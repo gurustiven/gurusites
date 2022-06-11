@@ -1,0 +1,16 @@
+.slider {
+  background: grey;
+  padding-bottom: 40%;
+  position: relative;
+
+  .item {
+    background: black no-repeat center center;
+    background-size: cover;
+    display: flex;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+}

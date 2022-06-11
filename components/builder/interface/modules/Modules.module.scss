@@ -1,0 +1,39 @@
+.modules {
+  position: relative;
+
+  .options {
+    border: 2px dotted orange;
+    display: none;
+    height: 100%;
+    left: 0;
+    padding: 4px;
+    position: absolute;
+    text-align: left;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+
+    button {
+      background: orange;
+      border-radius: 0;
+
+      &:hover {
+        background: darken(orange, 4%);
+      }
+
+      &:first-child {
+        border-bottom-left-radius: 4px;
+        border-top-left-radius: 4px;
+      }
+
+      &:last-child {
+        border-bottom-right-radius: 4px;
+        border-top-right-radius: 4px;
+      }
+    }
+  }
+
+  .active {
+    display: block;
+  }
+}
