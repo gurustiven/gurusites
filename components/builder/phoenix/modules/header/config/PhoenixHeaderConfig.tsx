@@ -1,5 +1,5 @@
-import { ArrowLeftRegular } from "@guruhotel/aura-icons"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Box, Button, HStack, Input, InputGroup, Label, RadioGroup, RadioGroupIndicator, RadioGroupItem, Separator, Stack, Tabs, TabsContent, TabsList, TabsTrigger, VStack } from "@guruhotel/aura-ui"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Box, Button, HStack, Input, Label, RadioGroup, RadioGroupIndicator, RadioGroupItem, Separator, Stack, Tabs, TabsContent, TabsList, TabsTrigger } from "@guruhotel/aura-ui"
+import ModulesStyle from "components/builder/interface/modules/style/ModulesStyle"
 import { useApp } from "components/context/AppContext"
 import { useEffect, useState } from "react"
 import { uuid } from "uuidv4"
@@ -20,7 +20,6 @@ export default function PhoenixHeaderConfig() {
 
   // Receive new data from config
   const [menu, setMenu] = useState(getHeader?.menu)
-  const [logo, setLogo] = useState(getHeader?.logo)
 
   useEffect(() => {
     if (menu?.length)
@@ -72,7 +71,7 @@ export default function PhoenixHeaderConfig() {
           <AccordionItem value="item-2">
             <AccordionTrigger>Branding</AccordionTrigger>
             <AccordionContent>
-              <Input defaultValue={logo} placeholder="URL" style={{ width: "100%" }} onChange={(e) => update("logo", e.target.value)} />
+              <Input defaultValue={getHeader?.logo} placeholder="URL" style={{ width: "100%" }} onChange={(e) => update("logo", e.target.value)} />
               <Separator css={{ margin: '12px 0' }} />
               <Input defaultValue={getHeader?.name} placeholder="Hotel name" css={{ width: '100%' }} onChange={e => update("name", e.target.value)} />
             </AccordionContent>
@@ -89,34 +88,7 @@ export default function PhoenixHeaderConfig() {
         </Accordion>
       </TabsContent>
       <TabsContent value="style" css={{ padding: "0" }}>
-        <RadioGroup defaultValue={getHeader?.order} aria-label="Header order" onValueChange={e => update("order", e)}>
-          <HStack spacing="2" css={{ marginBottom: '12px' }}>
-            <Stack spacing="2">
-              <RadioGroupItem value="solid" id="solid">
-                <RadioGroupIndicator />
-              </RadioGroupItem>
-              <Label htmlFor="solid">Solido</Label>
-            </Stack>
-            <Stack spacing="2">
-              <RadioGroupItem value="gradient" id="gradient">
-                <RadioGroupIndicator />
-              </RadioGroupItem>
-              <Label htmlFor="gradient">Gradient</Label>
-            </Stack>
-            <Stack spacing="2">
-              <RadioGroupItem value="image" id="image">
-                <RadioGroupIndicator />
-              </RadioGroupItem>
-              <Label htmlFor="image">Image</Label>
-            </Stack>
-          </HStack>
-        </RadioGroup>
-        <Input placeholder="Color" css={{ width: '100%' }} />
-        <Separator css={{ margin: '12px 0' }} />
-        <InputGroup>
-          <InputGroup.LeftIcon icon={<ArrowLeftRegular />} />
-          <InputGroup.Input type="number" />
-        </InputGroup>
+        <ModulesStyle component="header" />
       </TabsContent>
     </Tabs>
 

@@ -1,29 +1,20 @@
-import { useApp } from 'components/context/AppContext'
 import styles from './Header.module.scss'
 
-export default function PhoenixHeader() {
-  // Get theme
-  const { theme, setTheme } = useApp()
-
-  // Get header config
-  const getHeader = theme?.[0]?.header
-
-  // Set some constants
-  const hotelName = getHeader?.name ? getHeader?.name : "Hotel name"
-
+export default function PhoenixHeader({ data, style }: any) {
   return (
-    <header className={styles.header}>
+    <header className={styles.header} style={style}>
       <div className={styles.container}>
         <div className={styles.logo}>
-          {getHeader?.logo
-            ? <img src={getHeader?.logo} alt={hotelName} />
-            : <h1>{hotelName}</h1>
+          {data?.logo
+            ? <img src={data?.logo} alt={data?.name} />
+            : <h1>{data?.name}</h1>
           }
         </div>
-        {getHeader?.menu?.length &&
+        {
+          data?.menu?.length === 0 &&
           <nav className={styles.navigation}>
             <ul>
-              {getHeader?.menu?.map(({ label }: any) => (
+              {data?.menu?.map(({ label }: any) => (
                 <li><a>{label}</a></li>
               ))}
             </ul>
@@ -42,7 +33,7 @@ export default function PhoenixHeader() {
             </ul>
           </nav>
         </div>
-      </div>
-    </header>
+      </div >
+    </header >
   )
 }

@@ -1,9 +1,9 @@
 import styles from './Layout.module.scss'
-import PhoenixHeader from "../modules/header/Header";
 import ModulesConfig from '../../interface/modules/ModulesConfig';
 import PhoenixHeaderConfig from '../modules/header/config/PhoenixHeaderConfig';
-import { Box } from '@guruhotel/aura-ui';
 import LayoutPages from 'components/builder/interface/layout/pages/LayoutPages';
+import PhoenixHeaderRender from '../modules/header/config/PhoenixHeaderRender';
+import { Box } from '@guruhotel/aura-ui';
 
 export default function PhoenixLayout({ children }: any) {
   return (
@@ -12,7 +12,7 @@ export default function PhoenixLayout({ children }: any) {
         <LayoutPages />
       </Box>
       <div className={styles.container}>
-        <ModulesConfig module={<PhoenixHeader />} config={<PhoenixHeaderConfig />} />
+        <ModulesConfig module={<PhoenixHeaderRender />} config={<PhoenixHeaderConfig />} />
         {children}
       </div>
     </div>
