@@ -3,7 +3,7 @@ import styles from './Header.module.scss'
 export default function PhoenixHeader({ data, style }: any) {
   return (
     <header className={styles.header} style={style}>
-      <div className={styles.container}>
+      <div className={styles.container} style={{ maxWidth: data?.style?.container?.containerWidth }}>
         <div className={styles.logo}>
           {data?.logo
             ? <img src={data?.logo} alt={data?.name} />
