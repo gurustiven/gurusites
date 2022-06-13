@@ -9,12 +9,12 @@ export default function PhoenixHeaderConfig() {
   const { theme, setTheme } = useApp()
 
   // Get header config
-  const getHeader = theme?.[0]?.header
+  const getHeader = theme?.header
 
   // Update parent module
   const update = (name: any, value: any) => {
-    const values = [...theme];
-    values[0].header[name] = value
+    const values = {...theme};
+    values.header[name] = value
     setTheme(values)
   };
 

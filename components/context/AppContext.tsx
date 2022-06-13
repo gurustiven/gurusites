@@ -21,7 +21,7 @@ type Props = {
 };
 
 export function AppProvider({ children }: Props) {
-  const [theme, setTheme] = useState([
+  const [theme, setTheme] = useState(
     {
       general: {
         colors: {
@@ -38,7 +38,8 @@ export function AppProvider({ children }: Props) {
         name: "",
         logo: "",
         menu: [],
-        order: "classic"
+        order: "classic",
+        style: {}
       },
       pages: [{
         id: "798e4870-c94f-43f5-aff6-0023211a1f8f",
@@ -47,7 +48,7 @@ export function AppProvider({ children }: Props) {
         modules: []
       }]
     }
-  ])
+  )
 
   return (
     <AppContext.Provider value={{ theme, setTheme }}>

@@ -15,8 +15,8 @@ export default function LayoutPages() {
 
   // Add new element
   function newElement() {
-    const values = [...theme]
-    values?.[0]?.pages?.push({ id: uuid(), name: "-", route: "", modules: [] })
+    const values = { ...theme }
+    values?.pages?.push({ id: uuid(), name: "-", route: "", modules: [] })
     setTheme(values)
   }
 
@@ -26,10 +26,10 @@ export default function LayoutPages() {
         <GearRegular color='darkie' label='settings' css={{ marginRight: '2px' }} />
         <Button colorScheme="darkie" css={{ display: 'block' }} variant="link">Pages</Button>
         <ChevronRightRegular label="spacer" size="xs" css={{ marginRight: '12px' }} />
-        <Button colorScheme="darkie" css={{ display: 'block' }} variant="flat">{p ? `${theme?.[0]?.pages?.filter(({ id }: any) => id === p)[0]?.name}` : 'Home'}</Button>
+        <Button colorScheme="darkie" css={{ display: 'block' }} variant="flat">{p ? `${theme?.pages?.filter(({ id }: any) => id === p)[0]?.name}` : 'Home'}</Button>
       </Button>}>
         <Box css={{ marginTop: '20px' }}>
-          {theme?.[0]?.pages?.map((item: any, key: any) => (
+          {theme?.pages?.map((item: any, key: any) => (
             <LayoutPagesCreator key={key} data={item} theme={theme} setTheme={setTheme} />
           ))}
         </Box>
@@ -52,9 +52,9 @@ function LayoutPagesCreator({ data, theme, setTheme }: any) {
 
   // Update parent
   const update = (name: string, value: any) => {
-    const values = [...theme];
-    const index = values?.[0]?.pages?.map((page: any) => page?.id).indexOf(id);
-    index !== -1 && (values[0].pages[index][name] = value);
+    const values = { ...theme };
+    const index = values?.pages?.map((page: any) => page?.id).indexOf(id);
+    index !== -1 && (values.pages[index][name] = value);
     setTheme(values)
   };
 

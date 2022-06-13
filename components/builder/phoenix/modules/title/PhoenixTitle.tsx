@@ -4,8 +4,6 @@ export default function PhoenixTitle({ data }: any) {
   // Obtain data to render component
   const { config } = data
 
-  console.log(config)
-
   // If exist
   if (config)
     return (

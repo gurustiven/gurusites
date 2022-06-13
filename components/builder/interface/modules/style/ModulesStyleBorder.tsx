@@ -2,7 +2,7 @@ import { Box, HStack, InputGroup, Label, Switch, SwitchThumb, Text, VStack } fro
 import { DesktopIcon, MobileIcon, ValueIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
 
-export default function ModulesStyleBorder() {
+export default function ModulesStyleBorder({ update }: any) {
   const [singleSwitch, setSingleSwitch] = useState(false)
   const [responsiveSwitch, setResponsiveSwitch] = useState(false)
   return (
@@ -29,12 +29,12 @@ export default function ModulesStyleBorder() {
           <HStack spacing="4" css={{ margin: '4px 0' }}>
             <InputGroup size="sm" css={{ width: '50%' }}>
               <InputGroup.LeftIcon icon={<DesktopIcon />} />
-              <InputGroup.Input id="" type="number" />
+              <InputGroup.Input id="" type="number" onChange={(e: any) => update("borderWidth", "desktop", `${e.target.value}px`)} />
             </InputGroup>
             {responsiveSwitch &&
               <InputGroup size="sm" css={{ width: '50%' }}>
                 <InputGroup.LeftIcon icon={<MobileIcon />} />
-                <InputGroup.Input id="" type="number" />
+                <InputGroup.Input id="" type="number" onChange={(e: any) => update("borderWidth", "mobile", `${e.target.value}px`)} />
               </InputGroup>
             }
           </HStack>
@@ -47,12 +47,12 @@ export default function ModulesStyleBorder() {
               <Label css={{ width: '100%' }}>Top</Label>
               <InputGroup size="sm">
                 <InputGroup.LeftIcon icon={<DesktopIcon />} />
-                <InputGroup.Input id="" type="number" />
+                <InputGroup.Input id="" type="number" onChange={(e: any) => update("borderTopWidth", "desktop", `${e.target.value}px`)} />
               </InputGroup>
               {responsiveSwitch &&
                 <InputGroup size="sm">
                   <InputGroup.LeftIcon icon={<MobileIcon />} />
-                  <InputGroup.Input id="" type="number" />
+                  <InputGroup.Input id="" type="number" onChange={(e: any) => update("borderTopWidth", "mobile", `${e.target.value}px`)} />
                 </InputGroup>
               }
             </VStack>
@@ -60,12 +60,12 @@ export default function ModulesStyleBorder() {
               <Label css={{ width: '100%' }}>Right</Label>
               <InputGroup size="sm">
                 <InputGroup.LeftIcon icon={<DesktopIcon />} />
-                <InputGroup.Input id="" type="number" />
+                <InputGroup.Input id="" type="number" onChange={(e: any) => update("borderRightWidth", "desktop", `${e.target.value}px`)} />
               </InputGroup>
               {responsiveSwitch &&
                 <InputGroup size="sm">
                   <InputGroup.LeftIcon icon={<MobileIcon />} />
-                  <InputGroup.Input id="" type="number" />
+                  <InputGroup.Input id="" type="number" onChange={(e: any) => update("borderRightWidth", "mobile", `${e.target.value}px`)} />
                 </InputGroup>
               }
             </VStack>
@@ -75,12 +75,12 @@ export default function ModulesStyleBorder() {
               <Label css={{ width: '100%' }}>Bottom</Label>
               <InputGroup size="sm">
                 <InputGroup.LeftIcon icon={<DesktopIcon />} />
-                <InputGroup.Input id="" type="number" />
+                <InputGroup.Input id="" type="number" onChange={(e: any) => update("borderBottomWidth", "desktop", `${e.target.value}px`)} />
               </InputGroup>
               {responsiveSwitch &&
                 <InputGroup size="sm">
                   <InputGroup.LeftIcon icon={<MobileIcon />} />
-                  <InputGroup.Input id="" type="number" />
+                  <InputGroup.Input id="" type="number" onChange={(e: any) => update("borderBottomWidth", "mobile", `${e.target.value}px`)} />
                 </InputGroup>
               }
             </VStack>
@@ -88,12 +88,12 @@ export default function ModulesStyleBorder() {
               <Label css={{ width: '100%' }}>Left</Label>
               <InputGroup size="sm">
                 <InputGroup.LeftIcon icon={<DesktopIcon />} />
-                <InputGroup.Input id="" type="number" />
+                <InputGroup.Input id="" type="number" onChange={(e: any) => update("borderLeftWidth", "desktop", `${e.target.value}px`)} />
               </InputGroup>
               {responsiveSwitch &&
                 <InputGroup size="sm">
                   <InputGroup.LeftIcon icon={<MobileIcon />} />
-                  <InputGroup.Input id="" type="number" />
+                  <InputGroup.Input id="" type="number" onChange={(e: any) => update("borderLeftWidth", "mobile", `${e.target.value}px`)} />
                 </InputGroup>
               }
             </VStack>
@@ -104,7 +104,7 @@ export default function ModulesStyleBorder() {
         <Text as="h5">Border color</Text>
         <InputGroup size="sm" css={{ width: '50%' }}>
           <InputGroup.LeftIcon icon={<ValueIcon />} />
-          <InputGroup.Input id="" type="text" />
+          <InputGroup.Input id="" type="text" onChange={(e: any) => update("borderColor", "desktop", e.target.value)} />
         </InputGroup>
       </VStack>
     </>

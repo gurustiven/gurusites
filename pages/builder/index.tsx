@@ -20,11 +20,12 @@ const BuilderHomePage: NextPage = () => {
   const { theme } = useApp()
 
   // Filter modules by page
-  const filterModulesByPage = theme?.[0]?.pages?.filter(({ id }: any) => id === p)?.[0]?.modules
+  const filterModulesByPage = theme?.pages?.filter(({ id }: any) => id === p)?.[0]?.modules
 
   return (
     <Layout page="home">
       <PhoenixLayout>
+        {JSON.stringify(theme)}
         {filterModulesByPage?.map((moduleData: any) => {
 
           // Modules: Images slider

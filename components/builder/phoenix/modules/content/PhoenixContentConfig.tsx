@@ -30,11 +30,11 @@ export default function PhoenixContentConfig({ module, page }) {
 
   // Update parent module
   const update = (value) => {
-    const values = [...theme];
-    const index = values?.[0]?.pages?.map(({ id }) => id).indexOf(page);
+    const values = { ...theme };
+    const index = values?.pages?.map(({ id }) => id).indexOf(page);
     if (index !== -1) {
-      const indexChild = values?.[0]?.pages[index]?.modules?.map((item) => item?.id).indexOf(module?.id);
-      indexChild !== -1 && (values[0].pages[index].modules[indexChild] = { id: module?.id, name: module?.name, config: value })
+      const indexChild = values?.pages[index]?.modules?.map((item) => item?.id).indexOf(module?.id);
+      indexChild !== -1 && (values.pages[index].modules[indexChild] = { id: module?.id, name: module?.name, config: value })
     }
     setTheme(values)
   };
@@ -53,7 +53,6 @@ export default function PhoenixContentConfig({ module, page }) {
           <SheetClose>Cerrar</SheetClose>
           <SheetTitle>Editar</SheetTitle>
           <SheetDescription>Descripción</SheetDescription>
-          {JSON.stringify(data)}
           <Tabs css={{ boxShadow: "none", width: '100%' }}>
             <TabsList defaultValue="options">
               <TabsTrigger value="options">Config</TabsTrigger>

@@ -11,11 +11,11 @@ export default function PhoenixHeader({ data, style }: any) {
           }
         </div>
         {
-          data?.menu?.length === 0 &&
+          data?.menu?.length > 0 &&
           <nav className={styles.navigation}>
             <ul>
               {data?.menu?.map(({ label }: any) => (
-                <li><a>{label}</a></li>
+                <li><a href="#" style={{ color: data?.style?.desktop?.color }}>{label}</a></li>
               ))}
             </ul>
           </nav>
@@ -23,13 +23,13 @@ export default function PhoenixHeader({ data, style }: any) {
         <div className={styles.lang}>
           <nav className={styles.navigation}>
             <ul>
-              <li><a>ES</a></li>
-              <li><a>EN</a></li>
+              <li><a style={{ color: data?.style?.desktop?.color }}>ES</a></li>
+              <li><a style={{ color: data?.style?.desktop?.color }}>EN</a></li>
             </ul>
           </nav>
           <nav className={styles.navigation}>
             <ul>
-              <li><a className={styles.active}>Book now</a></li>
+              <li><a className={styles.active} style={{ backgroundColor: data?.style?.desktop?.color, color: data?.style?.desktop?.backgroundColor }}>Book now</a></li>
             </ul>
           </nav>
         </div>

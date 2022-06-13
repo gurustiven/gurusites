@@ -1,7 +1,9 @@
 .header {
   background: black;
+  border-style: solid;
   display: block;
   height: 80px;
+  margin: 0 auto;
 
   .container {
     align-items: center;
@@ -15,7 +17,6 @@
 
   .logo {
     display: flex;
-    color: white;
 
     h1 {
       font-size: 1.5rem;

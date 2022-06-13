@@ -2,7 +2,7 @@ import { Box, HStack, InputGroup, Label, Switch, SwitchThumb, Text, VStack } fro
 import { DesktopIcon, MobileIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
 
-export default function ModulesStylePadding() {
+export default function ModulesStylePadding({ update }: any) {
   const [singleSwitch, setSingleSwitch] = useState(false)
   const [responsiveSwitch, setResponsiveSwitch] = useState(false)
   return (
@@ -29,12 +29,12 @@ export default function ModulesStylePadding() {
           <HStack spacing="4" css={{ margin: '4px 0' }}>
             <InputGroup size="sm" css={{ width: '50%' }}>
               <InputGroup.LeftIcon icon={<DesktopIcon />} />
-              <InputGroup.Input id="" type="number" />
+              <InputGroup.Input id="" type="number" onChange={(e: any) => update("padding", "desktop", `${e.target.value}px`)} />
             </InputGroup>
             {responsiveSwitch &&
               <InputGroup size="sm" css={{ width: '50%' }}>
                 <InputGroup.LeftIcon icon={<MobileIcon />} />
-                <InputGroup.Input id="" type="number" />
+                <InputGroup.Input id="" type="number" onChange={(e: any) => update("padding", "mobile", `${e.target.value}px`)} />
               </InputGroup>
             }
           </HStack>
@@ -47,12 +47,12 @@ export default function ModulesStylePadding() {
               <Label css={{ width: '100%' }}>Top</Label>
               <InputGroup size="sm">
                 <InputGroup.LeftIcon icon={<DesktopIcon />} />
-                <InputGroup.Input id="" type="number" />
+                <InputGroup.Input id="" type="number" onChange={(e: any) => update("paddingTop", "desktop", `${e.target.value}px`)} />
               </InputGroup>
               {responsiveSwitch &&
                 <InputGroup size="sm">
                   <InputGroup.LeftIcon icon={<MobileIcon />} />
-                  <InputGroup.Input id="" type="number" />
+                  <InputGroup.Input id="" type="number" onChange={(e: any) => update("paddingTop", "mobile", `${e.target.value}px`)} />
                 </InputGroup>
               }
             </VStack>
@@ -60,12 +60,12 @@ export default function ModulesStylePadding() {
               <Label css={{ width: '100%' }}>Right</Label>
               <InputGroup size="sm">
                 <InputGroup.LeftIcon icon={<DesktopIcon />} />
-                <InputGroup.Input id="" type="number" />
+                <InputGroup.Input id="" type="number" onChange={(e: any) => update("paddingRight", "desktop", `${e.target.value}px`)} />
               </InputGroup>
               {responsiveSwitch &&
                 <InputGroup size="sm">
                   <InputGroup.LeftIcon icon={<MobileIcon />} />
-                  <InputGroup.Input id="" type="number" />
+                  <InputGroup.Input id="" type="number" onChange={(e: any) => update("paddingRight", "mobile", `${e.target.value}px`)} />
                 </InputGroup>
               }
             </VStack>
@@ -75,12 +75,12 @@ export default function ModulesStylePadding() {
               <Label css={{ width: '100%' }}>Bottom</Label>
               <InputGroup size="sm">
                 <InputGroup.LeftIcon icon={<DesktopIcon />} />
-                <InputGroup.Input id="" type="number" />
+                <InputGroup.Input id="" type="number" onChange={(e: any) => update("paddingBottom", "desktop", `${e.target.value}px`)} />
               </InputGroup>
               {responsiveSwitch &&
                 <InputGroup size="sm">
                   <InputGroup.LeftIcon icon={<MobileIcon />} />
-                  <InputGroup.Input id="" type="number" />
+                  <InputGroup.Input id="" type="number" onChange={(e: any) => update("paddingBottom", "mobile", `${e.target.value}px`)} />
                 </InputGroup>
               }
             </VStack>
@@ -88,12 +88,12 @@ export default function ModulesStylePadding() {
               <Label css={{ width: '100%' }}>Left</Label>
               <InputGroup size="sm">
                 <InputGroup.LeftIcon icon={<DesktopIcon />} />
-                <InputGroup.Input id="" type="number" />
+                <InputGroup.Input id="" type="number" onChange={(e: any) => update("paddingLeft", "desktop", `${e.target.value}px`)} />
               </InputGroup>
               {responsiveSwitch &&
                 <InputGroup size="sm">
                   <InputGroup.LeftIcon icon={<MobileIcon />} />
-                  <InputGroup.Input id="" type="number" />
+                  <InputGroup.Input id="" type="number" onChange={(e: any) => update("paddingLeft", "mobile", `${e.target.value}px`)} />
                 </InputGroup>
               }
             </VStack>

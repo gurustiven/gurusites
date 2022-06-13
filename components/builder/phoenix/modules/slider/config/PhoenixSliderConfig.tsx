@@ -29,11 +29,11 @@ export default function PhoenixSliderConfig({ data, page }: PhoenixSliderConfigP
 
   // Update parent module
   const update = (value: any) => {
-    const values = [...theme];
-    const index = values?.[0]?.pages?.map(({ id }: any) => id).indexOf(page);
+    const values = {...theme};
+    const index = values?.pages?.map(({ id }: any) => id).indexOf(page);
     if (index !== -1) {
-      const indexChild = values?.[0]?.pages[index]?.modules?.map((item: any) => item?.id).indexOf(data?.id);
-      indexChild !== -1 && (values[0].pages[index].modules[indexChild] = { id: data?.id, name: data?.name, config: value })
+      const indexChild = values?.pages[index]?.modules?.map((item: any) => item?.id).indexOf(data?.id);
+      indexChild !== -1 && (values.pages[index].modules[indexChild] = { id: data?.id, name: data?.name, config: value })
     }
     setTheme(values)
   };

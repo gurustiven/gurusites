@@ -16,9 +16,9 @@ export default function NewModule({ page }: NewModuleProps) {
 
   // Add new module
   function addNewModule(module: string) {
-    const values = [...theme]
-    const index = values?.[0]?.pages?.map(({ id }: any) => id).indexOf(page);
-    index !== -1 && values?.[0]?.pages[index]?.modules?.push({ id: uuid(), name: module, config: [] });
+    const values = {...theme}
+    const index = values?.pages?.map(({ id }: any) => id).indexOf(page);
+    index !== -1 && values?.pages[index]?.modules?.push({ id: uuid(), name: module, config: [] });
     setTheme(values)
   }
 
