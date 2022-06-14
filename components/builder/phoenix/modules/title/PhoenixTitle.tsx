@@ -9,10 +9,10 @@ export default function PhoenixTitle({ data }: any) {
     return (
       <section className={styles.title}>
         <div className={styles.container}>
-          {config?.map(({ type, title }: any) => {
+          {config?.map(({ type, title }: any, key: any) => {
             const Component = type
             return (
-              <Component>{title}</Component>
+              <Component key={key}>{title}</Component>
             )
           })}
         </div>

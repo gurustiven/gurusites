@@ -5,7 +5,7 @@ import {
   TabsContent,
   Input
 } from "@guruhotel/aura-ui";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { v4 as uuid_v4 } from "uuid";
 import { useApp } from "../../../../../context/AppContext";
 
@@ -31,11 +31,6 @@ export default function PhoenixTitleConfig({ data, page }: PhoenixTitleConfigPro
     }
     setTheme(values)
   };
-
-  useEffect(() => {
-    if (config?.length)
-      update(config)
-  }, [config])
 
   return (
     <Tabs css={{ boxShadow: "none", width: '100%' }}>

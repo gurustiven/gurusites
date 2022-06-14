@@ -39,11 +39,6 @@ export default function PhoenixContentConfig({ module, page }) {
     setTheme(values)
   };
 
-  useEffect(() => {
-    if (data?.length)
-      update(data)
-  }, [data])
-
   return (
     <div>
       <PhoenixContent module={module} />

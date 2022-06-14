@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { Badge, Box, Button, Stack } from "@guruhotel/aura-ui";
 import { LaptopIcon, MobileIcon } from '@radix-ui/react-icons'
 import Link from "next/link";
@@ -11,7 +12,7 @@ export default function LayoutHeader() {
       <Box css={{ width: "33.33%" }}>
         <Link href="/">
           <Box css={{ borderRight: "1px solid $darkie4", cursor: 'pointer', display: "inline-block", paddingRight: "16px", verticalAlign: "middle" }}>
-            <img src="/guruhotel.svg" style={{ height: "28px" }} />
+            <img src="/guruhotel.svg" alt="GuruHotel" style={{ height: "28px" }} />
           </Box>
         </Link>
         <Box css={{ display: 'inline-flex', marginLeft: '8px' }}>

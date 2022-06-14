@@ -5,7 +5,7 @@ export default function PhoenixContent({ module }) {
   return (
     <section className={styles.content}>
       <div className={styles.container}>
-        {config[0]?.content && config[0]?.content?.map((paragraph) => (<p>{paragraph?.children?.[0]?.text}</p>))}
+        {config[0]?.content && config[0]?.content?.map((paragraph: any, key: any) => (<p key={key}>{paragraph?.children?.[0]?.text}</p>))}
       </div>
     </section>
   )

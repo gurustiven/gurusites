@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import styles from './Header.module.scss'
 
 export default function PhoenixHeader({ data, style }: any) {
