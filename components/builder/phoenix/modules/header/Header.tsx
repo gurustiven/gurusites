@@ -15,8 +15,8 @@ export default function PhoenixHeader({ data, style }: any) {
             data?.menu?.length > 0 &&
             <nav className={styles.navigation}>
               <ul>
-                {data?.menu?.map(({ label }: any) => (
-                  <li><a href="#" style={{ color: data?.style?.desktop?.color }}>{label}</a></li>
+                {data?.menu?.map(({ label, link }: any, key: any) => (
+                  <li key={key}><a href={link} style={{ color: data?.style?.desktop?.color }}>{label}</a></li>
                 ))}
               </ul>
             </nav>

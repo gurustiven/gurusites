@@ -7,7 +7,7 @@ import PhoenixLayout from 'components/builder/phoenix/layout/PhoenixLayout';
 import PhoenixContentConfig from 'components/builder/phoenix/modules/content/PhoenixContentConfig';
 import ModulesConfigActions from 'components/builder/interface/config/ModulesConfigActions';
 import PhoenixSlider from 'components/builder/phoenix/modules/slider/PhoenixSlider';
-import NewModule from 'components/builder/interface/modules/NewModule';
+import NewModule from 'components/builder/interface/layout/modules/NewModule';
 import PhoenixTitle from 'components/builder/phoenix/modules/title/PhoenixTitle';
 import PhoenixTitleConfig from 'components/builder/phoenix/modules/title/config/PhoenixTitleConfig';
 import { useRouter } from 'next/router';

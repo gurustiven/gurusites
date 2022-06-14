@@ -1,7 +1,7 @@
 import { Box, Button, HStack, Input, Label, RadioGroup, RadioGroupIndicator, RadioGroupItem, Separator, Stack, Text } from "@guruhotel/aura-ui"
 import ModulesConfigTabs from "components/builder/interface/config/ModulesConfigTabs"
 import { useApp } from "components/context/AppContext"
-import { uuid } from "uuidv4"
+import { v4 as uuid_v4 } from "uuid"
 
 export default function PhoenixHeaderConfig() {
   // Get theme
@@ -57,6 +57,7 @@ export default function PhoenixHeaderConfig() {
         placeholder="Logo URL"
         css={{ margin: '4px 0', width: "100%" }}
         onChange={(e) => update("logo", e.target.value)}
+        type="url"
       />
       <Input
         id="name"
