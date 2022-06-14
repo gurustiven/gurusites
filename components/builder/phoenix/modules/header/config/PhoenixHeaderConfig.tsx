@@ -20,12 +20,12 @@ export default function PhoenixHeaderConfig() {
   // Add new element
   function newMenuItem() {
     const values = { ...theme }
-    values?.header?.menu?.push({ id: uuid(), label: "", link: "" })
+    values?.header?.menu?.push({ id: uuid_v4(), label: "", link: "" })
     setTheme(values)
   }
 
   return (
-    <ModulesConfigTabs>
+    <ModulesConfigTabs module="header">
       <Text as="h5" css={{ margin: '8px 0' }}>Order</Text>
       <RadioGroup defaultValue={getHeader?.order} aria-label="Header order" onValueChange={e => update("order", e)}>
         <HStack spacing="2">

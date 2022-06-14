@@ -3,10 +3,12 @@ import { ReactNode } from "react";
 import ModulesStyle from "./style/ModulesStyle";
 
 interface ModulesConfigTabsProps {
-  children: ReactNode
+  children: ReactNode,
+  module: any,
+  pageId?: any
 }
 
-export default function ModulesConfigTabs({ children }: ModulesConfigTabsProps) {
+export default function ModulesConfigTabs({ children, module, pageId }: ModulesConfigTabsProps) {
   return (
     <Tabs defaultValue="general" css={{ boxShadow: "none", width: '100%' }}>
       <TabsList css={{ margin: '0', marginBottom: '16px', padding: '0' }}>
@@ -17,7 +19,7 @@ export default function ModulesConfigTabs({ children }: ModulesConfigTabsProps) 
         {children}
       </TabsContent>
       <TabsContent value="style" css={{ padding: "0" }}>
-        <ModulesStyle component="header" />
+        <ModulesStyle pageId={pageId} module={module} />
       </TabsContent>
     </Tabs>
   )

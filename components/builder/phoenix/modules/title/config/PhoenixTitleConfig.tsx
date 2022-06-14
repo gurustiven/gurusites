@@ -6,7 +6,7 @@ import {
   Input
 } from "@guruhotel/aura-ui";
 import { useEffect, useState } from "react";
-import { uuid } from 'uuidv4';
+import { v4 as uuid_v4 } from "uuid";
 import { useApp } from "../../../../../context/AppContext";
 
 interface PhoenixTitleConfigProps {
@@ -19,7 +19,7 @@ export default function PhoenixTitleConfig({ data, page }: PhoenixTitleConfigPro
   const { theme, setTheme } = useApp()
 
   // Receive new data from config
-  const [config, setConfig] = useState([{ id: uuid(), type: "h2" }])
+  const [config, setConfig] = useState([{ id: uuid_v4(), type: "h2" }])
 
   // Update parent module
   const update = (value: any) => {

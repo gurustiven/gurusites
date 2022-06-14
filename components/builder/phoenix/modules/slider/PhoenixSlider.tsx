@@ -5,7 +5,9 @@ export default function PhoenixSlider({ data, style }: any) {
   if (data?.config)
     return (
       <section className={styles.slider} style={style}>
-        {data?.config?.items?.map(({ source }: any) => (<div className={styles.item} style={{ backgroundImage: `url(${source})` }}></div>))}
+        <div className={styles.container} style={{ maxWidth: data?.style?.container?.containerWidth }}>
+          {data?.config?.items?.map(({ source }: any) => (<div className={styles.item} style={{ backgroundImage: `url(${source})` }}></div>))}
+        </div>
       </section>
     )
 

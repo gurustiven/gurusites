@@ -20,7 +20,7 @@ export default function Sidebar({ children, title, trigger, position }: SidebarP
           <Cross1Icon />
         </SheetClose>
         <SheetTitle css={{ margin: '0 0 12px 0', padding: '0' }}>
-          <Text as="h5" css={{ color: "$darkie" }}>{title}</Text>
+          <Text fontSize="lg" css={{ color: "$darkie" }}>{title}</Text>
         </SheetTitle>
         {children}
       </SheetContent>

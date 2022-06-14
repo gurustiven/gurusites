@@ -19,14 +19,14 @@ import {
   Button,
 } from "@guruhotel/aura-ui";
 import { useEffect, useState } from "react";
-import { uuid } from 'uuidv4';
+import { v4 as uuid_v4 } from "uuid";
 import { useApp } from "../../../../context/AppContext";
 import PlainTextExample from "../../../interface/shared/Slate";
 
 export default function PhoenixContentConfig({ module, page }) {
   const { theme, setTheme } = useApp()
 
-  const [data, setData] = useState([{ id: uuid(), content: "" }])
+  const [data, setData] = useState([{ id: uuid_v4(), content: "" }])
 
   // Update parent module
   const update = (value) => {

@@ -8,17 +8,31 @@ import ModulesStyleRadius from "./ModulesStyleRadius";
 import { useApp } from "components/context/AppContext"
 import ModulesStyleWidth from "./ModulesStyleWidth";
 
-export default function ModulesStyle({ component }: any) {
+export default function ModulesStyle({ module, pageId }: any) {
   // Get theme
   const { theme, setTheme } = useApp()
 
   // Update parent module
   const update = (name: any, media: any, value: any) => {
     const values = { ...theme };
-    if (values?.[component]?.style?.[media]) {
-      values[component].style[media][name] = value
+    if (module === 'header' || module === 'footer') {
+      if (values?.[module]?.style?.[media]) {
+        values[module].style[media][name] = value
+      } else {
+        values[module].style[media] = { [name]: value }
+      }
     } else {
-      values[component].style[media] = { [name]: value }
+      const pageIndex = values?.pages?.map(({ id }: any) => id).indexOf(pageId);
+      if (pageIndex !== -1) {
+        const moduleIndex = values?.pages[pageIndex]?.modules?.map((item: any) => item?.id).indexOf(module?.id);
+        if (moduleIndex !== -1) {
+          if (values?.pages[pageIndex]?.modules[moduleIndex]?.style?.[media]) {
+            values.pages[pageIndex].modules[moduleIndex].style[media][name] = value
+          } else {
+            values.pages[pageIndex].modules[moduleIndex].style[media] = { [name]: value }
+          }
+        }
+      }
     }
     setTheme(values)
   };

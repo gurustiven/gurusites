@@ -8,7 +8,7 @@ import { Box } from '@guruhotel/aura-ui';
 export default function PhoenixLayout({ children }: any) {
   return (
     <div className={styles.layout}>
-      <Box css={{ marginBottom: '12px' }}>
+      <Box css={{ marginBottom: '12px', marginLeft: '20px' }}>
         <LayoutPages />
       </Box>
       <div className={styles.container}>

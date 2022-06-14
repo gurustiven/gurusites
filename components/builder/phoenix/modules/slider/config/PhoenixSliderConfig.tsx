@@ -4,7 +4,7 @@ import {
   Box,
 } from "@guruhotel/aura-ui";
 import ModulesConfigTabs from "components/builder/interface/config/ModulesConfigTabs";
-import { uuid } from 'uuidv4';
+import { v4 as uuid_v4 } from "uuid";
 import { useApp } from "components/context/AppContext";
 
 interface PhoenixSliderConfigProps {
@@ -35,9 +35,9 @@ export default function PhoenixSliderConfig({ module, pageId }: PhoenixSliderCon
       const indexChild = values?.pages[index]?.modules?.map((item: any) => item?.id).indexOf(module?.id);
       if (indexChild !== -1) {
         if (values.pages[index].modules[indexChild].config.items) {
-          values.pages[index].modules[indexChild].config.items.push({ id: uuid(), source: "", text: "" })
+          values.pages[index].modules[indexChild].config.items.push({ id: uuid_v4(), source: "", text: "" })
         } else {
-          values.pages[index].modules[indexChild].config = { items: [{ id: uuid(), source: "", text: "" }] }
+          values.pages[index].modules[indexChild].config = { items: [{ id: uuid_v4(), source: "", text: "" }] }
         }
       }
     }
@@ -45,7 +45,7 @@ export default function PhoenixSliderConfig({ module, pageId }: PhoenixSliderCon
   }
 
   return (
-    <ModulesConfigTabs>
+    <ModulesConfigTabs pageId={pageId} module={module}>
       {module?.config?.items?.map(({ id }: any) => (
         <PhoenixSliderConfigItems key={id} itemId={id} items={module?.config?.items} setItems={e => update('items', e)} />
       ))}

@@ -4,8 +4,8 @@ import { Box, Button, Center, HStack, Input, Label, Separator, Sheet, SheetClose
 import { ChevronRightIcon, Cross1Icon } from "@radix-ui/react-icons";
 import { useRouter } from 'next/router'
 import { useState } from "react";
-import { uuid } from 'uuidv4';
-import { useApp } from "../../../../context/AppContext";
+import { v4 as uuid_v4 } from "uuid";
+import { useApp } from "components/context/AppContext";
 import Sidebar from '../../shared/Sidebar';
 
 export default function LayoutPages() {
@@ -16,18 +16,23 @@ export default function LayoutPages() {
   // Add new element
   function newElement() {
     const values = { ...theme }
-    values?.pages?.push({ id: uuid(), name: "-", route: "", modules: [] })
+    values?.pages?.push({ id: uuid_v4(), name: "-", route: "", modules: [] })
     setTheme(values)
   }
 
   if (theme && p) {
     return (
-      <Sidebar title='Pages' trigger={<Button colorScheme="darkie" size="sm" variant="link" css={{ marginLeft: '12px', padding: '0 2px' }}>
-        <GearRegular color='darkie' label='settings' css={{ marginRight: '2px' }} />
-        <Button colorScheme="darkie" css={{ display: 'block' }} variant="link">Pages</Button>
-        <ChevronRightRegular label="spacer" size="xs" css={{ marginRight: '12px' }} />
-        <Button colorScheme="darkie" css={{ display: 'block' }} variant="flat">{p ? `${theme?.pages?.filter(({ id }: any) => id === p)[0]?.name}` : 'Home'}</Button>
-      </Button>}>
+      <Sidebar
+        title='Pages'
+        trigger={
+          <HStack>
+            <GearRegular color='darkie' label='settings' css={{ marginRight: '2px' }} />
+            <Button colorScheme="darkie" css={{ display: 'block' }} variant="link">Pages</Button>
+            <ChevronRightRegular label="spacer" size="xs" css={{ marginRight: '12px' }} />
+            <Button colorScheme="darkie" css={{ display: 'block' }} variant="flat">{p ? `${theme?.pages?.filter(({ id }: any) => id === p)[0]?.name}` : 'Home'}</Button>
+          </HStack>
+        }
+      >
         <Box css={{ marginTop: '20px' }}>
           {theme?.pages?.map((item: any, key: any) => (
             <LayoutPagesCreator key={key} data={item} theme={theme} setTheme={setTheme} />
@@ -78,7 +83,7 @@ function LayoutPagesCreator({ data, theme, setTheme }: any) {
         <>
           <Button colorScheme="darkie" variant="outline" onClick={() => router.push(`/builder/?p=${id}`)} css={{ height: "40px", marginTop: "-24px", position: 'absolute', right: '0', top: '50%', width: "40px" }}><ChevronRightIcon /></Button>
           <Text fontWeight="bold">{name || "-"}</Text>
-          <Text fontSize="sm" css={{ color: "$text10" }}>Route: <Text fontWeight="bold" css={{ color: "$darkie", display: 'inline' }}>/{route || 'empty'}</Text></Text>
+          <Text as="span" fontSize="sm" css={{ color: "$text10" }}>Route: <Text fontWeight="bold" css={{ color: "$darkie", display: 'inline' }}>/{route || 'empty'}</Text></Text>
         </>
       }
       <HStack css={opened ? { margin: "4px 0 0 0" } : { justifyContent: "space-between", margin: '0 -8px', width: "100%" }}>
