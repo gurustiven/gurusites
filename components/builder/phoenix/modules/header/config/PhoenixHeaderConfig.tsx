@@ -1,7 +1,6 @@
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Box, Button, HStack, Input, Label, RadioGroup, RadioGroupIndicator, RadioGroupItem, Separator, Stack, Tabs, TabsContent, TabsList, TabsTrigger } from "@guruhotel/aura-ui"
-import ModulesStyle from "components/builder/interface/modules/style/ModulesStyle"
+import { Box, Button, HStack, Input, Label, RadioGroup, RadioGroupIndicator, RadioGroupItem, Separator, Stack, Text } from "@guruhotel/aura-ui"
+import ModulesConfigTabs from "components/builder/interface/config/ModulesConfigTabs"
 import { useApp } from "components/context/AppContext"
-import { useEffect, useState } from "react"
 import { uuid } from "uuidv4"
 
 export default function PhoenixHeaderConfig() {
@@ -13,100 +12,119 @@ export default function PhoenixHeaderConfig() {
 
   // Update parent module
   const update = (name: any, value: any) => {
-    const values = {...theme};
+    const values = { ...theme };
     values.header[name] = value
     setTheme(values)
   };
 
-  // Receive new data from config
-  const [menu, setMenu] = useState(getHeader?.menu)
-
-  useEffect(() => {
-    if (menu?.length)
-      update("menu", menu)
-  }, [menu])
-
   // Add new element
-  function newElement() {
-    const values = [...menu]
-    values.push({ id: uuid(), label: "", url: "" })
-    setMenu(values)
+  function newMenuItem() {
+    const values = { ...theme }
+    values?.header?.menu?.push({ id: uuid(), label: "", link: "" })
+    setTheme(values)
   }
 
   return (
-    <Tabs defaultValue="general" css={{ boxShadow: "none", width: '100%' }}>
-      <TabsList css={{ margin: '0', marginBottom: '16px', padding: '0' }}>
-        <TabsTrigger colorScheme="darkie" size="sm" value="general">General</TabsTrigger>
-        <TabsTrigger colorScheme="darkie" size="sm" value="style">Style</TabsTrigger>
-      </TabsList>
-      <TabsContent value="general" css={{ padding: "0" }}>
-        <Accordion type="single" defaultValue="item-1" collapsible size="md" css={{ border: '1px solid $darkie4', boxShadow: "none", overflow: 'hidden', width: '100%' }}>
-          <AccordionItem value="item-1">
-            <AccordionTrigger>Order</AccordionTrigger>
-            <AccordionContent>
-              <RadioGroup defaultValue={getHeader?.order} aria-label="Header order" onValueChange={e => update("order", e)}>
-                <HStack spacing="2">
-                  <Stack spacing="2">
-                    <RadioGroupItem value="classic" id="classic">
-                      <RadioGroupIndicator />
-                    </RadioGroupItem>
-                    <Label htmlFor="classic">Classic</Label>
-                  </Stack>
-                  <Stack spacing="2">
-                    <RadioGroupItem value="centered" id="centered">
-                      <RadioGroupIndicator />
-                    </RadioGroupItem>
-                    <Label htmlFor="centered">Centered</Label>
-                  </Stack>
-                  <Stack spacing="2">
-                    <RadioGroupItem value="between" id="between">
-                      <RadioGroupIndicator />
-                    </RadioGroupItem>
-                    <Label htmlFor="between">Between</Label>
-                  </Stack>
-                </HStack>
-              </RadioGroup>
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="item-2">
-            <AccordionTrigger>Branding</AccordionTrigger>
-            <AccordionContent>
-              <Input defaultValue={getHeader?.logo} placeholder="URL" style={{ width: "100%" }} onChange={(e) => update("logo", e.target.value)} />
-              <Separator css={{ margin: '12px 0' }} />
-              <Input defaultValue={getHeader?.name} placeholder="Hotel name" css={{ width: '100%' }} onChange={e => update("name", e.target.value)} />
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="item-3">
-            <AccordionTrigger>Menu</AccordionTrigger>
-            <AccordionContent>
-              {menu?.map((data: any, key: any) => (
-                <PhoenixHeaderConfigMenu key={key} data={data} menu={menu} setMenu={setMenu} />
-              ))}
-              <Button onClick={() => newElement()}>Add new +</Button>
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
-      </TabsContent>
-      <TabsContent value="style" css={{ padding: "0" }}>
-        <ModulesStyle component="header" />
-      </TabsContent>
-    </Tabs>
-
+    <ModulesConfigTabs>
+      <Text as="h5" css={{ margin: '8px 0' }}>Order</Text>
+      <RadioGroup defaultValue={getHeader?.order} aria-label="Header order" onValueChange={e => update("order", e)}>
+        <HStack spacing="2">
+          <Stack spacing="2">
+            <RadioGroupItem value="classic" id="classic">
+              <RadioGroupIndicator />
+            </RadioGroupItem>
+            <Label htmlFor="classic">Classic</Label>
+          </Stack>
+          <Stack spacing="2">
+            <RadioGroupItem value="centered" id="centered">
+              <RadioGroupIndicator />
+            </RadioGroupItem>
+            <Label htmlFor="centered">Centered</Label>
+          </Stack>
+          <Stack spacing="2">
+            <RadioGroupItem value="inverse" id="inverse">
+              <RadioGroupIndicator />
+            </RadioGroupItem>
+            <Label htmlFor="inverse">Inverse</Label>
+          </Stack>
+        </HStack>
+      </RadioGroup>
+      <Separator css={{ background: '$darkie2', margin: '16px 0 12px 0' }} />
+      <Text as="h5" css={{ margin: '8px 0' }}>Branding</Text>
+      <Input
+        id="logo"
+        defaultValue={getHeader?.logo}
+        placeholder="Logo URL"
+        css={{ margin: '4px 0', width: "100%" }}
+        onChange={(e) => update("logo", e.target.value)}
+      />
+      <Input
+        id="name"
+        defaultValue={getHeader?.name}
+        placeholder="Name"
+        css={{ margin: '4px 0', width: "100%" }}
+        onChange={(e) => update("name", e.target.value)}
+      />
+      <Separator css={{ background: '$darkie2', margin: '16px 0 12px 0' }} />
+      <Text as="h5" css={{ margin: '8px 0' }}>Navigation</Text>
+      {getHeader?.menu?.map((item: any) => (
+        <PhoenixHeaderConfigMenu key={item.id} item={item} theme={theme} setTheme={setTheme} />
+      ))}
+      <Button
+        variant="outline"
+        css={{ width: '100%' }}
+        onClick={() => newMenuItem()}
+        type="button"
+      >
+        Add new +
+      </Button>
+    </ModulesConfigTabs>
   )
 }
 
-function PhoenixHeaderConfigMenu({ data, menu, setMenu }: any) {
+function PhoenixHeaderConfigMenu({ item, theme, setTheme }: any) {
 
+  // Update parent elements
   const update = (name: any, value: any) => {
-    const values = [...menu];
-    const index = values?.map((item) => item?.id).indexOf(data?.id);
-    index !== -1 && (values[index][name] = value);
-    setMenu(values)
+    const values = { ...theme }
+    const index = values?.header?.menu?.map((child: any) => child?.id).indexOf(item?.id)
+    index !== -1 && (values.header.menu[index][name] = value)
+    setTheme(values)
+  };
+
+  // Remove current item
+  const removeElement = () => {
+    const values = { ...theme }
+    const index = values?.header?.menu?.map((child: any) => child?.id).indexOf(item?.id)
+    index !== -1 && values.header.menu.splice(index, 1)
+    setTheme(values)
   };
 
   return (
-    <Box>
-      <Input defaultValue={data?.label} placeholder="Label" style={{ width: "100%" }} onChange={(e) => update("label", e.target.value)} />
+    <Box css={{ border: '1px solid $darkie4', borderRadius: '8px', margin: '12px 0', padding: '12px' }}>
+      <Input
+        id="menuLabel"
+        defaultValue={item?.label}
+        placeholder="Label"
+        css={{ margin: '4px 0', width: "100%" }}
+        onChange={(e) => update("label", e.target.value)}
+      />
+      <Input
+        id="menuLink"
+        defaultValue={item?.link}
+        placeholder="Link"
+        css={{ margin: '4px 0', width: "100%" }}
+        onChange={(e) => update("link", e.target.value)}
+      />
+      <Button
+        colorScheme="red"
+        variant="link"
+        css={{ width: '100%' }}
+        onClick={() => removeElement()}
+        type="button"
+      >
+        Remove -
+      </Button>
     </Box>
   )
 }

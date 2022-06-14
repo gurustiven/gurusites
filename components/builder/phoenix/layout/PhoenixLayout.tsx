@@ -1,5 +1,5 @@
 import styles from './Layout.module.scss'
-import ModulesConfig from '../../interface/modules/ModulesConfig';
+import ModulesConfigActions from '../../interface/config/ModulesConfigActions';
 import PhoenixHeaderConfig from '../modules/header/config/PhoenixHeaderConfig';
 import LayoutPages from 'components/builder/interface/layout/pages/LayoutPages';
 import PhoenixHeaderRender from '../modules/header/config/PhoenixHeaderRender';
@@ -12,7 +12,7 @@ export default function PhoenixLayout({ children }: any) {
         <LayoutPages />
       </Box>
       <div className={styles.container}>
-        <ModulesConfig module={<PhoenixHeaderRender />} config={<PhoenixHeaderConfig />} />
+        <ModulesConfigActions module={<PhoenixHeaderRender />} config={<PhoenixHeaderConfig />} />
         {children}
       </div>
     </div>

@@ -25,21 +25,30 @@ export function AppProvider({ children }: Props) {
     {
       general: {
         colors: {
-          main: "",
-          secondary: "",
-          utilitary: ""
+          main: "black",
+          secondary: "blue",
+          utilitary: "red"
         },
         fonts: {
-          main: "",
-          secondary: ""
+          main: "Inter",
+          secondary: "Inter"
         }
       },
       header: {
-        name: "",
+        name: "Hotel name",
         logo: "",
         menu: [],
         order: "classic",
-        style: {}
+        style: {
+          container: {
+            width: '1200px'
+          },
+          desktop: {
+            backgroundColor: 'black',
+            borderColor: 'black',
+            color: 'white',
+          }
+        }
       },
       pages: [{
         id: "798e4870-c94f-43f5-aff6-0023211a1f8f",

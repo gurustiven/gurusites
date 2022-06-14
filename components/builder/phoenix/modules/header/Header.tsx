@@ -7,20 +7,20 @@ export default function PhoenixHeader({ data, style }: any) {
         <div className={styles.logo}>
           {data?.logo
             ? <img src={data?.logo} alt={data?.name} />
-            : <h1>{data?.name}</h1>
+            : <h1>{data?.name ? data?.name : 'Logo'}</h1>
           }
         </div>
-        {
-          data?.menu?.length > 0 &&
-          <nav className={styles.navigation}>
-            <ul>
-              {data?.menu?.map(({ label }: any) => (
-                <li><a href="#" style={{ color: data?.style?.desktop?.color }}>{label}</a></li>
-              ))}
-            </ul>
-          </nav>
-        }
         <div className={styles.lang}>
+          {
+            data?.menu?.length > 0 &&
+            <nav className={styles.navigation}>
+              <ul>
+                {data?.menu?.map(({ label }: any) => (
+                  <li><a href="#" style={{ color: data?.style?.desktop?.color }}>{label}</a></li>
+                ))}
+              </ul>
+            </nav>
+          }
           <nav className={styles.navigation}>
             <ul>
               <li><a style={{ color: data?.style?.desktop?.color }}>ES</a></li>
@@ -33,7 +33,7 @@ export default function PhoenixHeader({ data, style }: any) {
             </ul>
           </nav>
         </div>
-      </div >
-    </header >
+      </div>
+    </header>
   )
 }

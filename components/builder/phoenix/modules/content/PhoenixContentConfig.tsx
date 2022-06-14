@@ -21,7 +21,7 @@ import {
 import { useEffect, useState } from "react";
 import { uuid } from 'uuidv4';
 import { useApp } from "../../../../context/AppContext";
-import PlainTextExample from "../../../interface/components/Slate";
+import PlainTextExample from "../../../interface/shared/Slate";
 
 export default function PhoenixContentConfig({ module, page }) {
   const { theme, setTheme } = useApp()

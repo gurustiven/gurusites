@@ -1,9 +1,9 @@
 import styles from './New.module.scss'
 import { Box, Button, HStack } from "@guruhotel/aura-ui";
-import { useApp } from "../../../../context/AppContext";
+import { useApp } from "../../../context/AppContext";
 import { uuid } from 'uuidv4';
 import { HeadingIcon, ImageIcon, TextIcon } from '@radix-ui/react-icons';
-import Sidebar from "../Sidebar";
+import Sidebar from "../shared/Sidebar";
 import NewModuleButton from './NewModuleButton';
 
 interface NewModuleProps {

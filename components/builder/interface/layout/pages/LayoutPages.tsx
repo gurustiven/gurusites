@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import { useState } from "react";
 import { uuid } from 'uuidv4';
 import { useApp } from "../../../../context/AppContext";
-import Sidebar from '../../components/Sidebar';
+import Sidebar from '../../shared/Sidebar';
 
 export default function LayoutPages() {
   const router = useRouter()

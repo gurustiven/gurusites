@@ -1,5 +1,4 @@
 import { HStack, Separator } from "@guruhotel/aura-ui";
-import { useEffect, useState } from "react";
 import ModulesStyleBackground from "./ModulesStyleBackground";
 import ModulesStyleBorder from "./ModulesStyleBorder";
 import ModulesStyleColor from "./ModulesStyleColor";
@@ -23,8 +22,6 @@ export default function ModulesStyle({ component }: any) {
     }
     setTheme(values)
   };
-
-  console.log(theme['header'].style)
 
   return (
     <>

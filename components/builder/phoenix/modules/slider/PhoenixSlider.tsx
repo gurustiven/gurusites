@@ -1,15 +1,12 @@
 import styles from './Slider.module.scss'
 
-export default function PhoenixSlider({ data }: any) {
-  // Obtain data to render component
-  const { config } = data
-
+export default function PhoenixSlider({ data, style }: any) {
   // If exist
-  if (config)
+  if (data?.config)
     return (
-      <div className={styles.slider}>
-        {config?.map(({ url }: any) => (<div className={styles.item} style={{ backgroundImage: `url(${url})` }}></div>))}
-      </div>
+      <section className={styles.slider} style={style}>
+        {data?.config?.items?.map(({ source }: any) => (<div className={styles.item} style={{ backgroundImage: `url(${source})` }}></div>))}
+      </section>
     )
 
   // If doesn't exist

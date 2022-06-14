@@ -1,5 +1,4 @@
 .header {
-  background: black;
   border-style: solid;
   display: block;
   height: 80px;
@@ -19,9 +18,11 @@
     display: flex;
 
     h1 {
-      font-size: 1.5rem;
+      font-size: 1.375rem;
       line-height: 1;
+      letter-spacing: 2px;
       margin: 0;
+      text-transform: uppercase;
     }
   }
 
@@ -46,7 +47,6 @@
         position: relative;
 
         a {
-          color: white;
           display: inline-flex;
           height: 32px;
           margin: 0 4px;
