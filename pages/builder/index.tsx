@@ -27,7 +27,6 @@ const BuilderHomePage: NextPage = () => {
   return (
     <Layout page="home">
       <PhoenixLayout>
-        {JSON.stringify(theme)}
         {filterModulesByPage?.map((moduleData: any) => {
 
           // Modules: Images slider
@@ -39,8 +38,8 @@ const BuilderHomePage: NextPage = () => {
                 config={<PhoenixSliderConfig pageId={pageId} module={moduleData} />}
               />
             )
-
           } else if (moduleData?.name === 'block') {
+
             // Modules: Block content
             return (
               <ModulesConfigActions
@@ -49,21 +48,9 @@ const BuilderHomePage: NextPage = () => {
                 config={<PhoenixBlockConfig pageId={pageId} module={moduleData} />}
               />
             )
-
-          } else if (moduleData?.name === 'content') {
-            // Modules: Text content
-            return (<PhoenixContentConfig page={pageId} module={moduleData} key={moduleData?.id} />)
-
-          } else if (moduleData?.name === 'title') {
-            // Modules: Headings
-            return (
-              <ModulesConfigActions
-                key={moduleData?.id}
-                module={<PhoenixTitle data={moduleData} />}
-                config={<PhoenixTitleConfig page={pageId} data={moduleData} />}
-              />
-            )
           }
+
+          return null
         })}
         {pageId && <NewModule pageId={pageId} />}
       </PhoenixLayout>

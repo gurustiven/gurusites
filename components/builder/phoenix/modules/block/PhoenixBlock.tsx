@@ -1,3 +1,4 @@
+import styles from './Block.module.scss'
 import ModulesConfigActions from "components/builder/interface/config/ModulesConfigActions"
 import NewModule from "components/builder/interface/layout/modules/NewModule"
 import PhoenixSliderConfig from "../slider/config/PhoenixSliderConfig"
@@ -7,12 +8,10 @@ export default function PhoenixBlock({ data, style, pageId }: any) {
   // If exist
   if (data?.config)
     return (
-      <section style={style}>
-        <div style={{ maxWidth: data?.style?.container?.containerWidth }}>
-          {JSON.stringify(data)}
+      <section className={styles.block} style={style}>
+        <div className={styles.container} style={{ maxWidth: data?.style?.container?.containerWidth }}>
           {data?.config?.columns?.map((column: any, key: any) => (
             <div key={key}>
-              {JSON.stringify(column)}
               <div style={{ position: 'relative', zIndex: '20' }}>
                 {column?.modules?.map((moduleData: any) => {
 

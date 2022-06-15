@@ -2,7 +2,7 @@ import styles from './New.module.scss'
 import { Box, Button, HStack } from "@guruhotel/aura-ui";
 import { useApp } from "../../../../context/AppContext";
 import { v4 as uuid_v4 } from "uuid";
-import { HeadingIcon, ImageIcon, TextIcon } from '@radix-ui/react-icons';
+import { ImageIcon, ColumnsIcon } from '@radix-ui/react-icons';
 import Sidebar from "../../shared/Sidebar";
 import NewModuleButton from './NewModuleButton';
 
@@ -55,9 +55,20 @@ export default function NewModule({ pageId, isBlock, moduleId, columnId }: NewMo
               }
             })}
           />
-          <NewModuleButton icon={<HeadingIcon />} label="Title" onClick={() => addNewModule('title')} />
-          <NewModuleButton icon={<TextIcon />} label="Content" onClick={() => addNewModule('content')} />
-          <NewModuleButton icon={<HeadingIcon />} label="Block" onClick={() => addNewModule('block')} />
+          <NewModuleButton
+            icon={<ColumnsIcon />}
+            label="Block"
+            onClick={() => addNewModule('block', {
+              container: {
+                width: '100%'
+              },
+              desktop: {
+                backgroundColor: 'black',
+                borderColor: 'black',
+                color: 'white',
+              }
+            })}
+          />
         </HStack>
       </Sidebar>
     </Box>

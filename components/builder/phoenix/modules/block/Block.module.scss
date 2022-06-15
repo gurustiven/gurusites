@@ -1,0 +1,16 @@
+.block {
+  border-style: solid;
+  display: block;
+  min-height: 80px;
+  margin: 0 auto;
+
+  .container {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 1240px;
+    width: 100%;
+  }
+}
