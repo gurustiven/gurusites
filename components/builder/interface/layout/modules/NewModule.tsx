@@ -55,7 +55,7 @@ export default function NewModule({ pageId, isBlock, moduleId, columnId }: NewMo
               }
             })}
           />
-          <NewModuleButton
+          {!isBlock && <NewModuleButton
             icon={<ColumnsIcon />}
             label="Block"
             onClick={() => addNewModule('block', {
@@ -68,7 +68,7 @@ export default function NewModule({ pageId, isBlock, moduleId, columnId }: NewMo
                 color: 'white',
               }
             })}
-          />
+          />}
         </HStack>
       </Sidebar>
     </Box>

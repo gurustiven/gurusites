@@ -11,7 +11,7 @@ export default function PhoenixBlock({ data, style, pageId }: any) {
       <section className={styles.block} style={style}>
         <div className={styles.container} style={{ maxWidth: data?.style?.container?.containerWidth }}>
           {data?.config?.columns?.map((column: any, key: any) => (
-            <div key={key}>
+            <div className={styles.column} key={key}>
               <div style={{ position: 'relative', zIndex: '20' }}>
                 {column?.modules?.map((moduleData: any) => {
 
