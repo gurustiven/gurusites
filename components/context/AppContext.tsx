@@ -6,7 +6,7 @@ type appContextType = {
 };
 
 const appContextDefaultValues: appContextType = {
-  theme: [],
+  theme: {},
   setTheme: null,
 };
 

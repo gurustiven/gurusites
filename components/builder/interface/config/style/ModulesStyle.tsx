@@ -8,7 +8,7 @@ import ModulesStyleRadius from "./ModulesStyleRadius";
 import { useApp } from "components/context/AppContext"
 import ModulesStyleWidth from "./ModulesStyleWidth";
 
-export default function ModulesStyle({ module, pageId }: any) {
+export default function ModulesStyle({ module, pageId, isBlock, columnId, moduleId }: any) {
   // Get theme
   const { theme, setTheme } = useApp()
 
@@ -24,12 +24,32 @@ export default function ModulesStyle({ module, pageId }: any) {
     } else {
       const pageIndex = values?.pages?.map(({ id }: any) => id).indexOf(pageId);
       if (pageIndex !== -1) {
-        const moduleIndex = values?.pages[pageIndex]?.modules?.map((item: any) => item?.id).indexOf(module?.id);
-        if (moduleIndex !== -1) {
-          if (values?.pages[pageIndex]?.modules[moduleIndex]?.style?.[media]) {
-            values.pages[pageIndex].modules[moduleIndex].style[media][name] = value
-          } else {
-            values.pages[pageIndex].modules[moduleIndex].style[media] = { [name]: value }
+        if (isBlock) {
+          const indexModule = values?.pages[pageIndex]?.modules?.map(({ id }: any) => id).indexOf(moduleId);
+          if (indexModule !== -1) {
+            const indexColumn = values?.pages[pageIndex]?.modules[indexModule]?.config?.columns?.map(({ id }: any) => id).indexOf(columnId);
+            if (indexColumn !== -1) {
+              const indexModuleChild = values?.pages[pageIndex]?.modules[indexModule]?.config?.columns[indexColumn]?.modules?.map(({ id }: any) => id).indexOf(module?.id);
+              if (indexModuleChild !== -1) {
+                const indexModuleChildChild = values?.pages[pageIndex]?.modules[indexModule]?.config?.columns[indexColumn]?.modules[indexModuleChild]
+                if (indexModuleChildChild !== -1) {
+                  if (values?.pages[pageIndex]?.modules[indexModule]?.config?.columns[indexColumn]?.modules[indexModuleChild]?.style?.[media]) {
+                    values.pages[pageIndex].modules[indexModule].config.columns[indexColumn].modules[indexModuleChild].style[media][name] = value
+                  } else {
+                    values.pages[pageIndex].modules[indexModule].config.columns[indexColumn].modules[indexModuleChild].style[media] = { [name]: value }
+                  }
+                }
+              }
+            }
+          }
+        } else {
+          const moduleIndex = values?.pages[pageIndex]?.modules?.map((item: any) => item?.id).indexOf(module?.id);
+          if (moduleIndex !== -1) {
+            if (values?.pages[pageIndex]?.modules[moduleIndex]?.style?.[media]) {
+              values.pages[pageIndex].modules[moduleIndex].style[media][name] = value
+            } else {
+              values.pages[pageIndex].modules[moduleIndex].style[media] = { [name]: value }
+            }
           }
         }
       }

@@ -5,10 +5,13 @@ import ModulesStyle from "./style/ModulesStyle";
 interface ModulesConfigTabsProps {
   children: ReactNode,
   module: any,
-  pageId?: any
+  pageId?: any,
+  isBlock?: boolean,
+  columnId?: any
+  moduleId?: any
 }
 
-export default function ModulesConfigTabs({ children, module, pageId }: ModulesConfigTabsProps) {
+export default function ModulesConfigTabs({ children, module, pageId, isBlock, columnId, moduleId }: ModulesConfigTabsProps) {
   return (
     <Tabs defaultValue="general" css={{ boxShadow: "none", width: '100%' }}>
       <TabsList css={{ margin: '0', marginBottom: '16px', padding: '0' }}>
@@ -19,7 +22,7 @@ export default function ModulesConfigTabs({ children, module, pageId }: ModulesC
         {children}
       </TabsContent>
       <TabsContent value="style" css={{ padding: "0" }}>
-        <ModulesStyle pageId={pageId} module={module} />
+        <ModulesStyle isBlock={isBlock} columnId={columnId} moduleId={moduleId} pageId={pageId} module={module} />
       </TabsContent>
     </Tabs>
   )

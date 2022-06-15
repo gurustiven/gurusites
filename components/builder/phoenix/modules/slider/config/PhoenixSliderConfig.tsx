@@ -9,10 +9,13 @@ import { useApp } from "components/context/AppContext";
 
 interface PhoenixSliderConfigProps {
   module: any,
-  pageId: any
+  pageId: any,
+  isBlock?: boolean,
+  columnId?: any
+  moduleId?: any
 }
 
-export default function PhoenixSliderConfig({ module, pageId }: PhoenixSliderConfigProps) {
+export default function PhoenixSliderConfig({ module, pageId, isBlock, columnId, moduleId }: PhoenixSliderConfigProps) {
   // Get theme
   const { theme, setTheme } = useApp()
 
@@ -21,8 +24,19 @@ export default function PhoenixSliderConfig({ module, pageId }: PhoenixSliderCon
     const values = { ...theme };
     const index = values?.pages?.map(({ id }: any) => id).indexOf(pageId);
     if (index !== -1) {
-      const indexChild = values?.pages[index]?.modules?.map((item: any) => item?.id).indexOf(module?.id);
-      indexChild !== -1 && (values.pages[index].modules[indexChild].config[name] = value)
+      if (isBlock) {
+        const indexModule = values?.pages[index]?.modules?.map(({ id }: any) => id).indexOf(moduleId);
+        if (indexModule !== -1) {
+          const indexColumn = values?.pages[index]?.modules[indexModule]?.config?.columns?.map(({ id }: any) => id).indexOf(columnId);
+          if (indexColumn !== -1) {
+            const indexModuleChild = values?.pages[index]?.modules[indexModule]?.config?.columns[indexColumn]?.modules?.map(({ id }: any) => id).indexOf(module?.id);
+            indexModuleChild !== -1 && (values.pages[index].modules[indexModule].config.columns[indexColumn].modules[indexModuleChild].config[name] = value)
+          }
+        }
+      } else {
+        const indexChild = values?.pages[index]?.modules?.map((item: any) => item?.id).indexOf(module?.id);
+        indexChild !== -1 && (values.pages[index].modules[indexChild].config[name] = value)
+      }
     }
     setTheme(values)
   }
@@ -32,12 +46,29 @@ export default function PhoenixSliderConfig({ module, pageId }: PhoenixSliderCon
     const values = { ...theme };
     const index = values?.pages?.map(({ id }: any) => id).indexOf(pageId);
     if (index !== -1) {
-      const indexChild = values?.pages[index]?.modules?.map((item: any) => item?.id).indexOf(module?.id);
-      if (indexChild !== -1) {
-        if (values.pages[index].modules[indexChild].config.items) {
-          values.pages[index].modules[indexChild].config.items.push({ id: uuid_v4(), source: "", text: "" })
-        } else {
-          values.pages[index].modules[indexChild].config = { items: [{ id: uuid_v4(), source: "", text: "" }] }
+      if (isBlock) {
+        const indexModule = values?.pages[index]?.modules?.map(({ id }: any) => id).indexOf(moduleId);
+        if (indexModule !== -1) {
+          const indexColumn = values?.pages[index]?.modules[indexModule]?.config?.columns?.map(({ id }: any) => id).indexOf(columnId);
+          if (indexColumn !== -1) {
+            const indexModuleChild = values?.pages[index]?.modules[indexModule]?.config?.columns[indexColumn]?.modules?.map(({ id }: any) => id).indexOf(module?.id);
+            if (indexModuleChild !== -1) {
+              if (values?.pages[index]?.modules[indexModule]?.config?.columns[indexColumn]?.modules[indexModuleChild].config.items) {
+                values?.pages[index]?.modules[indexModule]?.config?.columns[indexColumn]?.modules[indexModuleChild].config.items.push({ id: uuid_v4(), source: "", text: "" })
+              } else {
+                values.pages[index].modules[indexModule].config.columns[indexColumn].modules[indexModuleChild].config = { items: [{ id: uuid_v4(), source: "", text: "" }] }
+              }
+            }
+          }
+        }
+      } else {
+        const indexModule = values?.pages[index]?.modules?.map(({ id }: any) => id).indexOf(module?.id);
+        if (indexModule !== -1) {
+          if (values.pages[index].modules[indexModule].config.items) {
+            values.pages[index].modules[indexModule].config.items.push({ id: uuid_v4(), source: "", text: "" })
+          } else {
+            values.pages[index].modules[indexModule].config = { items: [{ id: uuid_v4(), source: "", text: "" }] }
+          }
         }
       }
     }
@@ -45,7 +76,7 @@ export default function PhoenixSliderConfig({ module, pageId }: PhoenixSliderCon
   }
 
   return (
-    <ModulesConfigTabs pageId={pageId} module={module}>
+    <ModulesConfigTabs isBlock={isBlock} columnId={columnId} pageId={pageId} module={module} moduleId={moduleId}>
       {module?.config?.items?.map(({ id }: any) => (
         <PhoenixSliderConfigItems key={id} itemId={id} items={module?.config?.items} setItems={e => update('items', e)} />
       ))}

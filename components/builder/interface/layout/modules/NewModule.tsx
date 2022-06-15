@@ -7,18 +7,33 @@ import Sidebar from "../../shared/Sidebar";
 import NewModuleButton from './NewModuleButton';
 
 interface NewModuleProps {
-  page: any
+  pageId: any,
+  isBlock?: boolean,
+  moduleId?: any,
+  columnId?: any
 }
 
-export default function NewModule({ page }: NewModuleProps) {
+export default function NewModule({ pageId, isBlock, moduleId, columnId }: NewModuleProps) {
   // Get theme
   const { theme, setTheme } = useApp()
 
   // Add new module
   function addNewModule(module: string, defaultStyle?: object) {
     const values = { ...theme }
-    const index = values?.pages?.map(({ id }: any) => id).indexOf(page);
-    index !== -1 && values?.pages[index]?.modules?.push({ id: uuid_v4(), name: module, config: [], style: defaultStyle || {} });
+    const index = values?.pages?.map(({ id }: any) => id).indexOf(pageId);
+    if (index !== -1) {
+      if (isBlock) {
+        const indexModule = values?.pages[index]?.modules?.map(({ id }: any) => id).indexOf(moduleId);
+        if (indexModule !== -1) {
+          const indexColumn = values?.pages[index]?.modules[indexModule]?.config?.columns?.map(({ id }: any) => id).indexOf(columnId);
+          if (indexColumn !== -1) {
+            values?.pages[index]?.modules[indexModule]?.config?.columns[indexColumn]?.modules?.push({ id: uuid_v4(), name: module, config: [], style: defaultStyle || {} });
+          }
+        }
+      } else {
+        values?.pages[index]?.modules?.push({ id: uuid_v4(), name: module, config: [], style: defaultStyle || {} });
+      }
+    }
     setTheme(values)
   }
 
@@ -42,6 +57,7 @@ export default function NewModule({ page }: NewModuleProps) {
           />
           <NewModuleButton icon={<HeadingIcon />} label="Title" onClick={() => addNewModule('title')} />
           <NewModuleButton icon={<TextIcon />} label="Content" onClick={() => addNewModule('content')} />
+          <NewModuleButton icon={<HeadingIcon />} label="Block" onClick={() => addNewModule('block')} />
         </HStack>
       </Sidebar>
     </Box>
