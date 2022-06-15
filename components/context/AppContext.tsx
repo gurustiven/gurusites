@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 
 type appContextType = {
   theme: any;
@@ -21,43 +21,43 @@ type Props = {
 };
 
 export function AppProvider({ children }: Props) {
-  const [theme, setTheme] = useState(
-    {
-      general: {
-        colors: {
-          main: "black",
-          secondary: "blue",
-          utilitary: "red"
+  const defaultTheme = {
+    general: {
+      colors: {
+        main: "black",
+        secondary: "blue",
+        utilitary: "red"
+      },
+      fonts: {
+        main: "Inter",
+        secondary: "Inter"
+      }
+    },
+    header: {
+      name: "Hotel name",
+      logo: "",
+      menu: [],
+      design: "classic",
+      style: {
+        container: {
+          width: '1200px'
         },
-        fonts: {
-          main: "Inter",
-          secondary: "Inter"
+        desktop: {
+          backgroundColor: 'black',
+          borderColor: 'black',
+          color: 'white',
         }
-      },
-      header: {
-        name: "Hotel name",
-        logo: "",
-        menu: [],
-        order: "classic",
-        style: {
-          container: {
-            width: '1200px'
-          },
-          desktop: {
-            backgroundColor: 'black',
-            borderColor: 'black',
-            color: 'white',
-          }
-        }
-      },
-      pages: [{
-        id: "798e4870-c94f-43f5-aff6-0023211a1f8f",
-        name: "home",
-        route: "",
-        modules: []
-      }]
-    }
-  )
+      }
+    },
+    pages: [{
+      id: "798e4870-c94f-43f5-aff6-0023211a1f8f",
+      name: "home",
+      route: "",
+      modules: []
+    }]
+  }
+
+  const [theme, setTheme] = useState(defaultTheme)
 
   return (
     <AppContext.Provider value={{ theme, setTheme }}>

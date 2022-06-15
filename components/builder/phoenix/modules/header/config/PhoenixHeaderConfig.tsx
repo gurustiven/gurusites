@@ -1,5 +1,8 @@
-import { Box, Button, HStack, Input, Label, RadioGroup, RadioGroupIndicator, RadioGroupItem, Separator, Stack, Text } from "@guruhotel/aura-ui"
+import { Box, Button, HStack, Input, InputGroup, Separator, Text } from "@guruhotel/aura-ui"
+import { DesktopIcon, MobileIcon } from "@radix-ui/react-icons"
 import ModulesConfigTabs from "components/builder/interface/config/ModulesConfigTabs"
+import ImageSelect from "components/builder/interface/shared/ImageSelect"
+import ImageUpload from "components/builder/interface/shared/ImageUpload"
 import { useApp } from "components/context/AppContext"
 import { v4 as uuid_v4 } from "uuid"
 
@@ -26,39 +29,31 @@ export default function PhoenixHeaderConfig() {
 
   return (
     <ModulesConfigTabs module="header">
-      <Text as="h5" css={{ margin: '8px 0' }}>Order</Text>
-      <RadioGroup defaultValue={getHeader?.order} aria-label="Header order" onValueChange={e => update("order", e)}>
-        <HStack spacing="2">
-          <Stack spacing="2">
-            <RadioGroupItem value="classic" id="classic">
-              <RadioGroupIndicator />
-            </RadioGroupItem>
-            <Label htmlFor="classic">Classic</Label>
-          </Stack>
-          <Stack spacing="2">
-            <RadioGroupItem value="centered" id="centered">
-              <RadioGroupIndicator />
-            </RadioGroupItem>
-            <Label htmlFor="centered">Centered</Label>
-          </Stack>
-          <Stack spacing="2">
-            <RadioGroupItem value="inverse" id="inverse">
-              <RadioGroupIndicator />
-            </RadioGroupItem>
-            <Label htmlFor="inverse">Inverse</Label>
-          </Stack>
-        </HStack>
-      </RadioGroup>
+      <Text as="h5" css={{ margin: '8px 0' }}>Design</Text>
+      <ImageSelect
+        options={
+          [
+            { label: <img src="/builder/header/classic.svg" alt="classic" />, value: "classic" },
+            { label: <img src="/builder/header/inverse.svg" alt="inverse" />, value: "inverse" },
+            { label: <img src="/builder/header/centered.svg" alt="centered" />, value: "centered" }
+          ]
+        }
+        onChange={(e) => update("design", e)}
+      />
       <Separator css={{ background: '$darkie2', margin: '16px 0 12px 0' }} />
       <Text as="h5" css={{ margin: '8px 0' }}>Branding</Text>
-      <Input
-        id="logo"
-        defaultValue={getHeader?.logo}
-        placeholder="Logo URL"
-        css={{ margin: '4px 0', width: "100%" }}
-        onChange={(e) => update("logo", e.target.value)}
-        type="url"
-      />
+      <ImageUpload style={getHeader?.style?.desktop} onChange={(e) => update("logo", e)} />
+      <HStack spacing="2" css={{ margin: '8px 0 0 0' }}>
+        <InputGroup size="sm" css={{ width: '50%' }}>
+          <InputGroup.LeftIcon icon={<DesktopIcon />} />
+          <InputGroup.Input id="" placeholder="Max height" type="number" onChange={(e: any) => update("logoMaxHeight", `${e.target.value}px`)} />
+        </InputGroup>
+        <InputGroup size="sm" css={{ width: '50%' }}>
+          <InputGroup.LeftIcon icon={<MobileIcon />} />
+          <InputGroup.Input id="" placeholder="Max height" type="number" onChange={(e: any) => update("logoMaxHeightMobile", `${e.target.value}px`)} />
+        </InputGroup>
+      </HStack>
+      <Separator css={{ background: '$darkie2', margin: '16px 0 12px 0' }} />
       <Input
         id="name"
         defaultValue={getHeader?.name}
@@ -72,12 +67,13 @@ export default function PhoenixHeaderConfig() {
         <PhoenixHeaderConfigMenu key={item.id} item={item} theme={theme} setTheme={setTheme} />
       ))}
       <Button
-        variant="outline"
-        css={{ width: '100%' }}
+        colorScheme="darkie"
         onClick={() => newMenuItem()}
         type="button"
+        isFullWidth
+        variant="outline"
       >
-        Add new +
+        New menu item +
       </Button>
     </ModulesConfigTabs>
   )

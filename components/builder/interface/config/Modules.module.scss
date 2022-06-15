@@ -2,11 +2,11 @@
   position: relative;
 
   .options {
-    border: 2px dotted orange;
+    border: 4px solid rgba(white, 0.2);
     display: none;
     height: 100%;
     left: 0;
-    padding: 4px;
+    padding: 8px;
     position: absolute;
     text-align: left;
     top: 0;
@@ -14,12 +14,7 @@
     z-index: 1;
 
     button {
-      background: orange;
       border-radius: 0;
-
-      &:hover {
-        background: darken(orange, 4%);
-      }
 
       &:first-child {
         border-bottom-left-radius: 4px;

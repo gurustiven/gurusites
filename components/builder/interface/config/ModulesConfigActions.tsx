@@ -23,9 +23,8 @@ export default function ModulesConfigActions({ module, config }: ModulesConfigAc
     <div className={styles.modules} ref={hoverRef}>
       <div ref={ref} className={hovered || active ? `${styles.options} ${styles.active}` : styles.options}>
         <Sidebar title='Edit module' position="right" trigger={<Button onClick={() => setActive(true)} type="button"><Pencil2Icon /></Button>}>{config}</Sidebar>
-        {/*<Button type="button"><MoveIcon /></Button>
+        <Button type="button"><CopyIcon /></Button>
         <Button type="button"><TrashIcon /></Button>
-        <Button type="button"><CopyIcon /></Button>*/}
       </div>
       <div>{module}</div>
     </div>
