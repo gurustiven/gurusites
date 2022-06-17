@@ -1,13 +1,23 @@
 /* eslint-disable @next/next/no-img-element */
 import styles from './Header.module.scss'
+import useWindowSize from 'utils/useWindowSize'
 
 export default function PhoenixHeader({ data, style }: any) {
+  // Obtain windows width for medias
+  const { width } = useWindowSize()
+
   return (
     <header className={styles.header} style={style}>
-      <div className={styles.container} style={{ maxWidth: data?.style?.container?.containerWidth }}>
+      <div className={styles.container}
+        style={{
+          flexDirection: data?.design === 'centered' ? 'column' : data?.design === 'inverse' ? 'row-reverse' : 'row',
+          justifyContent: data?.design === 'centered' ? 'center' : 'space-between',
+          maxWidth: data?.style?.container?.containerWidth
+        }}
+      >
         <div className={styles.logo}>
           {data?.logo
-            ? <img src={data?.logo} alt={data?.name} style={{ maxHeight: data?.logoMaxHeight }} />
+            ? <img src={data?.logo} alt={data?.name} style={{ maxHeight: width < 1024 && data?.logoMaxHeightMobile ? data?.logoMaxHeightMobile : data?.logoMaxHeight }} />
             : <h1>{data?.name ? data?.name : 'Logo'}</h1>
           }
         </div>
@@ -34,6 +44,6 @@ export default function PhoenixHeader({ data, style }: any) {
           </nav>
         </nav>
       </div>
-    </header>
+    </header >
   )
 }

@@ -36,6 +36,8 @@ export function AppProvider({ children }: Props) {
     header: {
       name: "Hotel name",
       logo: "",
+      logoMaxHeight: "40px",
+      logoMaxHeightMobile: "32px",
       menu: [],
       design: "classic",
       style: {

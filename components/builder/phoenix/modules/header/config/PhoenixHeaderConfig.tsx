@@ -27,30 +27,33 @@ export default function PhoenixHeaderConfig() {
     setTheme(values)
   }
 
+  console.log(getHeader?.logoMaxHeight)
+
   return (
     <ModulesConfigTabs module="header">
-      <Text as="h5" css={{ margin: '8px 0' }}>Design</Text>
+      <Text as="h5" css={{ margin: '4px 0' }}>Design</Text>
       <ImageSelect
         options={
           [
-            { label: <img src="/builder/header/classic.svg" alt="classic" />, value: "classic" },
-            { label: <img src="/builder/header/inverse.svg" alt="inverse" />, value: "inverse" },
-            { label: <img src="/builder/header/centered.svg" alt="centered" />, value: "centered" }
+            { image: <img src="/builder/header/classic.svg" alt="classic" />, label: "Classic", value: "classic" },
+            { image: <img src="/builder/header/inverse.svg" alt="inverse" />, label: "Inverse", value: "inverse" },
+            { image: <img src="/builder/header/centered.svg" alt="centered" />, label: "Centered", value: "centered" }
           ]
         }
         onChange={(e) => update("design", e)}
+        defaultValue={getHeader?.design}
       />
       <Separator css={{ background: '$darkie2', margin: '16px 0 12px 0' }} />
       <Text as="h5" css={{ margin: '8px 0' }}>Branding</Text>
-      <ImageUpload style={getHeader?.style?.desktop} onChange={(e) => update("logo", e)} />
+      <ImageUpload style={getHeader?.style?.desktop} onChange={(e) => update("logo", e)} defaultValue={getHeader?.logo} />
       <HStack spacing="2" css={{ margin: '8px 0 0 0' }}>
         <InputGroup size="sm" css={{ width: '50%' }}>
           <InputGroup.LeftIcon icon={<DesktopIcon />} />
-          <InputGroup.Input id="" placeholder="Max height" type="number" onChange={(e: any) => update("logoMaxHeight", `${e.target.value}px`)} />
+          <InputGroup.Input id="" placeholder="Max height" type="number" onChange={(e: any) => update("logoMaxHeight", `${e.target.value}px`)} defaultValue={Number(getHeader?.logoMaxHeight)} />
         </InputGroup>
         <InputGroup size="sm" css={{ width: '50%' }}>
           <InputGroup.LeftIcon icon={<MobileIcon />} />
-          <InputGroup.Input id="" placeholder="Max height" type="number" onChange={(e: any) => update("logoMaxHeightMobile", `${e.target.value}px`)} />
+          <InputGroup.Input id="" placeholder="Max height" type="number" onChange={(e: any) => update("logoMaxHeightMobile", `${e.target.value}px`)} defaultValue={Number(getHeader?.logoMaxHeightMobile)} />
         </InputGroup>
       </HStack>
       <Separator css={{ background: '$darkie2', margin: '16px 0 12px 0' }} />

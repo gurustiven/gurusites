@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { Stack, Text } from '@guruhotel/aura-ui';
 import { UploadIcon } from '@radix-ui/react-icons';
 
-export default function ImageUpload({ onChange, style }: any) {
-  const [imageLink, setImageLink] = useState();
+export default function ImageUpload({ defaultValue, onChange, style }: any) {
+  const [imageLink, setImageLink] = useState(defaultValue);
 
   function fileManage(e) {
     const file = e.target.files[0];

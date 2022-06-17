@@ -57,22 +57,56 @@ export default function ModulesStyle({ module, pageId, isBlock, columnId, module
     setTheme(values)
   };
 
+  // Get default values
+  function defaultValues() {
+    const values = { ...theme }
+    if (module === 'header' || module === 'footer') {
+      return values?.[module]?.style
+    } else {
+      const pageIndex = values?.pages?.map(({ id }: any) => id).indexOf(pageId);
+      return values.pages[pageIndex]
+    }
+    return null
+  }
+
   return (
     <>
       <HStack spacing="4">
-        <ModulesStyleBackground update={(e: any) => update("backgroundColor", "desktop", e.target.value)} />
-        <ModulesStyleColor update={(e: any) => update("color", "desktop", e.target.value)} />
+        <ModulesStyleBackground
+          update={(e: any) => update("backgroundColor", "desktop", e.target.value)}
+          defaultValue={defaultValues()?.desktop?.backgroundColor}
+        />
+        <ModulesStyleColor
+          update={(e: any) => update("color", "desktop", e.target.value)}
+          defaultValue={defaultValues()?.desktop?.color}
+        />
       </HStack>
       <Separator css={{ background: '$darkie2', margin: '16px 0 12px 0' }} />
-      <ModulesStyleWidth update={update} />
+
+      <ModulesStyleWidth
+        update={update}
+        defaultValue={defaultValues()?.container?.containerWidth}
+      />
       <Separator css={{ background: '$darkie2', margin: '16px 0 12px 0' }} />
-      <ModulesStyleRadius update={update} />
+
+      <ModulesStyleRadius
+        update={update}
+      />
       <Separator css={{ background: '$darkie2', margin: '16px 0 12px 0' }} />
-      <ModulesStyleMargin update={update} />
+
+      <ModulesStyleMargin
+        update={update}
+      />
       <Separator css={{ background: '$darkie2', margin: '16px 0 12px 0' }} />
-      <ModulesStylePadding update={update} />
+
+      <ModulesStylePadding
+        update={update}
+      />
       <Separator css={{ background: '$darkie2', margin: '16px 0 12px 0' }} />
-      <ModulesStyleBorder update={update} />
+
+      <ModulesStyleBorder
+        update={update}
+      />
     </>
   )
 }
