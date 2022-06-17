@@ -1,62 +1,67 @@
-import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { createContext, ReactNode, useContext, useState } from 'react'
 
 type appContextType = {
-  theme: any;
-  setTheme: any;
-};
+  theme: any
+  setTheme: any
+}
 
 const appContextDefaultValues: appContextType = {
   theme: {},
   setTheme: null,
-};
+}
 
-const AppContext = createContext<appContextType>(appContextDefaultValues);
+const AppContext = createContext<appContextType>(appContextDefaultValues)
 
 export function useApp() {
-  return useContext(AppContext);
+  return useContext(AppContext)
 }
 
 type Props = {
-  children: ReactNode;
-};
+  children: ReactNode
+}
 
 export function AppProvider({ children }: Props) {
   const defaultTheme = {
     general: {
       colors: {
-        main: "black",
-        secondary: "blue",
-        utilitary: "red"
+        main: 'black',
+        secondary: 'blue',
+        utilitary: 'red',
       },
       fonts: {
-        main: "Inter",
-        secondary: "Inter"
-      }
+        main: 'Inter',
+        secondary: 'Inter',
+      },
+      container: {
+        maxWidth: '1240px',
+      },
     },
     header: {
-      name: "Hotel name",
-      logo: "",
-      logoMaxHeight: "40px",
-      logoMaxHeightMobile: "32px",
+      name: 'Hotel name',
+      logo: '',
+      logoMaxHeight: '40px',
+      logoMaxHeightMobile: '32px',
       menu: [],
-      design: "classic",
+      design: 'classic',
       style: {
         container: {
-          width: '1200px'
+          width: '1200px',
         },
         desktop: {
           backgroundColor: 'black',
           borderColor: 'black',
           color: 'white',
-        }
-      }
+        },
+      },
     },
-    pages: [{
-      id: "798e4870-c94f-43f5-aff6-0023211a1f8f",
-      name: "home",
-      route: "",
-      modules: []
-    }]
+    pages: [
+      {
+        id: '798e4870-c94f-43f5-aff6-0023211a1f8f',
+        name: 'home',
+        route: '',
+        modules: [],
+      },
+    ],
   }
 
   const [theme, setTheme] = useState(defaultTheme)
@@ -65,5 +70,5 @@ export function AppProvider({ children }: Props) {
     <AppContext.Provider value={{ theme, setTheme }}>
       {children}
     </AppContext.Provider>
-  );
+  )
 }

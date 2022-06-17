@@ -1,6 +1,8 @@
-import { AuraUIProvider } from "@guruhotel/aura-ui";
+import '../styles/variables.scss'
+
+import { AuraUIProvider } from '@guruhotel/aura-ui'
 import type { AppProps } from 'next/app'
-import { AppProvider } from "../components/context/AppContext";
+import { AppProvider } from '../components/context/AppContext'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -9,7 +11,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
       </AuraUIProvider>
     </AppProvider>
-  );
+  )
 }
 
-export default MyApp;
+export default MyApp
