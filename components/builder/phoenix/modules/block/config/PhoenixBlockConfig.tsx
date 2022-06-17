@@ -1,8 +1,4 @@
-import {
-  Input,
-  Button,
-  Box,
-} from "@guruhotel/aura-ui";
+import { Button, Box, } from "@guruhotel/aura-ui";
 import ModulesConfigTabs from "components/builder/interface/config/ModulesConfigTabs";
 import { v4 as uuid_v4 } from "uuid";
 import { useApp } from "components/context/AppContext";
