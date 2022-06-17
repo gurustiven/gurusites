@@ -113,7 +113,7 @@ export default function ModulesStyle({
       <HStack spacing="4">
         <ModulesStyleBackground
           update={update}
-          defaultValue={defaultValues?.desktop?.backgroundColor}
+          defaultValue={defaultValues?.desktop?.background}
         />
         <ModulesStyleColor
           update={update}

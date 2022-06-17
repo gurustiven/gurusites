@@ -1,4 +1,10 @@
-import { createContext, ReactNode, useContext, useState } from 'react'
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 
 type appContextType = {
   theme: any
@@ -37,7 +43,7 @@ export function AppProvider({ children }: Props) {
       },
     },
     header: {
-      name: 'Hotel name',
+      name: 'Site name',
       logo: '',
       logoMaxHeight: '40px',
       logoMaxHeightMobile: '32px',
@@ -64,6 +70,13 @@ export function AppProvider({ children }: Props) {
   }
 
   const [theme, setTheme] = useState(defaultTheme)
+
+  useEffect(() => {
+    if (localStorage.getItem('theme')) {
+      const getSavedTheme = JSON.parse(localStorage.getItem('theme'))
+      setTheme(getSavedTheme)
+    }
+  }, [])
 
   return (
     <AppContext.Provider value={{ theme, setTheme }}>

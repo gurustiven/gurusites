@@ -8,11 +8,11 @@ export default function ModulesStyleBackground({ update, defaultValue }: any) {
       <InputGroup size="sm" css={{ width: '100%' }}>
         <InputGroup.LeftIcon icon={<ValueIcon />} />
         <InputGroup.Input
-          id="backgroundColor"
+          id="background"
           type="text"
           defaultValue={defaultValue}
           onChange={(e: any) =>
-            update('backgroundColor', 'desktop', e.target.value)
+            update('background', 'desktop', e.target.value)
           }
         />
       </InputGroup>
