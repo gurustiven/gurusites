@@ -44,12 +44,11 @@ export function AppProvider({ children }: Props) {
       menu: [],
       design: 'classic',
       style: {
-        container: {
-          width: '1200px',
+        general: {
+          containerWidth: '1240px',
         },
         desktop: {
           backgroundColor: 'black',
-          borderColor: 'black',
           color: 'white',
         },
       },

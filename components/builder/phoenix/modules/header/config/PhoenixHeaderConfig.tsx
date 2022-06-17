@@ -1,11 +1,23 @@
+import { ChevronDownRegular } from '@guruhotel/aura-icons'
 import {
   Box,
   Button,
   HStack,
   Input,
   InputGroup,
+  Label,
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectIcon,
+  SelectItem,
+  SelectItemText,
+  SelectValue,
+  SelectTrigger,
+  SelectViewport,
   Separator,
   Text,
+  VStack,
 } from '@guruhotel/aura-ui'
 import { DesktopIcon, MobileIcon } from '@radix-ui/react-icons'
 import ModulesConfigTabs from 'components/builder/interface/config/ModulesConfigTabs'
@@ -156,37 +168,66 @@ function PhoenixHeaderConfigMenu({ item, theme, setTheme }: any) {
   }
 
   return (
-    <Box
-      css={{
-        border: '1px solid $darkie4',
-        borderRadius: '8px',
-        margin: '12px 0',
-        padding: '12px',
-      }}
-    >
-      <Input
-        id="menuLabel"
-        defaultValue={item?.label}
-        placeholder="Label"
-        css={{ margin: '4px 0', width: '100%' }}
-        onChange={(e) => update('label', e.target.value)}
-      />
-      <Input
-        id="menuLink"
-        defaultValue={item?.link}
-        placeholder="Link"
-        css={{ margin: '4px 0', width: '100%' }}
-        onChange={(e) => update('link', e.target.value)}
-      />
+    <Box>
+      <HStack spacing="2" css={{ position: 'relative', width: '100%' }}>
+        <VStack css={{ width: '60%' }}>
+          <Input
+            id="menuLabel"
+            defaultValue={item?.label}
+            placeholder="Label"
+            css={{ width: '100%' }}
+            onChange={(e) => update('label', e.target.value)}
+            size="sm"
+          />
+        </VStack>
+        <VStack css={{ width: '40%' }}>
+          <Select defaultValue="page">
+            <SelectTrigger id="linkTo" aria-label="Font">
+              <SelectValue />
+              <SelectIcon>
+                <Box css={{ mb: '$1' }}>
+                  <ChevronDownRegular label="" color="currentcolor" size="xs" />
+                </Box>
+              </SelectIcon>
+            </SelectTrigger>
+            <SelectContent>
+              <SelectViewport>
+                <SelectGroup>
+                  <SelectItem value="without">
+                    <SelectItemText>Without link</SelectItemText>
+                  </SelectItem>
+                  <SelectItem value="custom">
+                    <SelectItemText>Custom link</SelectItemText>
+                  </SelectItem>
+                  <SelectItem value="page">
+                    <SelectItemText>Link with page</SelectItemText>
+                  </SelectItem>
+                </SelectGroup>
+              </SelectViewport>
+            </SelectContent>
+          </Select>
+        </VStack>
+      </HStack>
+      <VStack css={{ margin: '4px 0', width: '100%' }}>
+        <Input
+          id="menuLink"
+          defaultValue={item?.link}
+          placeholder="Link"
+          css={{ width: '100%' }}
+          onChange={(e) => update('link', e.target.value)}
+          size="sm"
+        />
+      </VStack>
       <Button
         colorScheme="red"
-        css={{ width: '100%' }}
         onClick={() => removeElement()}
+        size="xs"
         type="button"
         variant="link"
       >
         Remove -
       </Button>
+      <Separator css={{ margin: '12px 0' }} />
     </Box>
   )
 }

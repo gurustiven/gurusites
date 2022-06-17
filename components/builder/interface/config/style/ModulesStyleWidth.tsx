@@ -34,7 +34,7 @@ export default function ModulesStyleWidth({ defaultValue, update }: any) {
             value: theme?.general?.container?.maxWidth,
           },
         ]}
-        onChange={(e: any) => update('containerWidth', 'container', e)}
+        onChange={(e: any) => update('containerWidth', 'general', e)}
         defaultValue={defaultValue}
       />
     </>
