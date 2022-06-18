@@ -71,7 +71,7 @@ export default function ModulesStyleMargin({ defaultValues, update }: any) {
               <InputGroup.Input
                 id="margin"
                 defaultValue={defaultValues?.desktop?.margin}
-                type="number"
+                type="text"
                 onChange={(e: any) =>
                   update('margin', 'desktop', e.target.value)
                 }
@@ -83,7 +83,7 @@ export default function ModulesStyleMargin({ defaultValues, update }: any) {
                 <InputGroup.Input
                   id="margin"
                   defaultValue={defaultValues?.mobile?.margin}
-                  type="number"
+                  type="text"
                   onChange={(e: any) =>
                     update('margin', 'mobile', e.target.value)
                   }
@@ -103,7 +103,7 @@ export default function ModulesStyleMargin({ defaultValues, update }: any) {
                 <InputGroup.Input
                   id="topMargin"
                   defaultValue={defaultValues?.desktop?.topMargin}
-                  type="number"
+                  type="text"
                   onChange={(e: any) =>
                     update('topMargin', 'desktop', e.target.value)
                   }
@@ -115,7 +115,7 @@ export default function ModulesStyleMargin({ defaultValues, update }: any) {
                   <InputGroup.Input
                     id="topMarginMobile"
                     defaultValue={defaultValues?.mobile?.topMargin}
-                    type="number"
+                    type="text"
                     onChange={(e: any) =>
                       update('topMargin', 'mobile', e.target.value)
                     }
@@ -130,7 +130,7 @@ export default function ModulesStyleMargin({ defaultValues, update }: any) {
                 <InputGroup.Input
                   id="rightMargin"
                   defaultValue={defaultValues?.desktop?.rightMargin}
-                  type="number"
+                  type="text"
                   onChange={(e: any) =>
                     update('rightMargin', 'desktop', e.target.value)
                   }
@@ -142,7 +142,7 @@ export default function ModulesStyleMargin({ defaultValues, update }: any) {
                   <InputGroup.Input
                     id="rightMarginMobile"
                     defaultValue={defaultValues?.mobile?.rightMargin}
-                    type="number"
+                    type="text"
                     onChange={(e: any) =>
                       update('rightMargin', 'mobile', e.target.value)
                     }
@@ -159,7 +159,7 @@ export default function ModulesStyleMargin({ defaultValues, update }: any) {
                 <InputGroup.Input
                   id="bottomMargin"
                   defaultValue={defaultValues?.desktop?.bottomMargin}
-                  type="number"
+                  type="text"
                   onChange={(e: any) =>
                     update('bottomMargin', 'desktop', e.target.value)
                   }
@@ -171,7 +171,7 @@ export default function ModulesStyleMargin({ defaultValues, update }: any) {
                   <InputGroup.Input
                     id="bottomMarginMobile"
                     defaultValue={defaultValues?.mobile?.bottomMargin}
-                    type="number"
+                    type="text"
                     onChange={(e: any) =>
                       update('bottomMargin', 'mobile', e.target.value)
                     }
@@ -186,7 +186,7 @@ export default function ModulesStyleMargin({ defaultValues, update }: any) {
                 <InputGroup.Input
                   id="leftMargin"
                   defaultValue={defaultValues?.desktop?.leftMargin}
-                  type="number"
+                  type="text"
                   onChange={(e: any) =>
                     update('leftMargin', 'desktop', e.target.value)
                   }
@@ -198,7 +198,7 @@ export default function ModulesStyleMargin({ defaultValues, update }: any) {
                   <InputGroup.Input
                     id="leftMarginMobile"
                     defaultValue={defaultValues?.mobile?.leftMargin}
-                    type="number"
+                    type="text"
                     onChange={(e: any) =>
                       update('leftMargin', 'mobile', e.target.value)
                     }

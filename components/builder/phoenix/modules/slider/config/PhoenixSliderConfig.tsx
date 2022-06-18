@@ -1,41 +1,60 @@
-import {
-  Input,
-  Button,
-  Box,
-} from "@guruhotel/aura-ui";
-import ModulesConfigTabs from "components/builder/interface/config/ModulesConfigTabs";
-import { v4 as uuid_v4 } from "uuid";
-import { useApp } from "components/context/AppContext";
+import { Input, Button, Box, Separator } from '@guruhotel/aura-ui'
+import ModulesConfigTabs from 'components/builder/interface/config/ModulesConfigTabs'
+import { v4 as uuid_v4 } from 'uuid'
+import { useApp } from 'components/context/AppContext'
+import ImageUpload from 'components/builder/interface/shared/ImageUpload'
 
 interface PhoenixSliderConfigProps {
-  module: any,
-  pageId: any,
-  isBlock?: boolean,
+  module: any
+  pageId: any
+  isBlock?: boolean
   columnId?: any
   moduleId?: any
 }
 
-export default function PhoenixSliderConfig({ module, pageId, isBlock, columnId, moduleId }: PhoenixSliderConfigProps) {
+export default function PhoenixSliderConfig({
+  module,
+  pageId,
+  isBlock,
+  columnId,
+  moduleId,
+}: PhoenixSliderConfigProps) {
   // Get theme
   const { theme, setTheme } = useApp()
 
   // Update parent
   function update(name: any, value: any) {
-    const values = { ...theme };
-    const index = values?.pages?.map(({ id }: any) => id).indexOf(pageId);
+    const values = { ...theme }
+    const index = values?.pages?.map(({ id }: any) => id).indexOf(pageId)
     if (index !== -1) {
       if (isBlock) {
-        const indexModule = values?.pages[index]?.modules?.map(({ id }: any) => id).indexOf(moduleId);
+        const indexModule = values?.pages[index]?.modules
+          ?.map(({ id }: any) => id)
+          .indexOf(moduleId)
         if (indexModule !== -1) {
-          const indexColumn = values?.pages[index]?.modules[indexModule]?.config?.columns?.map(({ id }: any) => id).indexOf(columnId);
+          const indexColumn = values?.pages[index]?.modules[
+            indexModule
+          ]?.config?.columns
+            ?.map(({ id }: any) => id)
+            .indexOf(columnId)
           if (indexColumn !== -1) {
-            const indexModuleChild = values?.pages[index]?.modules[indexModule]?.config?.columns[indexColumn]?.modules?.map(({ id }: any) => id).indexOf(module?.id);
-            indexModuleChild !== -1 && (values.pages[index].modules[indexModule].config.columns[indexColumn].modules[indexModuleChild].config[name] = value)
+            const indexModuleChild = values?.pages[index]?.modules[
+              indexModule
+            ]?.config?.columns[indexColumn]?.modules
+              ?.map(({ id }: any) => id)
+              .indexOf(module?.id)
+            indexModuleChild !== -1 &&
+              (values.pages[index].modules[indexModule].config.columns[
+                indexColumn
+              ].modules[indexModuleChild].config[name] = value)
           }
         }
       } else {
-        const indexChild = values?.pages[index]?.modules?.map((item: any) => item?.id).indexOf(module?.id);
-        indexChild !== -1 && (values.pages[index].modules[indexChild].config[name] = value)
+        const indexChild = values?.pages[index]?.modules
+          ?.map((item: any) => item?.id)
+          .indexOf(module?.id)
+        indexChild !== -1 &&
+          (values.pages[index].modules[indexChild].config[name] = value)
       }
     }
     setTheme(values)
@@ -43,31 +62,63 @@ export default function PhoenixSliderConfig({ module, pageId, isBlock, columnId,
 
   // Add new item
   function newItem() {
-    const values = { ...theme };
-    const index = values?.pages?.map(({ id }: any) => id).indexOf(pageId);
+    const values = { ...theme }
+    const index = values?.pages?.map(({ id }: any) => id).indexOf(pageId)
     if (index !== -1) {
       if (isBlock) {
-        const indexModule = values?.pages[index]?.modules?.map(({ id }: any) => id).indexOf(moduleId);
+        const indexModule = values?.pages[index]?.modules
+          ?.map(({ id }: any) => id)
+          .indexOf(moduleId)
         if (indexModule !== -1) {
-          const indexColumn = values?.pages[index]?.modules[indexModule]?.config?.columns?.map(({ id }: any) => id).indexOf(columnId);
+          const indexColumn = values?.pages[index]?.modules[
+            indexModule
+          ]?.config?.columns
+            ?.map(({ id }: any) => id)
+            .indexOf(columnId)
           if (indexColumn !== -1) {
-            const indexModuleChild = values?.pages[index]?.modules[indexModule]?.config?.columns[indexColumn]?.modules?.map(({ id }: any) => id).indexOf(module?.id);
+            const indexModuleChild = values?.pages[index]?.modules[
+              indexModule
+            ]?.config?.columns[indexColumn]?.modules
+              ?.map(({ id }: any) => id)
+              .indexOf(module?.id)
             if (indexModuleChild !== -1) {
-              if (values?.pages[index]?.modules[indexModule]?.config?.columns[indexColumn]?.modules[indexModuleChild].config.items) {
-                values?.pages[index]?.modules[indexModule]?.config?.columns[indexColumn]?.modules[indexModuleChild].config.items.push({ id: uuid_v4(), source: "", text: "" })
+              if (
+                values?.pages[index]?.modules[indexModule]?.config?.columns[
+                  indexColumn
+                ]?.modules[indexModuleChild].config.items
+              ) {
+                values?.pages[index]?.modules[indexModule]?.config?.columns[
+                  indexColumn
+                ]?.modules[indexModuleChild].config.items.push({
+                  id: uuid_v4(),
+                  source: '',
+                  text: '',
+                })
               } else {
-                values.pages[index].modules[indexModule].config.columns[indexColumn].modules[indexModuleChild].config = { items: [{ id: uuid_v4(), source: "", text: "" }] }
+                values.pages[index].modules[indexModule].config.columns[
+                  indexColumn
+                ].modules[indexModuleChild].config = {
+                  items: [{ id: uuid_v4(), source: '', text: '' }],
+                }
               }
             }
           }
         }
       } else {
-        const indexModule = values?.pages[index]?.modules?.map(({ id }: any) => id).indexOf(module?.id);
+        const indexModule = values?.pages[index]?.modules
+          ?.map(({ id }: any) => id)
+          .indexOf(module?.id)
         if (indexModule !== -1) {
           if (values.pages[index].modules[indexModule].config.items) {
-            values.pages[index].modules[indexModule].config.items.push({ id: uuid_v4(), source: "", text: "" })
+            values.pages[index].modules[indexModule].config.items.push({
+              id: uuid_v4(),
+              source: '',
+              text: '',
+            })
           } else {
-            values.pages[index].modules[indexModule].config = { items: [{ id: uuid_v4(), source: "", text: "" }] }
+            values.pages[index].modules[indexModule].config = {
+              items: [{ id: uuid_v4(), source: '', text: '' }],
+            }
           }
         }
       }
@@ -76,9 +127,20 @@ export default function PhoenixSliderConfig({ module, pageId, isBlock, columnId,
   }
 
   return (
-    <ModulesConfigTabs isBlock={isBlock} columnId={columnId} pageId={pageId} module={module} moduleId={moduleId}>
+    <ModulesConfigTabs
+      isBlock={isBlock}
+      columnId={columnId}
+      pageId={pageId}
+      module={module}
+      moduleId={moduleId}
+    >
       {module?.config?.items?.map(({ id }: any) => (
-        <PhoenixSliderConfigItems key={id} itemId={id} items={module?.config?.items} setItems={e => update('items', e)} />
+        <PhoenixSliderConfigItems
+          key={id}
+          itemId={id}
+          items={module?.config?.items}
+          setItems={(e: any) => update('items', e)}
+        />
       ))}
       <Button
         variant="outline"
@@ -92,45 +154,49 @@ export default function PhoenixSliderConfig({ module, pageId, isBlock, columnId,
 }
 
 function PhoenixSliderConfigItems({ itemId, items, setItems }: any) {
+  const index = items?.map(({ id }: any) => id).indexOf(itemId)
+  const getItem = items[index]
+
   // Update parent
   function update(name: any, value: any) {
-    const values = [...items];
-    const index = values?.map(({ id }: any) => id).indexOf(itemId);
+    const values = [...items]
+    const index = values?.map(({ id }: any) => id).indexOf(itemId)
     index !== -1 && (values[index][name] = value)
     setItems(values)
   }
 
   // Remove current item
   const removeItem = () => {
-    const values = [...items];
-    const index = values?.map(({ id }: any) => id).indexOf(itemId);
+    const values = [...items]
+    const index = values?.map(({ id }: any) => id).indexOf(itemId)
     index !== -1 && values.splice(index, 1)
     setItems(values)
-  };
+  }
 
   return (
-    <Box css={{ border: '1px solid $darkie4', borderRadius: '8px', margin: '12px 0', padding: '12px' }}>
-      <Input
-        id="itemUrl"
-        placeholder="Image URL"
-        css={{ margin: '4px 0', width: "100%" }}
-        onChange={e => update('source', e.target.value)}
+    <Box>
+      <ImageUpload
+        defaultValue={getItem?.source}
+        onChange={(e: any) => update('source', e)}
       />
       <Input
         id="itemText"
+        defaultValue={getItem?.text}
         placeholder="Image Text"
-        css={{ margin: '4px 0', width: "100%" }}
-        onChange={e => update('text', e.target.value)}
+        css={{ margin: '4px 0', width: '100%' }}
+        onChange={(e) => update('text', e.target.value)}
+        size="sm"
       />
       <Button
         colorScheme="red"
-        variant="link"
-        css={{ width: '100%' }}
         onClick={() => removeItem()}
+        size="xs"
         type="button"
+        variant="link"
       >
         Remove -
       </Button>
+      <Separator css={{ margin: '12px 0' }} />
     </Box>
   )
 }

@@ -1,5 +1,6 @@
 .slider {
   border-style: solid;
+  border-width: 0;
   height: 700px;
   overflow: hidden;
   position: relative;
@@ -17,13 +18,20 @@
   }
 
   .item {
-    background: no-repeat center center;
-    background-size: cover;
-    display: flex;
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
+    .text {
+      align-items: center;
+      background: rgba(black, 0.2);
+      color: white;
+      display: flex;
+      justify-content: center;
+      font-size: 2rem;
+      height: 100%;
+      left: 0;
+      position: absolute;
+      text-shadow: 1px 2px rgba(black, 0.2);
+      top: 0;
+      width: 100%;
+      z-index: 5;
+    }
   }
 }
