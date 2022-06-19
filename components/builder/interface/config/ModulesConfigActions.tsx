@@ -13,7 +13,7 @@ import styles from './Modules.module.scss'
 interface ModulesConfigActionsProps {
   module: ReactNode
   config: ReactNode
-  onlyEdit: boolean
+  onlyEdit?: boolean
 }
 
 export default function ModulesConfigActions({

@@ -74,6 +74,17 @@ export default function NewModule({
         <HStack spacing="2">
           <NewModuleButton
             icon={<ImageIcon />}
+            label="Content"
+            onClick={() =>
+              addNewModule('content', {
+                general: {
+                  containerWidth: theme?.general?.container?.maxWidth,
+                },
+              })
+            }
+          />
+          <NewModuleButton
+            icon={<ImageIcon />}
             label="Photo slider"
             onClick={() =>
               addNewModule('slider', {

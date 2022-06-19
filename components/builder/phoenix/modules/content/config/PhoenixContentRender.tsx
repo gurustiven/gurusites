@@ -1,7 +1,7 @@
 import useWindowSize from 'utils/useWindowSize'
-import PhoenixSlider from '../PhoenixSlider'
+import PhoenixContent from '../PhoenixContent'
 
-export default function PhoenixSliderRender({ module }: any) {
+export default function PhoenixContentRender({ module }: any) {
   // Obtain windows width for medias
   const { width } = useWindowSize()
 
@@ -15,5 +15,5 @@ export default function PhoenixSliderRender({ module }: any) {
     )
   }
 
-  return <PhoenixSlider data={module} style={style()} />
+  return <PhoenixContent data={module} style={style()} />
 }

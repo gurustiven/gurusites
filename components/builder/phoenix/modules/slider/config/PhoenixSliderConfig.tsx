@@ -22,39 +22,42 @@ export default function PhoenixSliderConfig({
   // Get theme
   const { theme, setTheme } = useApp()
 
+  // Set some constants
+  const pageIndex = theme?.pages?.map(({ id }: any) => id).indexOf(pageId)
+  const moduleIndex = isBlock
+    ? theme?.pages[pageIndex]?.modules
+        ?.map(({ id }: any) => id)
+        .indexOf(moduleId)
+    : theme?.pages[pageIndex]?.modules
+        ?.map(({ id }: any) => id)
+        .indexOf(module?.id)
+
   // Update parent
   function update(name: any, value: any) {
     const values = { ...theme }
-    const index = values?.pages?.map(({ id }: any) => id).indexOf(pageId)
-    if (index !== -1) {
+    if (pageIndex !== -1) {
       if (isBlock) {
-        const indexModule = values?.pages[index]?.modules
-          ?.map(({ id }: any) => id)
-          .indexOf(moduleId)
-        if (indexModule !== -1) {
-          const indexColumn = values?.pages[index]?.modules[
-            indexModule
+        if (moduleIndex !== -1) {
+          const indexColumn = values?.pages[pageIndex]?.modules[
+            moduleIndex
           ]?.config?.columns
             ?.map(({ id }: any) => id)
             .indexOf(columnId)
           if (indexColumn !== -1) {
-            const indexModuleChild = values?.pages[index]?.modules[
-              indexModule
+            const moduleIndexChild = values?.pages[pageIndex]?.modules[
+              moduleIndex
             ]?.config?.columns[indexColumn]?.modules
               ?.map(({ id }: any) => id)
               .indexOf(module?.id)
-            indexModuleChild !== -1 &&
-              (values.pages[index].modules[indexModule].config.columns[
+            moduleIndexChild !== -1 &&
+              (values.pages[pageIndex].modules[moduleIndex].config.columns[
                 indexColumn
-              ].modules[indexModuleChild].config[name] = value)
+              ].modules[moduleIndexChild].config[name] = value)
           }
         }
       } else {
-        const indexChild = values?.pages[index]?.modules
-          ?.map((item: any) => item?.id)
-          .indexOf(module?.id)
-        indexChild !== -1 &&
-          (values.pages[index].modules[indexChild].config[name] = value)
+        moduleIndex !== -1 &&
+          (values.pages[pageIndex].modules[moduleIndex].config[name] = value)
       }
     }
     setTheme(values)
@@ -63,41 +66,40 @@ export default function PhoenixSliderConfig({
   // Add new item
   function newItem() {
     const values = { ...theme }
-    const index = values?.pages?.map(({ id }: any) => id).indexOf(pageId)
-    if (index !== -1) {
+    if (pageIndex !== -1) {
       if (isBlock) {
-        const indexModule = values?.pages[index]?.modules
+        const moduleIndex = values?.pages[pageIndex]?.modules
           ?.map(({ id }: any) => id)
           .indexOf(moduleId)
-        if (indexModule !== -1) {
-          const indexColumn = values?.pages[index]?.modules[
-            indexModule
+        if (moduleIndex !== -1) {
+          const indexColumn = values?.pages[pageIndex]?.modules[
+            moduleIndex
           ]?.config?.columns
             ?.map(({ id }: any) => id)
             .indexOf(columnId)
           if (indexColumn !== -1) {
-            const indexModuleChild = values?.pages[index]?.modules[
-              indexModule
+            const moduleIndexChild = values?.pages[pageIndex]?.modules[
+              moduleIndex
             ]?.config?.columns[indexColumn]?.modules
               ?.map(({ id }: any) => id)
               .indexOf(module?.id)
-            if (indexModuleChild !== -1) {
+            if (moduleIndexChild !== -1) {
               if (
-                values?.pages[index]?.modules[indexModule]?.config?.columns[
+                values?.pages[pageIndex]?.modules[moduleIndex]?.config?.columns[
                   indexColumn
-                ]?.modules[indexModuleChild].config.items
+                ]?.modules[moduleIndexChild].config.items
               ) {
-                values?.pages[index]?.modules[indexModule]?.config?.columns[
+                values?.pages[pageIndex]?.modules[moduleIndex]?.config?.columns[
                   indexColumn
-                ]?.modules[indexModuleChild].config.items.push({
+                ]?.modules[moduleIndexChild].config.items.push({
                   id: uuid_v4(),
                   source: '',
                   text: '',
                 })
               } else {
-                values.pages[index].modules[indexModule].config.columns[
+                values.pages[pageIndex].modules[moduleIndex].config.columns[
                   indexColumn
-                ].modules[indexModuleChild].config = {
+                ].modules[moduleIndexChild].config = {
                   items: [{ id: uuid_v4(), source: '', text: '' }],
                 }
               }
@@ -105,18 +107,15 @@ export default function PhoenixSliderConfig({
           }
         }
       } else {
-        const indexModule = values?.pages[index]?.modules
-          ?.map(({ id }: any) => id)
-          .indexOf(module?.id)
-        if (indexModule !== -1) {
-          if (values.pages[index].modules[indexModule].config.items) {
-            values.pages[index].modules[indexModule].config.items.push({
+        if (moduleIndex !== -1) {
+          if (values.pages[pageIndex].modules[moduleIndex].config.items) {
+            values.pages[pageIndex].modules[moduleIndex].config.items.push({
               id: uuid_v4(),
               source: '',
               text: '',
             })
           } else {
-            values.pages[index].modules[indexModule].config = {
+            values.pages[pageIndex].modules[moduleIndex].config = {
               items: [{ id: uuid_v4(), source: '', text: '' }],
             }
           }

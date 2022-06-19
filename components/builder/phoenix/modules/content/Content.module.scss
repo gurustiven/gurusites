@@ -1,7 +1,16 @@
 .content {
+  border-style: solid;
+  border-width: 0;
+  overflow: hidden;
+  position: relative;
+
   .container {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     margin: 0 auto;
     max-width: var(--defaults--container-width);
-    width: 100%;
+    height: 100%;
   }
 }
