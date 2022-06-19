@@ -13,4 +13,10 @@
     max-width: var(--defaults--container-width);
     height: 100%;
   }
+
+  p {
+    line-height: 1.125;
+    margin: 12px 0;
+    padding: 0;
+  }
 }

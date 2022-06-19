@@ -63,8 +63,6 @@ export default function PhoenixContentConfig({
     setTheme(values)
   }
 
-  console.log(theme.pages[pageIndex].modules[moduleIndex])
-
   return (
     <ModulesConfigTabs
       isBlock={isBlock}
@@ -73,7 +71,10 @@ export default function PhoenixContentConfig({
       module={module}
       moduleId={moduleId}
     >
-      <RickText setValue={(e: any) => update('content', e)} />
+      <RickText
+        setValue={(e: any) => update('content', e)}
+        defaultValue={module?.config?.content}
+      />
     </ModulesConfigTabs>
   )
 }

@@ -29,22 +29,6 @@ export default function PhoenixContent({ data, style }: any) {
                     ))}
                   </ul>
                 )
-              case 'heading-one':
-                return (
-                  <h1 key={key}>
-                    {children?.map(({ text }: any, k: any) => (
-                      <Fragment key={k}>{text}</Fragment>
-                    ))}
-                  </h1>
-                )
-              case 'heading-two':
-                return (
-                  <h2 key={key}>
-                    {children?.map(({ text }: any, k: any) => (
-                      <Fragment key={k}>{text}</Fragment>
-                    ))}
-                  </h2>
-                )
               case 'list-item':
                 return (
                   <li key={key}>
@@ -56,8 +40,17 @@ export default function PhoenixContent({ data, style }: any) {
               case 'numbered-list':
                 return (
                   <ol key={key}>
-                    {children?.map(({ text }: any, k: any) => (
-                      <Fragment key={k}>{text}</Fragment>
+                    {children?.map(({ children }: any, k: any) => (
+                      <li key={k}>
+                        {children?.map(
+                          ({ text, bold, italic, code }: any, k: any) => {
+                            if (bold) return <b key={k}>{text}</b>
+                            if (italic) return <i key={k}>{text}</i>
+                            if (code) return <code key={k}>{text}</code>
+                            return <Fragment key={k}>{text}</Fragment>
+                          }
+                        )}
+                      </li>
                     ))}
                   </ol>
                 )

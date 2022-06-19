@@ -1,5 +1,4 @@
-import React, { useCallback, useMemo } from 'react'
-import isHotkey from 'is-hotkey'
+import React, { PropsWithChildren, Ref, useCallback, useMemo } from 'react'
 import { Editable, withReact, useSlate, Slate } from 'slate-react'
 import {
   Editor,
@@ -9,62 +8,64 @@ import {
   Element as SlateElement,
 } from 'slate'
 import { withHistory } from 'slate-history'
-
-import { Button, Icon, Toolbar } from './Components'
-
-const HOTKEYS = {
-  'mod+b': 'bold',
-  'mod+i': 'italic',
-  'mod+u': 'underline',
-  'mod+`': 'code',
-}
+import {
+  CodeIcon,
+  FontBoldIcon,
+  FontItalicIcon,
+  ListBulletIcon,
+  QuoteIcon,
+  TextAlignCenterIcon,
+  TextAlignJustifyIcon,
+  TextAlignLeftIcon,
+  TextAlignRightIcon,
+  TextAlignTopIcon,
+  UnderlineIcon,
+} from '@radix-ui/react-icons'
+import { Box, Button, HStack } from '@guruhotel/aura-ui'
 
 const LIST_TYPES = ['numbered-list', 'bulleted-list']
 const TEXT_ALIGN_TYPES = ['left', 'center', 'right', 'justify']
 
-const RichText = ({ setValue }) => {
-  const renderElement = useCallback((props) => <Element {...props} />, [])
-  const renderLeaf = useCallback((props) => <Leaf {...props} />, [])
+const RichText = ({ defaultValue, setValue }: any) => {
+  const renderElement = useCallback((props: any) => <Element {...props} />, [])
+  const renderLeaf = useCallback((props: any) => <Leaf {...props} />, [])
   const editor = useMemo(() => withHistory(withReact(createEditor())), [])
 
   return (
-    <Slate editor={editor} value={initialValue} onChange={setValue}>
-      <Toolbar>
-        <MarkButton format="bold" icon="format_bold" />
-        <MarkButton format="italic" icon="format_italic" />
-        <MarkButton format="underline" icon="format_underlined" />
-        <MarkButton format="code" icon="code" />
-        <BlockButton format="heading-one" icon="looks_one" />
-        <BlockButton format="heading-two" icon="looks_two" />
-        <BlockButton format="block-quote" icon="format_quote" />
-        <BlockButton format="numbered-list" icon="format_list_numbered" />
-        <BlockButton format="bulleted-list" icon="format_list_bulleted" />
-        <BlockButton format="left" icon="format_align_left" />
-        <BlockButton format="center" icon="format_align_center" />
-        <BlockButton format="right" icon="format_align_right" />
-        <BlockButton format="justify" icon="format_align_justify" />
-      </Toolbar>
-      <Editable
-        renderElement={renderElement}
-        renderLeaf={renderLeaf}
-        placeholder="Enter some rich text…"
-        spellCheck
-        autoFocus
-        onKeyDown={(event) => {
-          for (const hotkey in HOTKEYS) {
-            if (isHotkey(hotkey, event as any)) {
-              event.preventDefault()
-              const mark = HOTKEYS[hotkey]
-              toggleMark(editor, mark)
-            }
-          }
-        }}
-      />
+    <Slate
+      editor={editor}
+      value={defaultValue || initialValue}
+      onChange={setValue}
+    >
+      <Box css={{ border: '1px solid $darkie4' }}>
+        <HStack justifyContent="center" css={{ backgroundColor: '$darkie4' }}>
+          <MarkButton format="bold" icon={FontBoldIcon} />
+          <MarkButton format="italic" icon={FontItalicIcon} />
+          <MarkButton format="underline" icon={UnderlineIcon} />
+          <MarkButton format="code" icon={CodeIcon} />
+          <BlockButton format="block-quote" icon={QuoteIcon} />
+          <BlockButton format="numbered-list" icon={TextAlignTopIcon} />
+          <BlockButton format="bulleted-list" icon={ListBulletIcon} />
+          <BlockButton format="left" icon={TextAlignLeftIcon} />
+          <BlockButton format="center" icon={TextAlignCenterIcon} />
+          <BlockButton format="right" icon={TextAlignRightIcon} />
+          <BlockButton format="justify" icon={TextAlignJustifyIcon} />
+        </HStack>
+        <Box css={{ padding: '12px 20px' }}>
+          <Editable
+            renderElement={renderElement}
+            renderLeaf={renderLeaf}
+            placeholder="Enter content..."
+            spellCheck
+            autoFocus
+          />
+        </Box>
+      </Box>
     </Slate>
   )
 }
 
-const toggleBlock = (editor, format) => {
+const toggleBlock = (editor: any, format: any) => {
   const isActive = isBlockActive(
     editor,
     format,
@@ -98,7 +99,7 @@ const toggleBlock = (editor, format) => {
   }
 }
 
-const toggleMark = (editor, format) => {
+const toggleMark = (editor: any, format: any) => {
   const isActive = isMarkActive(editor, format)
 
   if (isActive) {
@@ -108,7 +109,7 @@ const toggleMark = (editor, format) => {
   }
 }
 
-const isBlockActive = (editor, format, blockType = 'type') => {
+const isBlockActive = (editor: any, format: any, blockType = 'type') => {
   const { selection } = editor
   if (!selection) return false
 
@@ -125,12 +126,12 @@ const isBlockActive = (editor, format, blockType = 'type') => {
   return !!match
 }
 
-const isMarkActive = (editor, format) => {
+const isMarkActive = (editor: any, format: any) => {
   const marks = Editor.marks(editor)
   return marks ? marks[format] === true : false
 }
 
-const Element = ({ attributes, children, element }) => {
+const Element = ({ attributes, children, element }: any) => {
   const style = { textAlign: element.align }
   switch (element.type) {
     case 'block-quote':
@@ -144,18 +145,6 @@ const Element = ({ attributes, children, element }) => {
         <ul style={style} {...attributes}>
           {children}
         </ul>
-      )
-    case 'heading-one':
-      return (
-        <h1 style={style} {...attributes}>
-          {children}
-        </h1>
-      )
-    case 'heading-two':
-      return (
-        <h2 style={style} {...attributes}>
-          {children}
-        </h2>
       )
     case 'list-item':
       return (
@@ -178,7 +167,7 @@ const Element = ({ attributes, children, element }) => {
   }
 }
 
-const Leaf = ({ attributes, children, leaf }) => {
+const Leaf = ({ attributes, children, leaf }: any) => {
   if (leaf.bold) {
     children = <strong>{children}</strong>
   }
@@ -198,36 +187,38 @@ const Leaf = ({ attributes, children, leaf }) => {
   return <span {...attributes}>{children}</span>
 }
 
-const BlockButton = ({ format, icon }) => {
+const BlockButton = ({ format, icon }: any) => {
   const editor = useSlate()
+  const Icon = icon
   return (
     <Button
-      active={isBlockActive(
-        editor,
-        format,
-        TEXT_ALIGN_TYPES.includes(format) ? 'align' : 'type'
-      )}
-      onMouseDown={(event) => {
+      onClick={(event: any) => {
         event.preventDefault()
         toggleBlock(editor, format)
       }}
+      colorScheme="darkie"
+      variant="flat"
+      css={{ borderRadius: '0', backgroundColor: '$darkie4' }}
     >
-      <Icon>{icon}</Icon>
+      <Icon />
     </Button>
   )
 }
 
-const MarkButton = ({ format, icon }) => {
+const MarkButton = ({ format, icon }: any) => {
   const editor = useSlate()
+  const Icon = icon
   return (
     <Button
-      active={isMarkActive(editor, format)}
-      onMouseDown={(event) => {
+      onClick={(event: any) => {
         event.preventDefault()
         toggleMark(editor, format)
       }}
+      colorScheme="darkie"
+      variant="flat"
+      css={{ borderRadius: '0', backgroundColor: '$darkie4' }}
     >
-      <Icon>{icon}</Icon>
+      <Icon />
     </Button>
   )
 }
