@@ -4,7 +4,7 @@ import { useApp } from 'components/context/AppContext'
 
 import PhoenixSliderConfig from 'components/builder/phoenix/modules/slider/config/PhoenixSliderConfig'
 import PhoenixLayout from 'components/builder/phoenix/layout/PhoenixLayout'
-import ModulesConfigActions from 'components/builder/interface/config/ModulesConfigActions'
+import ModulesConfigActions from 'components/builder/interface/config/actions/ModulesConfigActions'
 import NewModule from 'components/builder/interface/layout/modules/NewModule'
 import { useRouter } from 'next/router'
 import PhoenixSliderRender from 'components/builder/phoenix/modules/slider/config/PhoenixSliderRender'
@@ -34,6 +34,7 @@ const BuilderHomePage: NextPage = () => {
             return (
               <ModulesConfigActions
                 key={moduleData?.id}
+                moduleData={moduleData}
                 module={<PhoenixSliderRender module={moduleData} />}
                 config={
                   <PhoenixSliderConfig pageId={pageId} module={moduleData} />
@@ -45,6 +46,7 @@ const BuilderHomePage: NextPage = () => {
             return (
               <ModulesConfigActions
                 key={moduleData?.id}
+                moduleData={moduleData}
                 module={
                   <PhoenixBlockRender pageId={pageId} module={moduleData} />
                 }
@@ -58,6 +60,7 @@ const BuilderHomePage: NextPage = () => {
             return (
               <ModulesConfigActions
                 key={moduleData?.id}
+                moduleData={moduleData}
                 module={
                   <PhoenixContentRender pageId={pageId} module={moduleData} />
                 }

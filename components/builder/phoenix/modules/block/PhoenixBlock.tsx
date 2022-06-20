@@ -1,5 +1,5 @@
 import styles from './Block.module.scss'
-import ModulesConfigActions from 'components/builder/interface/config/ModulesConfigActions'
+import ModulesConfigActions from 'components/builder/interface/config/actions/ModulesConfigActions'
 import NewModule from 'components/builder/interface/layout/modules/NewModule'
 import PhoenixSliderConfig from '../slider/config/PhoenixSliderConfig'
 import PhoenixSliderRender from '../slider/config/PhoenixSliderRender'

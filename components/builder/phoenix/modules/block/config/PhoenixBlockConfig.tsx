@@ -1,5 +1,5 @@
 import { Button, Box } from '@guruhotel/aura-ui'
-import ModulesConfigTabs from 'components/builder/interface/config/ModulesConfigTabs'
+import ModulesConfigTabs from 'components/builder/interface/config/actions/ModulesConfigTabs'
 import { v4 as uuid_v4 } from 'uuid'
 import { useApp } from 'components/context/AppContext'
 import { useEffect, useState } from 'react'
@@ -50,7 +50,7 @@ export default function PhoenixBlockConfig({
   function update(name: any, value: any) {
     const values = { ...theme }
 
-    if (pageIndex !== -1) {
+    if (pageIndex !== -1)
       if (isBlock) {
         if (moduleIndex !== -1)
           if (columnIndex !== -1)
@@ -62,7 +62,6 @@ export default function PhoenixBlockConfig({
         moduleIndex !== -1 &&
           (values.pages[pageIndex].modules[moduleIndex].config[name] = value)
       }
-    }
 
     setTheme(values)
   }

@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import {
   createContext,
   ReactNode,
@@ -9,11 +10,13 @@ import {
 type appContextType = {
   theme: any
   setTheme: any
+  pageIndex: any
 }
 
 const appContextDefaultValues: appContextType = {
   theme: {},
   setTheme: null,
+  pageIndex: undefined,
 }
 
 const AppContext = createContext<appContextType>(appContextDefaultValues)
@@ -27,6 +30,9 @@ type Props = {
 }
 
 export function AppProvider({ children }: Props) {
+  const router = useRouter()
+  const { p: pageId } = router.query
+
   const defaultTheme = {
     general: {
       colors: {
@@ -69,8 +75,10 @@ export function AppProvider({ children }: Props) {
     ],
   }
 
+  // Set theme
   const [theme, setTheme] = useState(defaultTheme)
 
+  // Save theme in localstorage
   useEffect(() => {
     if (localStorage.getItem('theme')) {
       const getSavedTheme = JSON.parse(localStorage.getItem('theme'))
@@ -78,8 +86,11 @@ export function AppProvider({ children }: Props) {
     }
   }, [])
 
+  // Current page index
+  const pageIndex = theme?.pages?.map(({ id }: any) => id).indexOf(pageId)
+
   return (
-    <AppContext.Provider value={{ theme, setTheme }}>
+    <AppContext.Provider value={{ theme, setTheme, pageIndex }}>
       {children}
     </AppContext.Provider>
   )

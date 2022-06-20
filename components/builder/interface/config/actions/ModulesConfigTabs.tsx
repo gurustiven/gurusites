@@ -1,6 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@guruhotel/aura-ui";
 import { ReactNode } from "react";
-import ModulesStyle from "./style/ModulesStyle";
+import ModulesStyle from "../style/ModulesStyle";
 
 interface ModulesConfigTabsProps {
   children: ReactNode,

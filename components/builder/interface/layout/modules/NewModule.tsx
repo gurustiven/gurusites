@@ -104,7 +104,7 @@ export default function NewModule({
                   containerWidth: '100%',
                 },
                 desktop: {
-                  backgroundColor: 'black',
+                  background: 'black',
                 },
               })
             }
@@ -118,7 +118,7 @@ export default function NewModule({
                   width: '100%',
                 },
                 desktop: {
-                  backgroundColor: 'black',
+                  background: 'black',
                 },
               })
             }

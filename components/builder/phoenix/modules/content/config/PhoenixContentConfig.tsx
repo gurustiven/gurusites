@@ -1,5 +1,5 @@
 import { useApp } from 'components/context/AppContext'
-import ModulesConfigTabs from 'components/builder/interface/config/ModulesConfigTabs'
+import ModulesConfigTabs from 'components/builder/interface/config/actions/ModulesConfigTabs'
 import RickText from 'components/builder/interface/shared/Slate'
 
 interface PhoenixContentConfigProps {

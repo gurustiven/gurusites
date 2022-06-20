@@ -21,7 +21,7 @@ import {
   VStack,
 } from '@guruhotel/aura-ui'
 import { DesktopIcon, MobileIcon } from '@radix-ui/react-icons'
-import ModulesConfigTabs from 'components/builder/interface/config/ModulesConfigTabs'
+import ModulesConfigTabs from 'components/builder/interface/config/actions/ModulesConfigTabs'
 import ImageSelect from 'components/builder/interface/shared/ImageSelect'
 import ImageUpload from 'components/builder/interface/shared/ImageUpload'
 import { useApp } from 'components/context/AppContext'

@@ -1,5 +1,5 @@
 import styles from './Layout.module.scss'
-import ModulesConfigActions from '../../interface/config/ModulesConfigActions'
+import ModulesConfigActions from '../../interface/config/actions/ModulesConfigActions'
 import PhoenixHeaderConfig from '../modules/header/config/PhoenixHeaderConfig'
 import LayoutPages from 'components/builder/interface/layout/pages/LayoutPages'
 import PhoenixHeaderRender from '../modules/header/config/PhoenixHeaderRender'

@@ -1,7 +1,7 @@
 import { v4 as uuid_v4 } from 'uuid'
 import { Input, Button, Box, Separator } from '@guruhotel/aura-ui'
 import { useApp } from 'components/context/AppContext'
-import ModulesConfigTabs from 'components/builder/interface/config/ModulesConfigTabs'
+import ModulesConfigTabs from 'components/builder/interface/config/actions/ModulesConfigTabs'
 import ImageUpload from 'components/builder/interface/shared/ImageUpload'
 import { useEffect, useState } from 'react'
 
