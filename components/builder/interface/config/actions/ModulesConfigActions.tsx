@@ -3,7 +3,7 @@ import { Button } from '@guruhotel/aura-ui'
 import { Pencil2Icon } from '@radix-ui/react-icons'
 import { ReactNode, useState } from 'react'
 import Sidebar from '../../shared/Sidebar'
-import ModulesConfigActionsDelete from './duplicate/ModulesConfigActionsDelete'
+import ModulesConfigActionsDelete from './delete/ModulesConfigActionsDelete'
 import ModulesConfigActionsDuplicate from './duplicate/ModulesConfigActionsDuplicate'
 import styles from './Modules.module.scss'
 
