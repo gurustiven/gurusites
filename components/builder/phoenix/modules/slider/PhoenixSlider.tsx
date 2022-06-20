@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import styles from './Slider.module.scss'
 import 'swiper/css'
 import { Swiper, SwiperSlide } from 'swiper/react'

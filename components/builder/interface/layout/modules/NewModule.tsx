@@ -5,6 +5,7 @@ import { v4 as uuid_v4 } from 'uuid'
 import { ImageIcon, ColumnsIcon } from '@radix-ui/react-icons'
 import Sidebar from '../../shared/Sidebar'
 import NewModuleButton from './NewModuleButton'
+import { useEffect, useState } from 'react'
 
 interface NewModuleProps {
   pageId: any
@@ -22,24 +23,35 @@ export default function NewModule({
   // Get theme
   const { theme, setTheme } = useApp()
 
+  // Set some constants
+  const [themeCopy, setThemeCopy] = useState({ ...theme })
+  const pageIndex = themeCopy?.pages?.map(({ id }: any) => id).indexOf(pageId)
+  const moduleIndex = isBlock
+    ? themeCopy?.pages?.[pageIndex]?.modules
+        ?.map(({ id }: any) => id)
+        .indexOf(moduleId)
+    : themeCopy?.pages?.[pageIndex]?.modules
+        ?.map(({ id }: any) => id)
+        .indexOf(module?.id)
+  const columnIndex = themeCopy?.pages?.[pageIndex]?.modules?.[
+    moduleIndex
+  ]?.config?.columns
+    ?.map(({ id }: any) => id)
+    .indexOf(columnId)
+
+  // Refresh data for constants
+  useEffect(() => setThemeCopy({ ...theme }), [theme])
+
   // Add new module
   function addNewModule(module: string, defaultStyle?: object) {
     const values = { ...theme }
-    const index = values?.pages?.map(({ id }: any) => id).indexOf(pageId)
-    if (index !== -1) {
+
+    if (pageIndex !== -1) {
       if (isBlock) {
-        const indexModule = values?.pages[index]?.modules
-          ?.map(({ id }: any) => id)
-          .indexOf(moduleId)
-        if (indexModule !== -1) {
-          const indexColumn = values?.pages[index]?.modules[
-            indexModule
-          ]?.config?.columns
-            ?.map(({ id }: any) => id)
-            .indexOf(columnId)
-          if (indexColumn !== -1) {
-            values?.pages[index]?.modules[indexModule]?.config?.columns[
-              indexColumn
+        if (moduleIndex !== -1) {
+          if (columnIndex !== -1) {
+            values?.pages[pageIndex]?.modules[moduleIndex]?.config?.columns[
+              columnIndex
             ]?.modules?.push({
               id: uuid_v4(),
               name: module,
@@ -49,7 +61,7 @@ export default function NewModule({
           }
         }
       } else {
-        values?.pages[index]?.modules?.push({
+        values?.pages[pageIndex]?.modules?.push({
           id: uuid_v4(),
           name: module,
           config: [],
@@ -97,24 +109,20 @@ export default function NewModule({
               })
             }
           />
-          {!isBlock && (
-            <NewModuleButton
-              icon={<ColumnsIcon />}
-              label="Block"
-              onClick={() =>
-                addNewModule('block', {
-                  container: {
-                    width: '100%',
-                  },
-                  desktop: {
-                    backgroundColor: 'black',
-                    borderColor: 'black',
-                    color: 'white',
-                  },
-                })
-              }
-            />
-          )}
+          <NewModuleButton
+            icon={<ColumnsIcon />}
+            label="Block"
+            onClick={() =>
+              addNewModule('block', {
+                container: {
+                  width: '100%',
+                },
+                desktop: {
+                  backgroundColor: 'black',
+                },
+              })
+            }
+          />
         </HStack>
       </Sidebar>
     </Box>

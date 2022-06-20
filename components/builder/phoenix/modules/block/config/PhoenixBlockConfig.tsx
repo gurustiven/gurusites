@@ -2,54 +2,111 @@ import { Button, Box } from '@guruhotel/aura-ui'
 import ModulesConfigTabs from 'components/builder/interface/config/ModulesConfigTabs'
 import { v4 as uuid_v4 } from 'uuid'
 import { useApp } from 'components/context/AppContext'
+import { useEffect, useState } from 'react'
 
 interface PhoenixBlockConfigProps {
   module: any
   pageId: any
+  isBlock?: boolean
+  columnId?: any
+  moduleId?: any
 }
 
 export default function PhoenixBlockConfig({
   module,
   pageId,
+  isBlock,
+  columnId,
+  moduleId,
 }: PhoenixBlockConfigProps) {
   // Get theme
   const { theme, setTheme } = useApp()
 
+  // Set some constants
+  const [themeCopy, setThemeCopy] = useState({ ...theme })
+  const pageIndex = themeCopy?.pages?.map(({ id }: any) => id).indexOf(pageId)
+  const moduleIndex = isBlock
+    ? themeCopy?.pages?.[pageIndex]?.modules
+        ?.map(({ id }: any) => id)
+        .indexOf(moduleId)
+    : themeCopy?.pages?.[pageIndex]?.modules
+        ?.map(({ id }: any) => id)
+        .indexOf(module?.id)
+  const columnIndex = themeCopy?.pages?.[pageIndex]?.modules?.[
+    moduleIndex
+  ]?.config?.columns
+    ?.map(({ id }: any) => id)
+    .indexOf(columnId)
+  const moduleIndexChild = themeCopy?.pages?.[pageIndex]?.modules?.[
+    moduleIndex
+  ]?.config?.columns?.[columnIndex]?.modules
+    ?.map(({ id }: any) => id)
+    .indexOf(module?.id)
+
+  // Refresh data for constants
+  useEffect(() => setThemeCopy({ ...theme }), [theme])
+
   // Update parent
   function update(name: any, value: any) {
     const values = { ...theme }
-    const index = values?.pages?.map(({ id }: any) => id).indexOf(pageId)
-    if (index !== -1) {
-      const indexChild = values?.pages[index]?.modules
-        ?.map((item: any) => item?.id)
-        .indexOf(module?.id)
-      indexChild !== -1 &&
-        (values.pages[index].modules[indexChild].config[name] = value)
+
+    if (pageIndex !== -1) {
+      if (isBlock) {
+        if (moduleIndex !== -1)
+          if (columnIndex !== -1)
+            moduleIndexChild !== -1 &&
+              (values.pages[pageIndex].modules[moduleIndex].config.columns[
+                columnIndex
+              ].modules[moduleIndexChild].config[name] = value)
+      } else {
+        moduleIndex !== -1 &&
+          (values.pages[pageIndex].modules[moduleIndex].config[name] = value)
+      }
     }
+
     setTheme(values)
   }
 
   // Add new item
   function newColumn() {
     const values = { ...theme }
-    const index = values?.pages?.map(({ id }: any) => id).indexOf(pageId)
-    if (index !== -1) {
-      const indexChild = values?.pages[index]?.modules
-        ?.map((item: any) => item?.id)
-        .indexOf(module?.id)
-      if (indexChild !== -1) {
-        if (values.pages[index].modules[indexChild].config.columns) {
-          values.pages[index].modules[indexChild].config.columns.push({
+
+    if (pageIndex !== -1)
+      if (isBlock) {
+        if (moduleIndex !== -1)
+          if (columnIndex !== -1)
+            if (moduleIndexChild !== -1)
+              if (
+                values?.pages[pageIndex]?.modules[moduleIndex]?.config?.columns[
+                  columnIndex
+                ]?.modules[moduleIndexChild].config.columns
+              ) {
+                values?.pages[pageIndex]?.modules[moduleIndex]?.config?.columns[
+                  columnIndex
+                ]?.modules[moduleIndexChild].config.columns.push({
+                  id: uuid_v4(),
+                  modules: [],
+                })
+              } else {
+                values.pages[pageIndex].modules[moduleIndex].config.columns[
+                  columnIndex
+                ].modules[moduleIndexChild].config = {
+                  columns: [{ id: uuid_v4(), modules: [] }],
+                }
+              }
+      } else {
+        if (values.pages[pageIndex].modules[moduleIndex].config.columns) {
+          values.pages[pageIndex].modules[moduleIndex].config.columns.push({
             id: uuid_v4(),
             modules: [],
           })
         } else {
-          values.pages[index].modules[indexChild].config = {
+          values.pages[pageIndex].modules[moduleIndex].config = {
             columns: [{ id: uuid_v4(), modules: [] }],
           }
         }
       }
-    }
+
     setTheme(values)
   }
 
@@ -60,7 +117,7 @@ export default function PhoenixBlockConfig({
           key={id}
           itemId={id}
           columns={module?.config?.columns}
-          setColumns={(e) => update('columns', e)}
+          setColumns={(e: any) => update('columns', e)}
         />
       ))}
       <Button

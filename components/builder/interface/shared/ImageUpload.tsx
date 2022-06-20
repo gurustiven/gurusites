@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import styles from './Shared.module.scss'
 import { useEffect, useState } from 'react'
 import { Stack, Text } from '@guruhotel/aura-ui'

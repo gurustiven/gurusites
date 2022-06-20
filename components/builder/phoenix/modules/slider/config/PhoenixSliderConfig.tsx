@@ -1,8 +1,9 @@
-import { Input, Button, Box, Separator } from '@guruhotel/aura-ui'
-import ModulesConfigTabs from 'components/builder/interface/config/ModulesConfigTabs'
 import { v4 as uuid_v4 } from 'uuid'
+import { Input, Button, Box, Separator } from '@guruhotel/aura-ui'
 import { useApp } from 'components/context/AppContext'
+import ModulesConfigTabs from 'components/builder/interface/config/ModulesConfigTabs'
 import ImageUpload from 'components/builder/interface/shared/ImageUpload'
+import { useEffect, useState } from 'react'
 
 interface PhoenixSliderConfigProps {
   module: any
@@ -23,74 +24,65 @@ export default function PhoenixSliderConfig({
   const { theme, setTheme } = useApp()
 
   // Set some constants
-  const pageIndex = theme?.pages?.map(({ id }: any) => id).indexOf(pageId)
+  const [themeCopy, setThemeCopy] = useState({ ...theme })
+  const pageIndex = themeCopy?.pages?.map(({ id }: any) => id).indexOf(pageId)
   const moduleIndex = isBlock
-    ? theme?.pages[pageIndex]?.modules
+    ? themeCopy?.pages?.[pageIndex]?.modules
         ?.map(({ id }: any) => id)
         .indexOf(moduleId)
-    : theme?.pages[pageIndex]?.modules
+    : themeCopy?.pages?.[pageIndex]?.modules
         ?.map(({ id }: any) => id)
         .indexOf(module?.id)
+  const columnIndex = themeCopy?.pages?.[pageIndex]?.modules?.[
+    moduleIndex
+  ]?.config?.columns
+    ?.map(({ id }: any) => id)
+    .indexOf(columnId)
+  const moduleIndexChild = themeCopy?.pages?.[pageIndex]?.modules?.[
+    moduleIndex
+  ]?.config?.columns?.[columnIndex]?.modules
+    ?.map(({ id }: any) => id)
+    .indexOf(module?.id)
+
+  // Refresh data for constants
+  useEffect(() => setThemeCopy({ ...theme }), [theme])
 
   // Update parent
   function update(name: any, value: any) {
     const values = { ...theme }
-    if (pageIndex !== -1) {
+
+    if (pageIndex !== -1)
       if (isBlock) {
-        if (moduleIndex !== -1) {
-          const indexColumn = values?.pages[pageIndex]?.modules[
-            moduleIndex
-          ]?.config?.columns
-            ?.map(({ id }: any) => id)
-            .indexOf(columnId)
-          if (indexColumn !== -1) {
-            const moduleIndexChild = values?.pages[pageIndex]?.modules[
-              moduleIndex
-            ]?.config?.columns[indexColumn]?.modules
-              ?.map(({ id }: any) => id)
-              .indexOf(module?.id)
+        if (moduleIndex !== -1)
+          if (columnIndex !== -1)
             moduleIndexChild !== -1 &&
               (values.pages[pageIndex].modules[moduleIndex].config.columns[
-                indexColumn
+                columnIndex
               ].modules[moduleIndexChild].config[name] = value)
-          }
-        }
       } else {
         moduleIndex !== -1 &&
           (values.pages[pageIndex].modules[moduleIndex].config[name] = value)
       }
-    }
+
     setTheme(values)
   }
 
   // Add new item
   function newItem() {
     const values = { ...theme }
-    if (pageIndex !== -1) {
+
+    if (pageIndex !== -1)
       if (isBlock) {
-        const moduleIndex = values?.pages[pageIndex]?.modules
-          ?.map(({ id }: any) => id)
-          .indexOf(moduleId)
-        if (moduleIndex !== -1) {
-          const indexColumn = values?.pages[pageIndex]?.modules[
-            moduleIndex
-          ]?.config?.columns
-            ?.map(({ id }: any) => id)
-            .indexOf(columnId)
-          if (indexColumn !== -1) {
-            const moduleIndexChild = values?.pages[pageIndex]?.modules[
-              moduleIndex
-            ]?.config?.columns[indexColumn]?.modules
-              ?.map(({ id }: any) => id)
-              .indexOf(module?.id)
-            if (moduleIndexChild !== -1) {
+        if (moduleIndex !== -1)
+          if (columnIndex !== -1)
+            if (moduleIndexChild !== -1)
               if (
                 values?.pages[pageIndex]?.modules[moduleIndex]?.config?.columns[
-                  indexColumn
+                  columnIndex
                 ]?.modules[moduleIndexChild].config.items
               ) {
                 values?.pages[pageIndex]?.modules[moduleIndex]?.config?.columns[
-                  indexColumn
+                  columnIndex
                 ]?.modules[moduleIndexChild].config.items.push({
                   id: uuid_v4(),
                   source: '',
@@ -98,16 +90,13 @@ export default function PhoenixSliderConfig({
                 })
               } else {
                 values.pages[pageIndex].modules[moduleIndex].config.columns[
-                  indexColumn
+                  columnIndex
                 ].modules[moduleIndexChild].config = {
                   items: [{ id: uuid_v4(), source: '', text: '' }],
                 }
               }
-            }
-          }
-        }
       } else {
-        if (moduleIndex !== -1) {
+        if (moduleIndex !== -1)
           if (values.pages[pageIndex].modules[moduleIndex].config.items) {
             values.pages[pageIndex].modules[moduleIndex].config.items.push({
               id: uuid_v4(),
@@ -119,9 +108,8 @@ export default function PhoenixSliderConfig({
               items: [{ id: uuid_v4(), source: '', text: '' }],
             }
           }
-        }
       }
-    }
+
     setTheme(values)
   }
 

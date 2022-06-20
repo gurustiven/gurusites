@@ -1,12 +1,5 @@
-import {
-  HStack,
-  Label,
-  RadioGroup,
-  RadioGroupIndicator,
-  RadioGroupItem,
-  Stack,
-  Text,
-} from '@guruhotel/aura-ui'
+/* eslint-disable @next/next/no-img-element */
+import { HStack, Text } from '@guruhotel/aura-ui'
 import { useApp } from 'components/context/AppContext'
 import ImageSelect from '../../shared/ImageSelect'
 

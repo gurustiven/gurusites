@@ -8,6 +8,7 @@
     align-items: center;
     display: flex;
     height: 100%;
+    flex-wrap: nowrap;
     justify-content: space-between;
     margin: 0 auto;
     max-width: var(--defaults--container-width);
@@ -15,6 +16,7 @@
   }
 
   .column {
+    overflow: hidden;
     width: 100%;
   }
 }
