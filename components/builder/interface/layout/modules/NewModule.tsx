@@ -123,6 +123,17 @@ export default function NewModule({
               })
             }
           />
+          <NewModuleButton
+            icon={<ColumnsIcon />}
+            label="Title"
+            onClick={() =>
+              addNewModule('title', {
+                container: {
+                  width: '100%',
+                },
+              })
+            }
+          />
         </HStack>
       </Sidebar>
     </Box>

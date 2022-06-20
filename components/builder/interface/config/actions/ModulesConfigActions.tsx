@@ -11,7 +11,7 @@ interface ModulesConfigActionsProps {
   module: ReactNode
   config: ReactNode
   onlyEdit?: boolean
-  moduleData: any
+  moduleData?: any
 }
 
 export default function ModulesConfigActions({

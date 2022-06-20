@@ -6,6 +6,10 @@ import PhoenixSliderRender from '../slider/config/PhoenixSliderRender'
 import PhoenixBlockRender from './config/PhoenixBlockRender'
 import PhoenixBlockConfig from './config/PhoenixBlockConfig'
 import { useRouter } from 'next/router'
+import PhoenixContentRender from '../content/config/PhoenixContentRender'
+import PhoenixContentConfig from '../content/config/PhoenixContentConfig'
+import PhoenixTitleRender from '../title/config/PhoenixTitleRender'
+import PhoenixTitleConfig from '../title/config/PhoenixTitleConfig'
 
 export default function PhoenixBlock({ data, style }: any) {
   const router = useRouter()
@@ -52,6 +56,46 @@ export default function PhoenixBlock({ data, style }: any) {
                             pageId={pageId}
                             module={moduleData}
                             moduleId={data?.id}
+                          />
+                        }
+                      />
+                    )
+                  } else if (moduleData?.name === 'title') {
+                    // Modules: Title content
+                    return (
+                      <ModulesConfigActions
+                        key={moduleData?.id}
+                        moduleData={moduleData}
+                        module={
+                          <PhoenixTitleRender
+                            pageId={pageId}
+                            module={moduleData}
+                          />
+                        }
+                        config={
+                          <PhoenixTitleConfig
+                            pageId={pageId}
+                            module={moduleData}
+                          />
+                        }
+                      />
+                    )
+                  } else if (moduleData?.name === 'content') {
+                    // Modules: Content content
+                    return (
+                      <ModulesConfigActions
+                        key={moduleData?.id}
+                        moduleData={moduleData}
+                        module={
+                          <PhoenixContentRender
+                            pageId={pageId}
+                            module={moduleData}
+                          />
+                        }
+                        config={
+                          <PhoenixContentConfig
+                            pageId={pageId}
+                            module={moduleData}
                           />
                         }
                       />

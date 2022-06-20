@@ -12,6 +12,8 @@ import PhoenixBlockRender from 'components/builder/phoenix/modules/block/config/
 import PhoenixBlockConfig from 'components/builder/phoenix/modules/block/config/PhoenixBlockConfig'
 import PhoenixContentRender from 'components/builder/phoenix/modules/content/config/PhoenixContentRender'
 import PhoenixContentConfig from 'components/builder/phoenix/modules/content/config/PhoenixContentConfig'
+import PhoenixTitleRender from 'components/builder/phoenix/modules/title/config/PhoenixTitleRender'
+import PhoenixTitleConfig from 'components/builder/phoenix/modules/title/config/PhoenixTitleConfig'
 
 const BuilderHomePage: NextPage = () => {
   const router = useRouter()
@@ -52,6 +54,20 @@ const BuilderHomePage: NextPage = () => {
                 }
                 config={
                   <PhoenixBlockConfig pageId={pageId} module={moduleData} />
+                }
+              />
+            )
+          } else if (moduleData?.name === 'title') {
+            // Modules: Title content
+            return (
+              <ModulesConfigActions
+                key={moduleData?.id}
+                moduleData={moduleData}
+                module={
+                  <PhoenixTitleRender pageId={pageId} module={moduleData} />
+                }
+                config={
+                  <PhoenixTitleConfig pageId={pageId} module={moduleData} />
                 }
               />
             )
