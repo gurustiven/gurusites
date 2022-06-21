@@ -10,14 +10,14 @@ interface PhoenixSliderConfigProps {
   module: any
   isBlock?: boolean
   columnId?: any
-  moduleId?: any
+  parentModuleId?: any
 }
 
 export default function PhoenixSliderConfig({
   module,
   isBlock,
   columnId,
-  moduleId,
+  parentModuleId,
 }: PhoenixSliderConfigProps) {
   // Get theme
   const { theme, setTheme, pageIndex } = useApp()
@@ -32,7 +32,7 @@ export default function PhoenixSliderConfig({
   const moduleIndex = isBlock
     ? themeCopy?.pages[modulePageIndex]?.modules
         ?.map(({ id }: any) => id)
-        .indexOf(moduleId)
+        .indexOf(parentModuleId)
     : themeCopy?.pages[modulePageIndex]?.modules
         ?.map(({ id }: any) => id)
         .indexOf(module?.id)
@@ -128,7 +128,7 @@ export default function PhoenixSliderConfig({
       isBlock={isBlock}
       columnId={columnId}
       module={module}
-      moduleId={moduleId}
+      parentModuleId={parentModuleId}
     >
       {module?.config?.items?.map(({ id }: any) => (
         <PhoenixSliderConfigItems

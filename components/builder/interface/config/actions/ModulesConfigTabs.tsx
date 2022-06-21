@@ -7,7 +7,7 @@ interface ModulesConfigTabsProps {
   module: any
   isBlock?: boolean
   columnId?: any
-  moduleId?: any
+  parentModuleId?: any
 }
 
 export default function ModulesConfigTabs({
@@ -15,7 +15,7 @@ export default function ModulesConfigTabs({
   module,
   isBlock,
   columnId,
-  moduleId,
+  parentModuleId,
 }: ModulesConfigTabsProps) {
   return (
     <Tabs defaultValue="general" css={{ boxShadow: 'none', width: '100%' }}>
@@ -34,7 +34,7 @@ export default function ModulesConfigTabs({
         <ModulesStyle
           isBlock={isBlock}
           columnId={columnId}
-          moduleId={moduleId}
+          parentModuleId={parentModuleId}
           module={module}
         />
       </TabsContent>

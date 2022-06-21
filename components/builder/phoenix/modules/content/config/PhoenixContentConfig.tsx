@@ -8,14 +8,14 @@ interface PhoenixContentConfigProps {
   module: any
   isBlock?: boolean
   columnId?: any
-  moduleId?: any
+  parentModuleId?: any
 }
 
 export default function PhoenixContentConfig({
   module,
   isBlock,
   columnId,
-  moduleId,
+  parentModuleId,
 }: PhoenixContentConfigProps) {
   // Get theme
   const { theme, setTheme } = useApp()
@@ -30,7 +30,7 @@ export default function PhoenixContentConfig({
   const moduleIndex = isBlock
     ? themeCopy?.pages[modulePageIndex]?.modules
         ?.map(({ id }: any) => id)
-        .indexOf(moduleId)
+        .indexOf(parentModuleId)
     : themeCopy?.pages[modulePageIndex]?.modules
         ?.map(({ id }: any) => id)
         .indexOf(module?.id)
@@ -76,7 +76,7 @@ export default function PhoenixContentConfig({
       isBlock={isBlock}
       columnId={columnId}
       module={module}
-      moduleId={moduleId}
+      parentModuleId={parentModuleId}
     >
       <RickText
         setValue={(e: any) => update('content', e)}

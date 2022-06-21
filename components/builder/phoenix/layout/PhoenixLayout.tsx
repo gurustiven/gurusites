@@ -4,6 +4,8 @@ import PhoenixHeaderConfig from '../modules/header/config/PhoenixHeaderConfig'
 import LayoutPages from 'components/builder/interface/layout/pages/LayoutPages'
 import PhoenixHeaderRender from '../modules/header/config/PhoenixHeaderRender'
 import { Box, useTheme } from '@guruhotel/aura-ui'
+import PhoenixFooterRender from '../modules/footer/config/PhoenixFooterRender'
+import PhoenixFooterConfig from '../modules/footer/config/PhoenixFooterConfig'
 
 export default function PhoenixLayout({ children }: any) {
   const { theme } = useTheme()
@@ -22,6 +24,11 @@ export default function PhoenixLayout({ children }: any) {
           config={<PhoenixHeaderConfig />}
         />
         {children}
+        <ModulesConfigActions
+          onlyEdit
+          module={<PhoenixFooterRender />}
+          config={<PhoenixFooterConfig />}
+        />
       </div>
     </div>
   )

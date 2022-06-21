@@ -2,6 +2,7 @@ import { useClickOutside, useHover } from '@guruhotel/aura-hooks'
 import { Button } from '@guruhotel/aura-ui'
 import { Pencil2Icon } from '@radix-ui/react-icons'
 import { ReactNode, useState } from 'react'
+import ModulesConfigActionsNew from './new/ModulesConfigActionsNew'
 import Sidebar from '../../shared/Sidebar'
 import ModulesConfigActionsDelete from './delete/ModulesConfigActionsDelete'
 import ModulesConfigActionsDuplicate from './duplicate/ModulesConfigActionsDuplicate'
@@ -10,15 +11,15 @@ import styles from './Modules.module.scss'
 interface ModulesConfigActionsProps {
   module: ReactNode
   config: ReactNode
-  onlyEdit?: boolean
   moduleData?: any
+  onlyEdit?: boolean
 }
 
 export default function ModulesConfigActions({
   module,
   config,
-  onlyEdit,
   moduleData,
+  onlyEdit,
 }: ModulesConfigActionsProps) {
   // Set hover to allow edit options
   const { hovered, ref: hoverRef } = useHover()
@@ -53,10 +54,11 @@ export default function ModulesConfigActions({
           <>
             <ModulesConfigActionsDuplicate module={moduleData} />
             <ModulesConfigActionsDelete module={moduleData} />
+            <ModulesConfigActionsNew />
           </>
         )}
       </div>
-      <div>{module}</div>
+      <>{module}</>
     </div>
   )
 }

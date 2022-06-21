@@ -9,14 +9,14 @@ interface PhoenixTitleConfigProps {
   module: any
   isBlock?: boolean
   columnId?: any
-  moduleId?: any
+  parentModuleId?: any
 }
 
 export default function PhoenixTitleConfig({
   module,
   isBlock,
   columnId,
-  moduleId,
+  parentModuleId,
 }: PhoenixTitleConfigProps) {
   // Get theme
   const { theme, setTheme, pageIndex } = useApp()
@@ -31,7 +31,7 @@ export default function PhoenixTitleConfig({
   const moduleIndex = isBlock
     ? themeCopy?.pages[modulePageIndex]?.modules
         ?.map(({ id }: any) => id)
-        .indexOf(moduleId)
+        .indexOf(parentModuleId)
     : themeCopy?.pages[modulePageIndex]?.modules
         ?.map(({ id }: any) => id)
         .indexOf(module?.id)
@@ -78,7 +78,7 @@ export default function PhoenixTitleConfig({
       isBlock={isBlock}
       columnId={columnId}
       module={module}
-      moduleId={moduleId}
+      parentModuleId={parentModuleId}
     >
       <Input
         id="content"

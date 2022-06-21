@@ -13,7 +13,7 @@ export default function ModulesStyle({
   module,
   isBlock,
   columnId,
-  moduleId,
+  parentModuleId,
 }: any) {
   // Get theme
   const { theme, setTheme } = useApp()
@@ -42,7 +42,7 @@ export default function ModulesStyle({
         if (isBlock) {
           const indexModule = values?.pages[pageIndex]?.modules
             ?.map(({ id }: any) => id)
-            .indexOf(moduleId)
+            .indexOf(parentModuleId)
           if (indexModule !== -1) {
             const indexColumn = values?.pages[pageIndex]?.modules[
               indexModule

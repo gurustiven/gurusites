@@ -1,0 +1,35 @@
+.footer {
+  align-items: center;
+  border-width: 0;
+  border-style: solid;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+
+  .container {
+    align-items: flex-start;
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+    height: 100%;
+    margin: 0 auto;
+    max-width: var(--defaults--container-width);
+    width: 100%;
+
+    .copyright {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      width: 100%;
+
+      .made {
+        width: 200px;
+
+        img {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

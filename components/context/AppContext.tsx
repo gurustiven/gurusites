@@ -50,6 +50,17 @@ export function AppProvider({ children }: Props) {
         maxWidth: '1240px',
       },
     },
+    footer: {
+      style: {
+        general: {
+          containerWidth: '1240px',
+        },
+        desktop: {
+          backgroundColor: 'black',
+          color: 'white',
+        },
+      },
+    },
     header: {
       name: 'Site name',
       logo: '',
