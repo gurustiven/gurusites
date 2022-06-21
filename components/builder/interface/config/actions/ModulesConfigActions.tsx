@@ -30,35 +30,41 @@ export default function ModulesConfigActions({
   // Disable active state when click outside module
   const ref = useClickOutside(() => setActive(false))
   return (
-    <div className={styles.modules} ref={hoverRef}>
-      <div
-        ref={ref}
-        className={
-          hovered || active
-            ? `${styles.options} ${styles.active}`
-            : styles.options
-        }
-      >
-        <Sidebar
-          title="Edit module"
-          position="right"
-          trigger={
-            <Button onClick={() => setActive(true)} type="button">
-              <Pencil2Icon />
-            </Button>
-          }
+    <div
+      className={
+        hovered || active
+          ? `${styles.modules} ${styles.active}`
+          : styles.modules
+      }
+      ref={hoverRef}
+    >
+      <div ref={ref}>
+        <div
+          className={`${styles.buttons} ${
+            onlyEdit ? styles.bottom : styles.top
+          }`}
         >
-          {config}
-        </Sidebar>
-        {!onlyEdit && (
-          <>
-            <ModulesConfigActionsDuplicate module={moduleData} />
-            <ModulesConfigActionsDelete module={moduleData} />
-            <ModulesConfigActionsNew />
-          </>
-        )}
+          <Sidebar
+            title="Edit module"
+            position="right"
+            trigger={
+              <Button onClick={() => setActive(true)} type="button">
+                <Pencil2Icon />
+              </Button>
+            }
+          >
+            {config}
+          </Sidebar>
+          {!onlyEdit && (
+            <>
+              <ModulesConfigActionsDuplicate module={moduleData} />
+              <ModulesConfigActionsDelete module={moduleData} />
+              <ModulesConfigActionsNew />
+            </>
+          )}
+        </div>
+        <div className={styles.module}>{module}</div>
       </div>
-      <>{module}</>
     </div>
   )
 }

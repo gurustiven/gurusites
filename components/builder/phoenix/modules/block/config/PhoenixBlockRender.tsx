@@ -3,6 +3,7 @@ import Modules from 'components/builder/Modules'
 import useWindowSize from 'utils/useWindowSize'
 import PhoenixBlock from '../PhoenixBlock'
 import ModulesConfigActionsNew from 'components/builder/interface/config/actions/new/ModulesConfigActionsNew'
+import { Stack } from '@guruhotel/aura-ui'
 
 export default function PhoenixBlockRender({ module }: any) {
   // Obtain windows width for medias
@@ -22,8 +23,8 @@ export default function PhoenixBlockRender({ module }: any) {
     <PhoenixBlock data={module} style={style()}>
       {module?.config?.columns?.map((column: any, key: any) => (
         <div className={styles.column} key={key}>
-          <div style={{ position: 'relative', zIndex: '20' }}>
-            {column?.modules?.map((moduleData: any) => {
+          {column?.modules?.length ? (
+            column?.modules?.map((moduleData: any) => {
               return (
                 <Modules
                   key={moduleData?.id}
@@ -33,13 +34,20 @@ export default function PhoenixBlockRender({ module }: any) {
                   isBlock
                 />
               )
-            })}
-          </div>
-          <ModulesConfigActionsNew
-            isBlock
-            parentModuleId={module?.id}
-            columnId={column?.id}
-          />
+            })
+          ) : (
+            <Stack
+              alignItems="center"
+              justifyContent="center"
+              css={{ height: '100%', width: '100%' }}
+            >
+              <ModulesConfigActionsNew
+                isBlock
+                parentModuleId={module?.id}
+                columnId={column?.id}
+              />
+            </Stack>
+          )}
         </div>
       ))}
     </PhoenixBlock>

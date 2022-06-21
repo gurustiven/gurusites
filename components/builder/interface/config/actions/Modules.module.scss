@@ -2,16 +2,26 @@
   position: relative;
   width: 100%;
 
-  .options {
-    border: 4px solid var(--defaults--guru);
+  &::after {
+    border: 4px solid var(--defaults--color__guru);
+    content: '';
     display: none;
     height: 100%;
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1;
+  }
+
+  .buttons {
+    display: none;
     left: 0;
     position: absolute;
     text-align: left;
     top: 0;
-    width: 100%;
-    z-index: 20;
+    z-index: 10;
 
     button {
       border-radius: 0;
@@ -22,7 +32,26 @@
     }
   }
 
-  .active {
+  .bottom {
+    bottom: 0;
+    top: inherit;
+
+    button {
+      border-radius: 0;
+
+      &:last-child {
+        border-top-right-radius: 4px;
+      }
+    }
+  }
+}
+
+.active {
+  &::after {
+    display: block;
+  }
+
+  .buttons {
     display: block;
   }
 }
