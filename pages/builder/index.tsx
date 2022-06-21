@@ -27,10 +27,75 @@ const BuilderHomePage: NextPage = () => {
     ({ id }: any) => id === pageId
   )?.[0]?.modules
 
+  // Filter modules by stick
+  const filterModulesByStick = theme?.pages?.map((page: any) =>
+    page?.modules?.filter((module: any) => module?.stickToFooter)
+  )
+
   return (
     <Layout page="home">
       <PhoenixLayout>
         {filterModulesByPage?.map((moduleData: any) => {
+          if (!moduleData?.stickToFooter)
+            if (moduleData?.name === 'slider') {
+              // Modules: Images slider
+              return (
+                <ModulesConfigActions
+                  key={moduleData?.id}
+                  moduleData={moduleData}
+                  module={<PhoenixSliderRender module={moduleData} />}
+                  config={
+                    <PhoenixSliderConfig pageId={pageId} module={moduleData} />
+                  }
+                />
+              )
+            } else if (moduleData?.name === 'block') {
+              // Modules: Block content
+              return (
+                <ModulesConfigActions
+                  key={moduleData?.id}
+                  moduleData={moduleData}
+                  module={
+                    <PhoenixBlockRender pageId={pageId} module={moduleData} />
+                  }
+                  config={
+                    <PhoenixBlockConfig pageId={pageId} module={moduleData} />
+                  }
+                />
+              )
+            } else if (moduleData?.name === 'title') {
+              // Modules: Title content
+              return (
+                <ModulesConfigActions
+                  key={moduleData?.id}
+                  moduleData={moduleData}
+                  module={
+                    <PhoenixTitleRender pageId={pageId} module={moduleData} />
+                  }
+                  config={
+                    <PhoenixTitleConfig pageId={pageId} module={moduleData} />
+                  }
+                />
+              )
+            } else if (moduleData?.name === 'content') {
+              // Modules: Content content
+              return (
+                <ModulesConfigActions
+                  key={moduleData?.id}
+                  moduleData={moduleData}
+                  module={
+                    <PhoenixContentRender pageId={pageId} module={moduleData} />
+                  }
+                  config={
+                    <PhoenixContentConfig pageId={pageId} module={moduleData} />
+                  }
+                />
+              )
+            }
+          return null
+        })}
+
+        {filterModulesByStick.flat(1)?.map((moduleData: any) => {
           // Modules: Images slider
           if (moduleData?.name === 'slider') {
             return (

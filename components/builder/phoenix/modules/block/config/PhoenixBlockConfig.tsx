@@ -3,10 +3,10 @@ import ModulesConfigTabs from 'components/builder/interface/config/actions/Modul
 import { v4 as uuid_v4 } from 'uuid'
 import { useApp } from 'components/context/AppContext'
 import { useEffect, useState } from 'react'
+import StickToFooter from 'components/builder/interface/config/stick/StickToFooter'
 
 interface PhoenixBlockConfigProps {
   module: any
-  pageId: any
   isBlock?: boolean
   columnId?: any
   moduleId?: any
@@ -14,30 +14,33 @@ interface PhoenixBlockConfigProps {
 
 export default function PhoenixBlockConfig({
   module,
-  pageId,
   isBlock,
   columnId,
   moduleId,
 }: PhoenixBlockConfigProps) {
   // Get theme
-  const { theme, setTheme } = useApp()
+  const { theme, setTheme, pageIndex } = useApp()
+
+  // Get current module page index based on prop
+  const modulePageIndex = theme?.pages
+    .map(({ id }: any) => id)
+    .indexOf(module?.pageId)
 
   // Set some constants
   const [themeCopy, setThemeCopy] = useState({ ...theme })
-  const pageIndex = themeCopy?.pages?.map(({ id }: any) => id).indexOf(pageId)
   const moduleIndex = isBlock
-    ? themeCopy?.pages?.[pageIndex]?.modules
+    ? themeCopy?.pages[modulePageIndex]?.modules
         ?.map(({ id }: any) => id)
         .indexOf(moduleId)
-    : themeCopy?.pages?.[pageIndex]?.modules
+    : themeCopy?.pages[modulePageIndex]?.modules
         ?.map(({ id }: any) => id)
         .indexOf(module?.id)
-  const columnIndex = themeCopy?.pages?.[pageIndex]?.modules?.[
+  const columnIndex = themeCopy?.pages?.[modulePageIndex]?.modules?.[
     moduleIndex
   ]?.config?.columns
     ?.map(({ id }: any) => id)
     .indexOf(columnId)
-  const moduleIndexChild = themeCopy?.pages?.[pageIndex]?.modules?.[
+  const moduleIndexChild = themeCopy?.pages?.[modulePageIndex]?.modules?.[
     moduleIndex
   ]?.config?.columns?.[columnIndex]?.modules
     ?.map(({ id }: any) => id)
@@ -50,17 +53,20 @@ export default function PhoenixBlockConfig({
   function update(name: any, value: any) {
     const values = { ...theme }
 
-    if (pageIndex !== -1)
+    if (modulePageIndex !== -1)
       if (isBlock) {
         if (moduleIndex !== -1)
           if (columnIndex !== -1)
             moduleIndexChild !== -1 &&
-              (values.pages[pageIndex].modules[moduleIndex].config.columns[
-                columnIndex
-              ].modules[moduleIndexChild].config[name] = value)
+              (values.pages[modulePageIndex].modules[
+                moduleIndex
+              ].config.columns[columnIndex].modules[moduleIndexChild].config[
+                name
+              ] = value)
       } else {
         moduleIndex !== -1 &&
-          (values.pages[pageIndex].modules[moduleIndex].config[name] = value)
+          (values.pages[modulePageIndex].modules[moduleIndex].config[name] =
+            value)
       }
 
     setTheme(values)
@@ -70,37 +76,42 @@ export default function PhoenixBlockConfig({
   function newColumn() {
     const values = { ...theme }
 
-    if (pageIndex !== -1)
+    if (modulePageIndex !== -1)
       if (isBlock) {
         if (moduleIndex !== -1)
           if (columnIndex !== -1)
             if (moduleIndexChild !== -1)
               if (
-                values?.pages[pageIndex]?.modules[moduleIndex]?.config?.columns[
-                  columnIndex
-                ]?.modules[moduleIndexChild].config.columns
+                values?.pages[modulePageIndex]?.modules[moduleIndex]?.config
+                  ?.columns[columnIndex]?.modules[moduleIndexChild].config
+                  .columns
               ) {
-                values?.pages[pageIndex]?.modules[moduleIndex]?.config?.columns[
-                  columnIndex
-                ]?.modules[moduleIndexChild].config.columns.push({
+                values?.pages[modulePageIndex]?.modules[
+                  moduleIndex
+                ]?.config?.columns[columnIndex]?.modules[
+                  moduleIndexChild
+                ].config.columns.push({
                   id: uuid_v4(),
                   modules: [],
                 })
               } else {
-                values.pages[pageIndex].modules[moduleIndex].config.columns[
-                  columnIndex
-                ].modules[moduleIndexChild].config = {
-                  columns: [{ id: uuid_v4(), modules: [] }],
-                }
+                values.pages[modulePageIndex].modules[
+                  moduleIndex
+                ].config.columns[columnIndex].modules[moduleIndexChild].config =
+                  {
+                    columns: [{ id: uuid_v4(), modules: [] }],
+                  }
               }
       } else {
-        if (values.pages[pageIndex].modules[moduleIndex].config.columns) {
-          values.pages[pageIndex].modules[moduleIndex].config.columns.push({
+        if (values.pages[modulePageIndex].modules[moduleIndex].config.columns) {
+          values.pages[modulePageIndex].modules[
+            moduleIndex
+          ].config.columns.push({
             id: uuid_v4(),
             modules: [],
           })
         } else {
-          values.pages[pageIndex].modules[moduleIndex].config = {
+          values.pages[modulePageIndex].modules[moduleIndex].config = {
             columns: [{ id: uuid_v4(), modules: [] }],
           }
         }
@@ -110,7 +121,7 @@ export default function PhoenixBlockConfig({
   }
 
   return (
-    <ModulesConfigTabs pageId={pageId} module={module}>
+    <ModulesConfigTabs module={module}>
       {module?.config?.columns?.map(({ id }: any) => (
         <PhoenixBlockConfigItems
           key={id}
@@ -126,6 +137,13 @@ export default function PhoenixBlockConfig({
       >
         Add column +
       </Button>
+      {modulePageIndex === pageIndex && !isBlock && (
+        <StickToFooter
+          moduleIndex={moduleIndex}
+          modulePageIndex={modulePageIndex}
+          defaultValue={module?.stickToFooter}
+        />
+      )}
     </ModulesConfigTabs>
   )
 }

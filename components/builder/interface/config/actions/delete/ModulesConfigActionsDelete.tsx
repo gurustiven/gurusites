@@ -14,9 +14,13 @@ import { useApp } from 'components/context/AppContext'
 
 export default function ModulesConfigActionsDelete({ module }: any) {
   // Get theme
-  const { theme, setTheme, pageIndex } = useApp()
+  const { theme, setTheme } = useApp()
 
-  // Duplicate function
+  const pageIndex = theme?.pages
+    .map(({ id }: any) => id)
+    .indexOf(module?.pageId)
+
+  // Delete function
   function deleteModule() {
     const values = { ...theme }
     const moduleIndex = values?.pages?.[pageIndex]?.modules

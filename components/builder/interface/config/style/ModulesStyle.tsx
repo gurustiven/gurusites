@@ -11,7 +11,6 @@ import ModulesStyleHeight from './ModulesStyleHeight'
 
 export default function ModulesStyle({
   module,
-  pageId,
   isBlock,
   columnId,
   moduleId,
@@ -19,11 +18,12 @@ export default function ModulesStyle({
   // Get theme
   const { theme, setTheme } = useApp()
 
+  const pageIndex = theme?.pages
+    .map(({ id }: any) => id)
+    .indexOf(module?.pageId)
+
   // Index constants
   const currentThemeCopy = { ...theme }
-  const pageIndex = currentThemeCopy?.pages
-    ?.map(({ id }: any) => id)
-    .indexOf(pageId)
   const moduleIndex = currentThemeCopy?.pages[pageIndex]?.modules
     ?.map((item: any) => item?.id)
     .indexOf(module?.id)

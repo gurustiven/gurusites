@@ -8,24 +8,21 @@ import NewModuleButton from './NewModuleButton'
 import { useEffect, useState } from 'react'
 
 interface NewModuleProps {
-  pageId: any
   isBlock?: boolean
   moduleId?: any
   columnId?: any
 }
 
 export default function NewModule({
-  pageId,
   isBlock,
   moduleId,
   columnId,
 }: NewModuleProps) {
   // Get theme
-  const { theme, setTheme } = useApp()
+  const { theme, setTheme, pageIndex, pageId } = useApp()
 
   // Set some constants
   const [themeCopy, setThemeCopy] = useState({ ...theme })
-  const pageIndex = themeCopy?.pages?.map(({ id }: any) => id).indexOf(pageId)
   const moduleIndex = isBlock
     ? themeCopy?.pages?.[pageIndex]?.modules
         ?.map(({ id }: any) => id)
@@ -57,6 +54,7 @@ export default function NewModule({
               name: module,
               config: [],
               style: defaultStyle || {},
+              pageId,
             })
           }
         }
@@ -66,6 +64,7 @@ export default function NewModule({
           name: module,
           config: [],
           style: defaultStyle || {},
+          pageId,
         })
       }
     }

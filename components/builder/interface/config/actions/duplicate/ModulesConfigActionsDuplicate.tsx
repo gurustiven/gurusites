@@ -5,7 +5,11 @@ import { useApp } from 'components/context/AppContext'
 
 export default function ModulesConfigActionsDuplicate({ module }: any) {
   // Get theme
-  const { theme, setTheme, pageIndex } = useApp()
+  const { theme, setTheme } = useApp()
+
+  const pageIndex = theme?.pages
+    .map(({ id }: any) => id)
+    .indexOf(module?.pageId)
 
   // Duplicate function
   function duplicateModule() {

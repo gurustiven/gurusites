@@ -11,12 +11,14 @@ type appContextType = {
   theme: any
   setTheme: any
   pageIndex: any
+  pageId: any
 }
 
 const appContextDefaultValues: appContextType = {
   theme: {},
   setTheme: null,
   pageIndex: undefined,
+  pageId: undefined,
 }
 
 const AppContext = createContext<appContextType>(appContextDefaultValues)
@@ -90,7 +92,7 @@ export function AppProvider({ children }: Props) {
   const pageIndex = theme?.pages?.map(({ id }: any) => id).indexOf(pageId)
 
   return (
-    <AppContext.Provider value={{ theme, setTheme, pageIndex }}>
+    <AppContext.Provider value={{ theme, setTheme, pageIndex, pageId }}>
       {children}
     </AppContext.Provider>
   )
