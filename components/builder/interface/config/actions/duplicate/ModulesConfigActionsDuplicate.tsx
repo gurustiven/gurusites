@@ -14,8 +14,15 @@ export default function ModulesConfigActionsDuplicate({ module }: any) {
   // Duplicate function
   function duplicateModule() {
     const values = { ...theme }
-    const moduleToDuplicate = { ...module }
+
+    // Make a deep copy of the current module
+    const moduleToDuplicate = JSON.parse(JSON.stringify(module))
+
+    // Modify some parameters
     moduleToDuplicate['id'] = uuid_v4()
+    moduleToDuplicate['copyOf'] = module?.id
+
+    // Push to main array
     if (pageIndex !== -1)
       values?.pages?.[pageIndex]?.modules.push(moduleToDuplicate)
     setTheme(values)

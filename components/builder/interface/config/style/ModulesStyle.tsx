@@ -114,7 +114,6 @@ export default function ModulesStyle({
 
   return (
     <>
-      {JSON.stringify(moduleIndex)}
       <ModulesStyleHeight update={update} defaultValues={defaultValues} />
       <Separator css={{ background: '$darkie2', margin: '16px 0 12px 0' }} />
 
