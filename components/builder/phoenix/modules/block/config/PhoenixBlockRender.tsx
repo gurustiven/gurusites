@@ -21,7 +21,7 @@ export default function PhoenixBlockRender({ module }: any) {
 
   return (
     <PhoenixBlock data={module} style={style()}>
-      {module?.config?.columns?.map((column: any, key: any) => (
+      {module?.config?.items?.map((column: any, key: any) => (
         <div className={styles.column} key={key}>
           {column?.modules?.length ? (
             column?.modules?.map((moduleData: any) => {

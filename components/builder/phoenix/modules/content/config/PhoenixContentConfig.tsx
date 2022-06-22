@@ -36,12 +36,12 @@ export default function PhoenixContentConfig({
         .indexOf(module?.id)
   const columnIndex = themeCopy?.pages?.[modulePageIndex]?.modules?.[
     moduleIndex
-  ]?.config?.columns
+  ]?.config?.items
     ?.map(({ id }: any) => id)
     .indexOf(columnId)
   const moduleIndexChild = themeCopy?.pages?.[modulePageIndex]?.modules?.[
     moduleIndex
-  ]?.config?.columns?.[columnIndex]?.modules
+  ]?.config?.items?.[columnIndex]?.modules
     ?.map(({ id }: any) => id)
     .indexOf(module?.id)
 
@@ -58,7 +58,7 @@ export default function PhoenixContentConfig({
             moduleIndexChild !== -1 &&
               (values.pages[modulePageIndex].modules[
                 moduleIndex
-              ].config.columns[columnIndex].modules[moduleIndexChild].config[
+              ].config.items[columnIndex].modules[moduleIndexChild].config[
                 name
               ] = value)
       } else {

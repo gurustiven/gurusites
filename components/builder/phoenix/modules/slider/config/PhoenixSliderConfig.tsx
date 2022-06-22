@@ -38,7 +38,7 @@ export default function PhoenixSliderConfig({
   function update(name: any, value: any) {
     // If current module is in block
     if (isBlock)
-      currentPageModule[moduleIndex].config.columns[columnIndex].modules[
+      currentPageModule[moduleIndex].config.items[columnIndex].modules[
         moduleIndexChild
       ].config[name] = value
     // If current module is not in block
@@ -52,7 +52,7 @@ export default function PhoenixSliderConfig({
   function newItem() {
     // Get current column in block
     const childColumn =
-      currentPageModule[moduleIndex]?.config?.columns?.[columnIndex]
+      currentPageModule[moduleIndex]?.config?.items?.[columnIndex]
 
     // Set values to add
     const valuesToPush = { id: uuid_v4(), source: '', text: '' }

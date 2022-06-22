@@ -41,7 +41,7 @@ export default function ModulesConfigActionsNew({
   function addModulesConfigActionsNew(module: string, defaultStyle?: object) {
     if (isBlock) {
       // Push new module to current block
-      themeCopy?.pages[modulePageIndex]?.modules[moduleIndex]?.config?.columns[
+      themeCopy?.pages[modulePageIndex]?.modules[moduleIndex]?.config?.items[
         columnIndex
       ]?.modules?.push({
         id: uuid_v4(),

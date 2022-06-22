@@ -35,12 +35,12 @@ export default function ModulesStyle({
         .indexOf(module?.id)
   const columnIndex = themeCopy?.pages?.[modulePageIndex]?.modules?.[
     moduleIndex
-  ]?.config?.columns
+  ]?.config?.items
     ?.map(({ id }: any) => id)
     .indexOf(columnId)
   const moduleIndexChild = themeCopy?.pages?.[modulePageIndex]?.modules?.[
     moduleIndex
-  ]?.config?.columns?.[columnIndex]?.modules
+  ]?.config?.items?.[columnIndex]?.modules
     ?.map(({ id }: any) => id)
     .indexOf(module?.id)
 
@@ -64,22 +64,22 @@ export default function ModulesStyle({
               if (moduleIndexChild !== -1) {
                 const moduleIndexChildChild =
                   values?.pages[modulePageIndex]?.modules[moduleIndex]?.config
-                    ?.columns[columnIndex]?.modules[moduleIndexChild]
+                    ?.items[columnIndex]?.modules[moduleIndexChild]
                 if (moduleIndexChildChild !== -1)
                   if (
                     values?.pages[modulePageIndex]?.modules[moduleIndex]?.config
-                      ?.columns[columnIndex]?.modules[moduleIndexChild]
+                      ?.items[columnIndex]?.modules[moduleIndexChild]
                       ?.style?.[media]
                   ) {
                     values.pages[modulePageIndex].modules[
                       moduleIndex
-                    ].config.columns[columnIndex].modules[
+                    ].config.items[columnIndex].modules[
                       moduleIndexChild
                     ].style[media][name] = value
                   } else {
                     values.pages[modulePageIndex].modules[
                       moduleIndex
-                    ].config.columns[columnIndex].modules[
+                    ].config.items[columnIndex].modules[
                       moduleIndexChild
                     ].style[media] = { [name]: value }
                   }

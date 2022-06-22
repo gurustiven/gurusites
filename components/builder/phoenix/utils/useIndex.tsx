@@ -21,12 +21,12 @@ export default function useIndex(
     : currentPageModule?.map(({ id }: any) => id).indexOf(moduleId)
 
   // Get current column index if is block
-  const columnIndex = currentPageModule?.[moduleIndex]?.config?.columns
+  const columnIndex = currentPageModule?.[moduleIndex]?.config?.items
     ?.map(({ id }: any) => id)
     .indexOf(columnId)
 
   // Get current column module index
-  const moduleIndexChild = currentPageModule?.[moduleIndex]?.config?.columns?.[
+  const moduleIndexChild = currentPageModule?.[moduleIndex]?.config?.items?.[
     columnIndex
   ]?.modules
     ?.map(({ id }: any) => id)

@@ -38,7 +38,7 @@ export default function PhoenixBlockConfig({
   function update(name: any, value: any) {
     // If current module is in block
     if (isBlock)
-      currentPageModule[moduleIndex].config.columns[columnIndex].modules[
+      currentPageModule[moduleIndex].config.items[columnIndex].modules[
         moduleIndexChild
       ].config[name] = value
     // If current module is not in block
@@ -49,27 +49,28 @@ export default function PhoenixBlockConfig({
   }
 
   // Add new item
-  function newColumn() {
+  function newItem() {
     // Get current column in block
     const childColumn =
-      currentPageModule[moduleIndex]?.config?.columns?.[columnIndex]
+      currentPageModule[moduleIndex]?.config?.items?.[columnIndex]
 
     // Set values to add
     const valuesToPush = { id: uuid_v4(), modules: [] }
 
+    // If current module is in block
     if (isBlock)
-      if (childColumn?.modules[moduleIndexChild].config.columns) {
-        childColumn?.modules[moduleIndexChild].config.columns.push(valuesToPush)
-      } else {
+      if (childColumn?.modules[moduleIndexChild].config.items)
+        childColumn.modules[moduleIndexChild].config.items.push(valuesToPush)
+      else
         childColumn.modules[moduleIndexChild].config = {
-          columns: [valuesToPush],
+          items: [valuesToPush],
         }
-      }
-    else if (currentPageModule[moduleIndex]?.config.columns)
-      currentPageModule[moduleIndex].config.columns.push(valuesToPush)
+    // If current module is not in block
+    else if (currentPageModule[moduleIndex].config.items)
+      currentPageModule[moduleIndex].config.items.push(valuesToPush)
     else
       currentPageModule[moduleIndex].config = {
-        columns: [valuesToPush],
+        items: [valuesToPush],
       }
 
     // Update theme
@@ -78,17 +79,17 @@ export default function PhoenixBlockConfig({
 
   return (
     <ModulesConfigTabs module={module}>
-      {module?.config?.columns?.map(({ id }: any) => (
+      {module?.config?.items?.map(({ id }: any) => (
         <PhoenixBlockConfigItems
           key={id}
           itemId={id}
-          columns={module?.config?.columns}
-          setColumns={(e: any) => update('columns', e)}
+          items={module?.config?.items}
+          setColumns={(e: any) => update('items', e)}
         />
       ))}
       <Button
         variant="outline"
-        onClick={() => newColumn()}
+        onClick={() => newItem()}
         css={{ marginTop: '12px', width: '100%' }}
       >
         Add column +
@@ -104,10 +105,10 @@ export default function PhoenixBlockConfig({
   )
 }
 
-function PhoenixBlockConfigItems({ itemId, columns, setColumns }: any) {
+function PhoenixBlockConfigItems({ itemId, items, setColumns }: any) {
   // Remove current item
   const removeItem = () => {
-    const values = [...columns]
+    const values = [...items]
     const index = values?.map(({ id }: any) => id).indexOf(itemId)
     index !== -1 && values.splice(index, 1)
     setColumns(values)
