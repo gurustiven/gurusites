@@ -59,7 +59,7 @@ export default function PhoenixSliderConfig({
 
     // If current module is in block
     if (isBlock)
-      if (childColumn.modules[moduleIndexChild].config.items)
+      if (childColumn?.modules[moduleIndexChild].config.items)
         childColumn.modules[moduleIndexChild].config.items.push(valuesToPush)
       else
         childColumn.modules[moduleIndexChild].config = {
