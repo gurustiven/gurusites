@@ -35,6 +35,15 @@ export default function ModulesConfigActions({
 
   // Disable active state when click outside module
   const ref = useClickOutside(() => setActive(false))
+
+  // set some repeated values
+  let blockProps = {
+    isBlock,
+    parentModuleId,
+    columnId,
+    module: moduleData,
+  }
+
   return (
     <div
       className={
@@ -63,13 +72,9 @@ export default function ModulesConfigActions({
           </Sidebar>
           {!onlyEdit && (
             <>
-              <ModulesConfigActionsDuplicate module={moduleData} />
-              <ModulesConfigActionsDelete module={moduleData} />
-              <ModulesConfigActionsNew
-                isBlock={isBlock}
-                parentModuleId={parentModuleId}
-                columnId={columnId}
-              />
+              <ModulesConfigActionsDuplicate {...blockProps} />
+              <ModulesConfigActionsDelete {...blockProps} />
+              <ModulesConfigActionsNew {...blockProps} />
             </>
           )}
         </div>

@@ -10,25 +10,52 @@ import {
   Stack,
 } from '@guruhotel/aura-ui'
 import { TrashIcon } from '@radix-ui/react-icons'
+import useIndex from 'components/builder/phoenix/utils/useIndex'
 import { useApp } from 'components/context/AppContext'
 
-export default function ModulesConfigActionsDelete({ module }: any) {
+export default function ModulesConfigActionsDelete({
+  module,
+  isBlock,
+  parentModuleId,
+  columnId,
+}: any) {
   // Get theme
-  const { theme, setTheme } = useApp()
+  const { theme, setTheme, pageIndex } = useApp()
 
-  const pageIndex = theme?.pages
-    .map(({ id }: any) => id)
-    .indexOf(module?.pageId)
+  // Refresh data for constants
+  const themeCopy = { ...theme }
+
+  // Get child module from page module
+  const currentPageModuleChild = isBlock
+    ? theme?.pages.map(({ modules }: any) =>
+        modules.filter(({ id }: any) => id === parentModuleId)
+      )
+    : themeCopy?.pages.map(({ modules }: any) =>
+        modules.filter(({ id }: any) => id === module?.id)
+      )
+
+  // Set some constants
+  const { modulePageIndex, moduleIndex, columnIndex, moduleIndexChild } =
+    useIndex(
+      isBlock,
+      parentModuleId,
+      columnId,
+      module?.id,
+      currentPageModuleChild?.flat(1)[0]?.pageId
+    )
 
   // Delete function
   function deleteModule() {
-    const values = { ...theme }
-    const moduleIndex = values?.pages?.[pageIndex]?.modules
-      ?.map(({ id }: any) => id)
-      .indexOf(module?.id)
-    if (pageIndex !== -1 && moduleIndex !== -1)
-      values?.pages?.[pageIndex]?.modules?.splice(moduleIndex, 1)
-    setTheme(values)
+    if (isBlock)
+      // Push new module to current block
+      themeCopy?.pages[modulePageIndex]?.modules[moduleIndex]?.config?.items[
+        columnIndex
+      ]?.modules.splice(moduleIndexChild, 1)
+    // Remove module in current page
+    else themeCopy?.pages?.[modulePageIndex]?.modules?.splice(moduleIndex, 1)
+
+    // Update theme
+    setTheme(themeCopy)
   }
 
   return (
