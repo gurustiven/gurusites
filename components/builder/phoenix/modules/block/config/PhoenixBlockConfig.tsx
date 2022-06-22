@@ -4,6 +4,7 @@ import { v4 as uuid_v4 } from 'uuid'
 import { useApp } from 'components/context/AppContext'
 import { useEffect, useState } from 'react'
 import StickToFooter from 'components/builder/interface/config/stick/StickToFooter'
+import useIndex from 'components/builder/phoenix/utils/useIndex'
 
 interface PhoenixBlockConfigProps {
   module: any
@@ -21,105 +22,58 @@ export default function PhoenixBlockConfig({
   // Get theme
   const { theme, setTheme, pageIndex } = useApp()
 
-  // Get current module page index based on prop
-  const modulePageIndex = theme?.pages
-    .map(({ id }: any) => id)
-    .indexOf(module?.pageId)
+  // Refresh data for constants
+  const themeCopy = { ...theme }
 
   // Set some constants
-  const [themeCopy, setThemeCopy] = useState({ ...theme })
-  const moduleIndex = isBlock
-    ? themeCopy?.pages[modulePageIndex]?.modules
-        ?.map(({ id }: any) => id)
-        .indexOf(parentModuleId)
-    : themeCopy?.pages[modulePageIndex]?.modules
-        ?.map(({ id }: any) => id)
-        .indexOf(module?.id)
-  const columnIndex = themeCopy?.pages?.[modulePageIndex]?.modules?.[
-    moduleIndex
-  ]?.config?.columns
-    ?.map(({ id }: any) => id)
-    .indexOf(columnId)
-  const moduleIndexChild = themeCopy?.pages?.[modulePageIndex]?.modules?.[
-    moduleIndex
-  ]?.config?.columns?.[columnIndex]?.modules
-    ?.map(({ id }: any) => id)
-    .indexOf(module?.id)
-
-  // Refresh data for constants
-  useEffect(() => setThemeCopy({ ...theme }), [theme])
+  let {
+    modulePageIndex,
+    currentPageModule,
+    moduleIndex,
+    columnIndex,
+    moduleIndexChild,
+  } = useIndex(isBlock, parentModuleId, columnId, module?.id, module?.pageId)
 
   // Update parent
   function update(name: any, value: any) {
-    const values = { ...theme }
+    // If current module is in block
+    if (isBlock)
+      currentPageModule[moduleIndex].config.columns[columnIndex].modules[
+        moduleIndexChild
+      ].config[name] = value
+    // If current module is not in block
+    else currentPageModule[moduleIndex].config[name] = value
 
-    if (modulePageIndex !== -1)
-      if (isBlock) {
-        if (moduleIndex !== -1)
-          if (columnIndex !== -1)
-            moduleIndexChild !== -1 &&
-              (values.pages[modulePageIndex].modules[
-                moduleIndex
-              ].config.columns[columnIndex].modules[moduleIndexChild].config[
-                name
-              ] = value)
-      } else {
-        moduleIndex !== -1 &&
-          (values.pages[modulePageIndex].modules[moduleIndex].config[name] =
-            value)
-      }
-
-    setTheme(values)
+    // Update theme
+    setTheme(themeCopy)
   }
 
   // Add new item
   function newColumn() {
-    const values = { ...theme }
+    // Get current column in block
+    const childColumn =
+      currentPageModule[moduleIndex]?.config?.columns?.[columnIndex]
 
-    if (modulePageIndex !== -1)
-      if (isBlock) {
-        if (moduleIndex !== -1)
-          if (columnIndex !== -1)
-            if (moduleIndexChild !== -1)
-              if (
-                values?.pages[modulePageIndex]?.modules[moduleIndex]?.config
-                  ?.columns[columnIndex]?.modules[moduleIndexChild].config
-                  .columns
-              ) {
-                values?.pages[modulePageIndex]?.modules[
-                  moduleIndex
-                ]?.config?.columns[columnIndex]?.modules[
-                  moduleIndexChild
-                ].config.columns.push({
-                  id: uuid_v4(),
-                  modules: [],
-                })
-              } else {
-                values.pages[modulePageIndex].modules[
-                  moduleIndex
-                ].config.columns[columnIndex].modules[moduleIndexChild].config =
-                  {
-                    columns: [{ id: uuid_v4(), modules: [] }],
-                  }
-              }
+    // Set values to add
+    const valuesToPush = { id: uuid_v4(), modules: [] }
+
+    if (isBlock)
+      if (childColumn?.modules[moduleIndexChild].config.columns) {
+        childColumn?.modules[moduleIndexChild].config.columns.push(valuesToPush)
       } else {
-        if (
-          values.pages[modulePageIndex].modules[moduleIndex]?.config.columns
-        ) {
-          values.pages[modulePageIndex].modules[
-            moduleIndex
-          ].config.columns.push({
-            id: uuid_v4(),
-            modules: [],
-          })
-        } else {
-          values.pages[modulePageIndex].modules[moduleIndex].config = {
-            columns: [{ id: uuid_v4(), modules: [] }],
-          }
+        childColumn.modules[moduleIndexChild].config = {
+          columns: [valuesToPush],
         }
       }
+    else if (currentPageModule[moduleIndex]?.config.columns)
+      currentPageModule[moduleIndex].config.columns.push(valuesToPush)
+    else
+      currentPageModule[moduleIndex].config = {
+        columns: [valuesToPush],
+      }
 
-    setTheme(values)
+    // Update theme
+    setTheme(themeCopy)
   }
 
   return (

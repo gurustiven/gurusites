@@ -4,7 +4,7 @@ import { useApp } from 'components/context/AppContext'
 import ModulesConfigTabs from 'components/builder/interface/config/actions/ModulesConfigTabs'
 import ImageUpload from 'components/builder/interface/shared/ImageUpload'
 import StickToFooter from 'components/builder/interface/config/stick/StickToFooter'
-import useIndex from 'components/builder/useIndex'
+import useIndex from 'components/builder/phoenix/utils/useIndex'
 
 interface PhoenixSliderConfigProps {
   module: any

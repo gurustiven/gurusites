@@ -4,7 +4,7 @@ import { v4 as uuid_v4 } from 'uuid'
 import { ImageIcon, ColumnsIcon, PlusCircledIcon } from '@radix-ui/react-icons'
 import Sidebar from 'components/builder/interface/shared/Sidebar'
 import styles from './New.module.scss'
-import useIndex from 'components/builder/useIndex'
+import useIndex from 'components/builder/phoenix/utils/useIndex'
 
 interface ModulesConfigActionsNewProps {
   isBlock?: boolean
