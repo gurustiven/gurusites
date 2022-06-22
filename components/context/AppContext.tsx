@@ -56,8 +56,10 @@ export function AppProvider({ children }: Props) {
           containerWidth: '1240px',
         },
         desktop: {
-          backgroundColor: 'black',
-          color: 'white',
+          backgroundColor: 'white',
+          borderTopWidth: '1px',
+          borderTopColor: '#f2f2f2',
+          color: 'black',
         },
       },
     },
