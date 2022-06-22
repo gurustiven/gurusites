@@ -4,6 +4,7 @@ import { ImageIcon, ColumnsIcon, PlusCircledIcon } from '@radix-ui/react-icons'
 import { useEffect, useState } from 'react'
 import Sidebar from 'components/builder/interface/shared/Sidebar'
 import { useApp } from 'components/context/AppContext'
+import styles from './New.module.scss'
 
 interface ModulesConfigActionsNewProps {
   isBlock?: boolean
@@ -142,8 +143,10 @@ export default function ModulesConfigActionsNew({
 
 function ModulesConfigActionsNewButton({ icon, label, onClick }: any) {
   return (
-    <button onClick={onClick} type="button">
-      <Box as="span">{icon}</Box>
+    <button onClick={onClick} type="button" className={styles.new}>
+      <Box as="span" className={styles.icon}>
+        {icon}
+      </Box>
       <Box as="span">{label}</Box>
     </button>
   )

@@ -1,0 +1,28 @@
+.new {
+    align-items: center;
+    background: var(--defaults--color__darkie);
+    color: white;
+    cursor: pointer;
+    border: 0;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100px;
+    transition-duration: 0.2s;
+    width: 33.33%;
+
+    &:hover {
+        transform: scale(1.06);
+    }
+
+    .icon {
+        align-items: center;
+        display: flex;
+        height: 28px;
+
+        svg {
+            transform: scale(1.25);
+        }
+    }
+}
