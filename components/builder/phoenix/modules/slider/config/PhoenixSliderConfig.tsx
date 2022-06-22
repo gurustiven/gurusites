@@ -58,26 +58,20 @@ export default function PhoenixSliderConfig({
     const valuesToPush = { id: uuid_v4(), source: '', text: '' }
 
     // If current module is in block
-    if (isBlock) {
-      if (childColumn?.modules[moduleIndexChild].config.items)
-        childColumn?.modules[moduleIndexChild].config.items.push(valuesToPush)
+    if (isBlock)
+      if (childColumn.modules[moduleIndexChild].config.items)
+        childColumn.modules[moduleIndexChild].config.items.push(valuesToPush)
       else
         childColumn.modules[moduleIndexChild].config = {
           items: [valuesToPush],
         }
-      // If current module is not in block
-    } else {
-      if (currentPageModule[moduleIndex].config.items)
-        currentPageModule[moduleIndex].config.items.push({
-          id: uuid_v4(),
-          source: '',
-          text: '',
-        })
-      else
-        currentPageModule[moduleIndex].config = {
-          items: [valuesToPush],
-        }
-    }
+    // If current module is not in block
+    else if (currentPageModule[moduleIndex].config.items)
+      currentPageModule[moduleIndex].config.items.push(valuesToPush)
+    else
+      currentPageModule[moduleIndex].config = {
+        items: [valuesToPush],
+      }
 
     // Update theme
     setTheme(themeCopy)

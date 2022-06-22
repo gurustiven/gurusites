@@ -30,7 +30,7 @@ export default function useIndex(
     columnIndex
   ]?.modules
     ?.map(({ id }: any) => id)
-    .indexOf(module?.id)
+    .indexOf(moduleId)
 
   return {
     modulePageIndex,
