@@ -38,7 +38,7 @@ export default function ModulesConfigActionsDelete({ module }: any) {
           <TrashIcon />
         </Button>
       </AlertDialogTrigger>
-      <AlertDialogContent isCentered size="lg">
+      <AlertDialogContent isCentered size="lg" style={{ zIndex: '9999' }}>
         <AlertDialogTitle>Are you sure?</AlertDialogTitle>
         <AlertDialogDescription>
           This action cannot be undone. This will permanently delete this

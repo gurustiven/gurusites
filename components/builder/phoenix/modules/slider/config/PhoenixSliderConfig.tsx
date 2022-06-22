@@ -29,21 +29,20 @@ export default function PhoenixSliderConfig({
 
   // Set some constants
   const [themeCopy, setThemeCopy] = useState({ ...theme })
+
+  const currentPageModule = themeCopy?.pages[modulePageIndex]?.modules
+
   const moduleIndex = isBlock
-    ? themeCopy?.pages[modulePageIndex]?.modules
-        ?.map(({ id }: any) => id)
-        .indexOf(parentModuleId)
-    : themeCopy?.pages[modulePageIndex]?.modules
-        ?.map(({ id }: any) => id)
-        .indexOf(module?.id)
-  const columnIndex = themeCopy?.pages?.[modulePageIndex]?.modules?.[
-    moduleIndex
-  ]?.config?.columns
+    ? currentPageModule?.map(({ id }: any) => id).indexOf(parentModuleId)
+    : currentPageModule?.map(({ id }: any) => id).indexOf(module?.id)
+
+  const columnIndex = currentPageModule?.[moduleIndex]?.config?.columns
     ?.map(({ id }: any) => id)
     .indexOf(columnId)
-  const moduleIndexChild = themeCopy?.pages?.[modulePageIndex]?.modules?.[
-    moduleIndex
-  ]?.config?.columns?.[columnIndex]?.modules
+
+  const moduleIndexChild = currentPageModule?.[moduleIndex]?.config?.columns?.[
+    columnIndex
+  ]?.modules
     ?.map(({ id }: any) => id)
     .indexOf(module?.id)
 
@@ -52,75 +51,63 @@ export default function PhoenixSliderConfig({
 
   // Update parent
   function update(name: any, value: any) {
-    const values = { ...theme }
-
     if (modulePageIndex !== -1)
       if (isBlock) {
         if (moduleIndex !== -1)
           if (columnIndex !== -1)
             moduleIndexChild !== -1 &&
-              (values.pages[modulePageIndex].modules[
-                moduleIndex
-              ].config.columns[columnIndex].modules[moduleIndexChild].config[
-                name
-              ] = value)
+              (currentPageModule[moduleIndex].config.columns[
+                columnIndex
+              ].modules[moduleIndexChild].config[name] = value)
       } else {
         moduleIndex !== -1 &&
-          (values.pages[modulePageIndex].modules[moduleIndex].config[name] =
-            value)
+          (currentPageModule[moduleIndex].config[name] = value)
       }
 
-    setTheme(values)
+    setTheme(themeCopy)
   }
 
   // Add new item
   function newItem() {
-    const values = { ...theme }
-
     if (modulePageIndex !== -1)
       if (isBlock) {
         if (moduleIndex !== -1)
           if (columnIndex !== -1)
             if (moduleIndexChild !== -1)
               if (
-                values?.pages[modulePageIndex]?.modules[moduleIndex]?.config
-                  ?.columns[columnIndex]?.modules[moduleIndexChild].config.items
+                currentPageModule[moduleIndex]?.config?.columns[columnIndex]
+                  ?.modules[moduleIndexChild].config.items
               ) {
-                values?.pages[modulePageIndex]?.modules[
-                  moduleIndex
-                ]?.config?.columns[columnIndex]?.modules[
-                  moduleIndexChild
-                ].config.items.push({
+                currentPageModule[moduleIndex]?.config?.columns[
+                  columnIndex
+                ]?.modules[moduleIndexChild].config.items.push({
                   id: uuid_v4(),
                   source: '',
                   text: '',
                 })
               } else {
-                values.pages[modulePageIndex].modules[
-                  moduleIndex
-                ].config.columns[columnIndex].modules[moduleIndexChild].config =
-                  {
-                    items: [{ id: uuid_v4(), source: '', text: '' }],
-                  }
+                currentPageModule[moduleIndex].config.columns[
+                  columnIndex
+                ].modules[moduleIndexChild].config = {
+                  items: [{ id: uuid_v4(), source: '', text: '' }],
+                }
               }
       } else {
         if (moduleIndex !== -1)
-          if (values.pages[modulePageIndex].modules[moduleIndex].config.items) {
-            values.pages[modulePageIndex].modules[
-              moduleIndex
-            ].config.items.push({
+          if (currentPageModule[moduleIndex].config.items) {
+            currentPageModule[moduleIndex].config.items.push({
               id: uuid_v4(),
               source: '',
               text: '',
             })
           } else {
-            values.pages[modulePageIndex].modules[moduleIndex].config = {
+            currentPageModule[moduleIndex].config = {
               items: [{ id: uuid_v4(), source: '', text: '' }],
             }
           }
       }
 
-    setTheme(values)
+    setTheme(themeCopy)
   }
 
   return (
