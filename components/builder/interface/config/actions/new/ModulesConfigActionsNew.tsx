@@ -1,21 +1,24 @@
 import { useApp } from 'components/context/AppContext'
-import { Box, Button, HStack } from '@guruhotel/aura-ui'
+import { Box, HStack } from '@guruhotel/aura-ui'
 import { v4 as uuid_v4 } from 'uuid'
 import { ImageIcon, ColumnsIcon, PlusCircledIcon } from '@radix-ui/react-icons'
 import Sidebar from 'components/builder/interface/shared/Sidebar'
 import styles from './New.module.scss'
 import useIndex from 'components/builder/phoenix/utils/useIndex'
+import { ReactNode } from 'react'
 
 interface ModulesConfigActionsNewProps {
   isBlock?: boolean
   parentModuleId?: any
   columnId?: any
+  children: ReactNode
 }
 
 export default function ModulesConfigActionsNew({
   isBlock,
   parentModuleId,
   columnId,
+  children,
 }: ModulesConfigActionsNewProps) {
   // Get theme
   const { theme, setTheme, pageIndex, pageId } = useApp()
@@ -66,15 +69,7 @@ export default function ModulesConfigActionsNew({
   }
 
   return (
-    <Sidebar
-      title="New module"
-      position="right"
-      trigger={
-        <Button type="button">
-          <PlusCircledIcon />
-        </Button>
-      }
-    >
+    <Sidebar title="New module" position="right" trigger={children}>
       <HStack spacing="2">
         <ModulesConfigActionsNewButton
           icon={<ImageIcon />}
@@ -96,7 +91,7 @@ export default function ModulesConfigActionsNew({
                 containerWidth: '100%',
               },
               desktop: {
-                background: 'black',
+                background: 'grey',
               },
             })
           }
@@ -110,7 +105,7 @@ export default function ModulesConfigActionsNew({
                 width: '100%',
               },
               desktop: {
-                background: 'black',
+                margin: '8px 0',
               },
             })
           }
@@ -125,8 +120,8 @@ export default function ModulesConfigActionsNew({
               },
               desktop: {
                 lineHeight: '1.5',
-                paddingBottom: '12px',
-                paddingTop: '12px',
+                margin: '8px 0',
+                padding: '4px 0',
               },
             })
           }

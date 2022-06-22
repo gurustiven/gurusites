@@ -1,6 +1,6 @@
 import { useClickOutside, useHover } from '@guruhotel/aura-hooks'
 import { Button } from '@guruhotel/aura-ui'
-import { Pencil2Icon } from '@radix-ui/react-icons'
+import { Pencil2Icon, PlusCircledIcon } from '@radix-ui/react-icons'
 import { ReactNode, useState } from 'react'
 import ModulesConfigActionsNew from './new/ModulesConfigActionsNew'
 import Sidebar from '../../shared/Sidebar'
@@ -74,7 +74,11 @@ export default function ModulesConfigActions({
             <>
               <ModulesConfigActionsDuplicate {...blockProps} />
               <ModulesConfigActionsDelete {...blockProps} />
-              <ModulesConfigActionsNew {...blockProps} />
+              <ModulesConfigActionsNew {...blockProps}>
+                <Button type="button">
+                  <PlusCircledIcon />
+                </Button>
+              </ModulesConfigActionsNew>
             </>
           )}
         </div>

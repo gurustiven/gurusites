@@ -1,0 +1,22 @@
+.empty {
+  position: relative;
+
+  &::after {
+    border: 4px solid transparent;
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1;
+  }
+
+  &:hover {
+    &::after {
+      border-color: var(--defaults--color__guru);
+    }
+  }
+}

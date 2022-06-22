@@ -1,4 +1,4 @@
-import { Button, Box } from '@guruhotel/aura-ui'
+import { Button, Box, HStack } from '@guruhotel/aura-ui'
 import ModulesConfigTabs from 'components/builder/interface/config/actions/ModulesConfigTabs'
 import { v4 as uuid_v4 } from 'uuid'
 import { useApp } from 'components/context/AppContext'
@@ -79,14 +79,16 @@ export default function PhoenixBlockConfig({
 
   return (
     <ModulesConfigTabs module={module}>
-      {module?.config?.items?.map(({ id }: any) => (
-        <PhoenixBlockConfigItems
-          key={id}
-          itemId={id}
-          items={module?.config?.items}
-          setColumns={(e: any) => update('items', e)}
-        />
-      ))}
+      <HStack spacing="2" css={{ width: '100%' }}>
+        {module?.config?.items?.map(({ id }: any) => (
+          <PhoenixBlockConfigItems
+            key={id}
+            itemId={id}
+            items={module?.config?.items}
+            setColumns={(e: any) => update('items', e)}
+          />
+        ))}
+      </HStack>
       <Button
         variant="outline"
         onClick={() => newItem()}
@@ -121,6 +123,7 @@ function PhoenixBlockConfigItems({ itemId, items, setColumns }: any) {
         borderRadius: '8px',
         margin: '12px 0',
         padding: '12px',
+        width: '100%',
       }}
     >
       <Button

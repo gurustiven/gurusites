@@ -1,5 +1,4 @@
 import styles from './Block.module.scss'
-import { useRouter } from 'next/router'
 
 export default function PhoenixBlock({ data, style, children }: any) {
   // If exist
