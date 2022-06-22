@@ -127,6 +127,11 @@ export default function ModulesConfigActionsNew({
               container: {
                 width: '100%',
               },
+              desktop: {
+                lineHeight: '1.5',
+                paddingBottom: '12px',
+                paddingTop: '12px',
+              },
             })
           }
         />
