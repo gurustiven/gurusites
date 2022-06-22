@@ -14,84 +14,49 @@ export default function Modules({
   parentModuleId,
   columnId,
 }: any) {
+  let moduleProps = {
+    key: moduleData?.id,
+    moduleData,
+    isBlock,
+    columnId,
+    parentModuleId,
+    module: moduleData,
+  }
+
   if (moduleData?.name === 'slider') {
     // Modules: Images slider
     return (
       <ModulesConfigActions
-        key={moduleData?.id}
-        moduleData={moduleData}
+        {...moduleProps}
         module={<PhoenixSliderRender module={moduleData} />}
-        config={
-          <PhoenixSliderConfig
-            columnId={columnId}
-            isBlock={isBlock}
-            module={moduleData}
-            parentModuleId={parentModuleId}
-          />
-        }
-        isBlock={isBlock}
-        columnId={columnId}
-        parentModuleId={parentModuleId}
+        config={<PhoenixSliderConfig {...moduleProps} />}
       />
     )
   } else if (moduleData?.name === 'block') {
     // Modules: Block content
     return (
       <ModulesConfigActions
-        key={moduleData?.id}
-        moduleData={moduleData}
+        {...moduleProps}
         module={<PhoenixBlockRender module={moduleData} />}
-        config={
-          <PhoenixBlockConfig
-            columnId={columnId}
-            isBlock={isBlock}
-            module={moduleData}
-            parentModuleId={parentModuleId}
-          />
-        }
-        isBlock={isBlock}
-        columnId={columnId}
-        parentModuleId={parentModuleId}
+        config={<PhoenixBlockConfig {...moduleProps} />}
       />
     )
   } else if (moduleData?.name === 'title') {
     // Modules: Title content
     return (
       <ModulesConfigActions
-        key={moduleData?.id}
-        moduleData={moduleData}
+        {...moduleProps}
         module={<PhoenixTitleRender module={moduleData} />}
-        config={
-          <PhoenixTitleConfig
-            columnId={columnId}
-            isBlock={isBlock}
-            module={moduleData}
-            parentModuleId={parentModuleId}
-          />
-        }
-        isBlock={isBlock}
-        columnId={columnId}
-        parentModuleId={parentModuleId}
+        config={<PhoenixTitleConfig {...moduleProps} />}
       />
     )
   } else if (moduleData?.name === 'content') {
     // Modules: Content content
     return (
       <ModulesConfigActions
-        key={moduleData?.id}
-        moduleData={moduleData}
+        {...moduleProps}
         module={<PhoenixContentRender module={moduleData} />}
-        config={
-          <PhoenixContentConfig
-            columnId={columnId}
-            isBlock={isBlock}
-            module={moduleData}
-            parentModuleId={parentModuleId}
-          />
-        }
-        isBlock={isBlock}
-        columnId={columnId}
-        parentModuleId={parentModuleId}
+        config={<PhoenixContentConfig {...moduleProps} />}
       />
     )
   }
