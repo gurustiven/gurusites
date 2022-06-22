@@ -40,6 +40,7 @@ export default function Modules({
         module={<PhoenixBlockRender module={moduleData} />}
         config={
           <PhoenixBlockConfig
+            columnId={columnId}
             isBlock={isBlock}
             module={moduleData}
             parentModuleId={parentModuleId}
@@ -56,6 +57,7 @@ export default function Modules({
         module={<PhoenixTitleRender module={moduleData} />}
         config={
           <PhoenixTitleConfig
+            columnId={columnId}
             isBlock={isBlock}
             module={moduleData}
             parentModuleId={parentModuleId}
@@ -72,6 +74,7 @@ export default function Modules({
         module={<PhoenixContentRender module={moduleData} />}
         config={
           <PhoenixContentConfig
+            columnId={columnId}
             isBlock={isBlock}
             module={moduleData}
             parentModuleId={parentModuleId}
