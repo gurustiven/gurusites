@@ -10,7 +10,9 @@ export default function PhoenixFooter({ data, style, children }: any) {
         style={{ maxWidth: data?.style?.general?.containerWidth }}
       >
         <div className={styles.copyright}>
-          <p>&copy; GuruSites</p>
+          <p>
+            &copy; GuruSites • <span>All rights reserved</span>
+          </p>
           <a className={styles.made}>
             <img src="/madewith.svg" alt="Made with GuruSites" />
           </a>

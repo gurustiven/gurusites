@@ -11,7 +11,7 @@ export default function ModulesConfigActionsDuplicate({
   columnId,
 }: any) {
   // Get theme
-  const { theme, setTheme, pageIndex } = useApp()
+  const { theme, setTheme } = useApp()
 
   // Refresh data for constants
   const themeCopy = { ...theme }

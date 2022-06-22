@@ -20,7 +20,7 @@ export default function ModulesConfigActionsDelete({
   columnId,
 }: any) {
   // Get theme
-  const { theme, setTheme, pageIndex } = useApp()
+  const { theme, setTheme } = useApp()
 
   // Refresh data for constants
   const themeCopy = { ...theme }
