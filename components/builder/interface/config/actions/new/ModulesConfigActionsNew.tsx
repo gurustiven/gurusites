@@ -91,7 +91,7 @@ export default function ModulesConfigActionsNew({
                 containerWidth: '100%',
               },
               desktop: {
-                background: 'grey',
+                background: '#A4A3BD',
               },
             })
           }

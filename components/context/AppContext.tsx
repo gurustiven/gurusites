@@ -75,7 +75,7 @@ export function AppProvider({ children }: Props) {
           containerWidth: '1240px',
         },
         desktop: {
-          backgroundColor: 'black',
+          backgroundColor: '#211F5C',
           color: 'white',
         },
       },

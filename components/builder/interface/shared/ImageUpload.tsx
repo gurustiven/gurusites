@@ -31,7 +31,7 @@ export default function ImageUpload({ defaultValue, onChange, style }: any) {
       className={styles.imageUpload}
     >
       {imageLink ? (
-        <img src={imageLink} />
+        <img src={imageLink} style={{ maxHeight: '60px', maxWidth: '80%' }} />
       ) : (
         <>
           <UploadIcon />
