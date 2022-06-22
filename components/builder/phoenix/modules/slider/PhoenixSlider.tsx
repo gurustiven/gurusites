@@ -13,6 +13,7 @@ export default function PhoenixSlider({ data, style }: any) {
           className={styles.container}
           style={{ maxWidth: data?.style?.general?.containerWidth }}
         >
+          <span style={{ color: 'white' }}>{JSON.stringify(data)}</span>
           <Swiper
             centeredSlides={true}
             spaceBetween={0}
