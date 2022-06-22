@@ -16,11 +16,11 @@ export default function PhoenixHeaderRender() {
   function style() {
     return Object.assign(
       {},
-      width < 1024 ? { ...getHeader?.style?.desktop, ...getHeader?.style?.mobile } : getHeader?.style?.desktop
-    );
+      width < 1024
+        ? { ...getHeader?.style?.desktop, ...getHeader?.style?.mobile }
+        : getHeader?.style?.desktop
+    )
   }
 
-  return (
-    <PhoenixHeader data={getHeader} style={style()} />
-  )
+  return <PhoenixHeader data={getHeader} style={style()} />
 }

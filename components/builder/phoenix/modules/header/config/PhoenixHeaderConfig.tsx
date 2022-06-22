@@ -6,7 +6,6 @@ import {
   HStack,
   Input,
   InputGroup,
-  Label,
   Select,
   SelectContent,
   SelectGroup,

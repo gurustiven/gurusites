@@ -22,6 +22,9 @@ export default function PhoenixSliderConfig({
   // Get theme
   const { theme, setTheme, pageIndex } = useApp()
 
+  // Set values to add
+  const valuesToPush = { id: uuid_v4(), source: '', text: '' }
+
   // Refresh data for constants
   const themeCopy = { ...theme }
 
@@ -53,9 +56,6 @@ export default function PhoenixSliderConfig({
     // Get current column in block
     const childColumn =
       currentPageModule[moduleIndex]?.config?.items?.[columnIndex]
-
-    // Set values to add
-    const valuesToPush = { id: uuid_v4(), source: '', text: '' }
 
     // If current module is in block
     if (isBlock)
