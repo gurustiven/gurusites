@@ -13,6 +13,9 @@ interface ModulesConfigActionsProps {
   config: ReactNode
   moduleData?: any
   onlyEdit?: boolean
+  isBlock?: boolean
+  columnId?: any
+  parentModuleId?: any
 }
 
 export default function ModulesConfigActions({
@@ -20,6 +23,9 @@ export default function ModulesConfigActions({
   config,
   moduleData,
   onlyEdit,
+  isBlock,
+  columnId,
+  parentModuleId,
 }: ModulesConfigActionsProps) {
   // Set hover to allow edit options
   const { hovered, ref: hoverRef } = useHover()
@@ -59,7 +65,11 @@ export default function ModulesConfigActions({
             <>
               <ModulesConfigActionsDuplicate module={moduleData} />
               <ModulesConfigActionsDelete module={moduleData} />
-              <ModulesConfigActionsNew />
+              <ModulesConfigActionsNew
+                isBlock={isBlock}
+                parentModuleId={parentModuleId}
+                columnId={columnId}
+              />
             </>
           )}
         </div>

@@ -29,6 +29,9 @@ export default function Modules({
             parentModuleId={parentModuleId}
           />
         }
+        isBlock={isBlock}
+        columnId={columnId}
+        parentModuleId={parentModuleId}
       />
     )
   } else if (moduleData?.name === 'block') {
@@ -46,6 +49,9 @@ export default function Modules({
             parentModuleId={parentModuleId}
           />
         }
+        isBlock={isBlock}
+        columnId={columnId}
+        parentModuleId={parentModuleId}
       />
     )
   } else if (moduleData?.name === 'title') {
@@ -63,6 +69,9 @@ export default function Modules({
             parentModuleId={parentModuleId}
           />
         }
+        isBlock={isBlock}
+        columnId={columnId}
+        parentModuleId={parentModuleId}
       />
     )
   } else if (moduleData?.name === 'content') {
@@ -80,6 +89,9 @@ export default function Modules({
             parentModuleId={parentModuleId}
           />
         }
+        isBlock={isBlock}
+        columnId={columnId}
+        parentModuleId={parentModuleId}
       />
     )
   }
