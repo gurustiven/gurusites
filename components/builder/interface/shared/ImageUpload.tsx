@@ -7,7 +7,7 @@ import { UploadIcon } from '@radix-ui/react-icons'
 export default function ImageUpload({ defaultValue, onChange, style }: any) {
   const [imageLink, setImageLink] = useState(defaultValue)
 
-  function fileManage(e) {
+  function fileManage(e: any) {
     const file = e.target.files[0]
     setImageLink(URL.createObjectURL(file))
   }
