@@ -6,8 +6,11 @@ import PhoenixHeaderRender from '../modules/header/config/PhoenixHeaderRender'
 import { Box, useTheme } from '@guruhotel/aura-ui'
 import PhoenixFooterRender from '../modules/footer/config/PhoenixFooterRender'
 import PhoenixFooterConfig from '../modules/footer/config/PhoenixFooterConfig'
+import { useRouter } from 'next/router'
 
 export default function PhoenixLayout({ children }: any) {
+  const router = useRouter()
+  const { viewport } = router.query
   const { theme } = useTheme()
   return (
     <div
@@ -17,7 +20,13 @@ export default function PhoenixLayout({ children }: any) {
       <Box css={{ marginBottom: '12px', marginLeft: '20px' }}>
         <LayoutPages />
       </Box>
-      <div className={styles.container}>
+      <div
+        className={
+          viewport === 'mobile'
+            ? `${styles.container} ${styles.mobileContainer}`
+            : styles.container
+        }
+      >
         <ModulesConfigActions
           onlyEdit
           module={<PhoenixHeaderRender />}

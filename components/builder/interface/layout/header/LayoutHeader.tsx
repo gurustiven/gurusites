@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Badge, Box, Button, Stack } from '@guruhotel/aura-ui'
+import { Badge, Box, Button, HStack, Stack } from '@guruhotel/aura-ui'
 import { LaptopIcon, MobileIcon } from '@radix-ui/react-icons'
 import { useApp } from 'components/context/AppContext'
 import Link from 'next/link'
@@ -7,7 +7,8 @@ import { useRouter } from 'next/router'
 
 export default function LayoutHeader() {
   const router = useRouter()
-  const { pathname } = router
+  const { pathname, query } = router
+  const { p: padeId, viewport } = query
 
   // Get theme
   const { theme } = useApp()
@@ -83,16 +84,37 @@ export default function LayoutHeader() {
       </Box>
       {pathname?.includes('builder') && (
         <>
-          <Box
-            css={{ display: 'flex', justifyContent: 'center', width: '33.33%' }}
+          <HStack
+            alignItems="center"
+            justifyContent="center"
+            spacing="1"
+            css={{ width: '33.33%' }}
           >
-            <Button colorScheme="guru">
+            <Button
+              colorScheme={!viewport?.includes('mobile') ? 'guru' : 'darkie'}
+              variant={!viewport?.includes('mobile') ? 'solid' : 'link'}
+              onClick={() =>
+                router.push({
+                  pathname: '/builder',
+                  query: { p: padeId, viewport: 'desktop' },
+                })
+              }
+            >
               <LaptopIcon />
             </Button>
-            <Button colorScheme="darkie" variant="link">
+            <Button
+              colorScheme={viewport?.includes('mobile') ? 'guru' : 'darkie'}
+              variant={viewport?.includes('mobile') ? 'solid' : 'link'}
+              onClick={() =>
+                router.push({
+                  pathname: '/builder',
+                  query: { p: padeId, viewport: 'mobile' },
+                })
+              }
+            >
               <MobileIcon />
             </Button>
-          </Box>
+          </HStack>
           <Box
             css={{
               display: 'flex',

@@ -9,4 +9,11 @@
     min-height: 100vh;
     width: 100%;
   }
+
+  .mobileContainer {
+    border-radius: 8px;
+    margin: 0 auto;
+    max-width: 550px;
+    overflow: hidden;
+  }
 }
