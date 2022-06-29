@@ -83,8 +83,12 @@ export function AppProvider({ children }: Props) {
     pages: [
       {
         id: '798e4870-c94f-43f5-aff6-0023211a1f8f',
-        name: 'home',
-        route: '',
+        config: {
+          name: 'Home',
+          title: 'My home page',
+          route: 'home',
+          description: 'This is my home page description for SEO',
+        },
         modules: [],
       },
     ],
