@@ -1,13 +1,14 @@
-import React, { PropsWithChildren, Ref, useCallback, useMemo } from 'react'
-import { Editable, withReact, useSlate, Slate } from 'slate-react'
+import React, { useCallback, useMemo } from 'react'
+import { Editable, withReact, useSlate, Slate, ReactEditor } from 'slate-react'
 import {
   Editor,
   Transforms,
   createEditor,
   Descendant,
   Element as SlateElement,
+  BaseEditor,
 } from 'slate'
-import { withHistory } from 'slate-history'
+import { HistoryEditor, withHistory } from 'slate-history'
 import {
   CodeIcon,
   FontBoldIcon,
@@ -25,6 +26,12 @@ import { Box, Button, HStack } from '@guruhotel/aura-ui'
 
 const LIST_TYPES = ['numbered-list', 'bulleted-list']
 const TEXT_ALIGN_TYPES = ['left', 'center', 'right', 'justify']
+
+declare module 'slate' {
+  interface CustomTypes {
+    Editor: BaseEditor & ReactEditor & HistoryEditor
+  }
+}
 
 const RichText = ({ defaultValue, setValue }: any) => {
   const renderElement = useCallback((props: any) => <Element {...props} />, [])
