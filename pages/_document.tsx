@@ -1,13 +1,22 @@
-import Document, { Html, Head, Main, NextScript } from "next/document";
-import { CssBaseline } from "@guruhotel/aura-ui";
+import Document, {
+  Html,
+  Head,
+  Main,
+  NextScript,
+  DocumentContext,
+  DocumentInitialProps,
+} from 'next/document'
+import { CssBaseline } from '@guruhotel/aura-ui'
 
 class MyDocument extends Document {
-  static async getInitialProps(ctx) {
-    const initialProps = await Document.getInitialProps(ctx);
+  static async getInitialProps(
+    ctx: DocumentContext
+  ): Promise<DocumentInitialProps> {
+    const initialProps = await Document.getInitialProps(ctx)
     return {
       ...initialProps,
-      styles: <>{initialProps.styles}</>,
-    };
+      styles: initialProps.styles,
+    }
   }
 
   render() {
@@ -19,8 +28,8 @@ class MyDocument extends Document {
           <NextScript />
         </body>
       </Html>
-    );
+    )
   }
 }
 
-export default MyDocument;
+export default MyDocument

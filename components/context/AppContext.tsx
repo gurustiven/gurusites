@@ -100,7 +100,7 @@ export function AppProvider({ children }: Props) {
   // Save theme in localstorage
   useEffect(() => {
     if (localStorage.getItem('theme')) {
-      const getSavedTheme = JSON.parse(localStorage.getItem('theme'))
+      const getSavedTheme = JSON.parse(localStorage.getItem('theme') || '[]')
       setTheme(getSavedTheme)
     }
   }, [])
