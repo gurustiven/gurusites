@@ -126,6 +126,22 @@ export default function ModulesConfigActionsNew({
             })
           }
         />
+        <ModulesConfigActionsNewButton
+          icon={<ColumnsIcon />}
+          label="Paragraph"
+          onClick={() =>
+            addModulesConfigActionsNew('paragraph', {
+              container: {
+                width: '100%',
+              },
+              desktop: {
+                lineHeight: '1.5',
+                margin: '8px 0',
+                padding: '4px 0',
+              },
+            })
+          }
+        />
       </HStack>
     </Sidebar>
   )

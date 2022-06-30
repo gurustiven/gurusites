@@ -1,18 +1,18 @@
-import styles from './Title.module.scss'
+import styles from './Paragraph.module.scss'
 
-export default function PhoenixTitle({ data, style }: any) {
+export default function PhoenixParagraph({ data, style }: any) {
   // If exist
   if (data?.config)
     return (
-      <section className={styles.title} style={style}>
+      <section className={styles.paragraph} style={style}>
         <div
           className={styles.container}
           style={{ maxWidth: data?.style?.general?.containerWidth }}
         >
           {data?.config?.content ? (
-            <h1>{data?.config?.content}</h1>
+            <p>{data?.config?.content}</p>
           ) : (
-            <h1>This is a heading</h1>
+            <p>This is a paragraph...</p>
           )}
         </div>
       </section>

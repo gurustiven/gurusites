@@ -3,6 +3,8 @@ import PhoenixBlockConfig from './phoenix/modules/block/config/PhoenixBlockConfi
 import PhoenixBlockRender from './phoenix/modules/block/config/PhoenixBlockRender'
 import PhoenixContentConfig from './phoenix/modules/content/config/PhoenixContentConfig'
 import PhoenixContentRender from './phoenix/modules/content/config/PhoenixContentRender'
+import PhoenixParagraphConfig from './phoenix/modules/paragraph/config/PhoenixParagraphConfig'
+import PhoenixParagraphRender from './phoenix/modules/paragraph/config/PhoenixParagraphRender'
 import PhoenixSliderConfig from './phoenix/modules/slider/config/PhoenixSliderConfig'
 import PhoenixSliderRender from './phoenix/modules/slider/config/PhoenixSliderRender'
 import PhoenixTitleConfig from './phoenix/modules/title/config/PhoenixTitleConfig'
@@ -48,6 +50,15 @@ export default function Modules({
         {...moduleProps}
         module={<PhoenixTitleRender module={moduleData} />}
         config={<PhoenixTitleConfig {...moduleProps} />}
+      />
+    )
+  } else if (moduleData?.name === 'paragraph') {
+    // Modules: Paragraph content
+    return (
+      <ModulesConfigActions
+        {...moduleProps}
+        module={<PhoenixParagraphRender module={moduleData} />}
+        config={<PhoenixParagraphConfig {...moduleProps} />}
       />
     )
   } else if (moduleData?.name === 'content') {
