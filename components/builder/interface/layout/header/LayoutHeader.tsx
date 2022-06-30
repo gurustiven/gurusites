@@ -83,80 +83,78 @@ export default function LayoutHeader() {
         </Box>
       </Box>
       {pathname?.includes('builder') && (
-        <>
-          <HStack
-            alignItems="center"
-            justifyContent="center"
-            spacing="1"
-            css={{ width: '33.33%' }}
+        <HStack
+          alignItems="center"
+          justifyContent="center"
+          spacing="1"
+          css={{ width: '33.33%' }}
+        >
+          <Button
+            colorScheme={!viewport?.includes('mobile') ? 'guru' : 'darkie'}
+            variant={!viewport?.includes('mobile') ? 'solid' : 'link'}
+            onClick={() =>
+              router.push({
+                pathname: '/builder',
+                query: { p: padeId, viewport: 'desktop' },
+              })
+            }
           >
-            <Button
-              colorScheme={!viewport?.includes('mobile') ? 'guru' : 'darkie'}
-              variant={!viewport?.includes('mobile') ? 'solid' : 'link'}
-              onClick={() =>
-                router.push({
-                  pathname: '/builder',
-                  query: { p: padeId, viewport: 'desktop' },
-                })
-              }
-            >
-              <LaptopIcon />
-            </Button>
-            <Button
-              colorScheme={viewport?.includes('mobile') ? 'guru' : 'darkie'}
-              variant={viewport?.includes('mobile') ? 'solid' : 'link'}
-              onClick={() =>
-                router.push({
-                  pathname: '/builder',
-                  query: { p: padeId, viewport: 'mobile' },
-                })
-              }
-            >
-              <MobileIcon />
-            </Button>
-          </HStack>
-          <Box
-            css={{
-              display: 'flex',
-              justifyContent: 'flex-end',
-              width: '33.33%',
-            }}
+            <LaptopIcon />
+          </Button>
+          <Button
+            colorScheme={viewport?.includes('mobile') ? 'guru' : 'darkie'}
+            variant={viewport?.includes('mobile') ? 'solid' : 'link'}
+            onClick={() =>
+              router.push({
+                pathname: '/builder',
+                query: { p: padeId, viewport: 'mobile' },
+              })
+            }
           >
-            <Badge
-              size="lg"
-              css={{
-                background: 'transparent',
-                color: '$darkie8',
-                fontWeight: '$normal',
-                marginRight: '8px',
-              }}
-            >
-              Edited 2 hours ago
-            </Badge>
-            <Button
-              colorScheme="red"
-              size="sm"
-              css={{ marginRight: '8px' }}
-              variant="link"
-              onClick={() => reset()}
-            >
-              Reset
-            </Button>
-            <Button
-              colorScheme="darkie"
-              size="sm"
-              css={{ marginRight: '8px' }}
-              variant="outline"
-              onClick={() => save()}
-            >
-              Save
-            </Button>
-            <Button size="sm" colorScheme="guru">
-              Publish
-            </Button>
-          </Box>
-        </>
+            <MobileIcon />
+          </Button>
+        </HStack>
       )}
+      <Box
+        css={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+          width: '33.33%',
+        }}
+      >
+        <Badge
+          size="lg"
+          css={{
+            background: 'transparent',
+            color: '$darkie8',
+            fontWeight: '$normal',
+            marginRight: '8px',
+          }}
+        >
+          Edited 2 hours ago
+        </Badge>
+        <Button
+          colorScheme="red"
+          size="sm"
+          css={{ marginRight: '8px' }}
+          variant="link"
+          onClick={() => reset()}
+        >
+          Reset
+        </Button>
+        <Button
+          colorScheme="darkie"
+          size="sm"
+          css={{ marginRight: '8px' }}
+          variant="outline"
+          onClick={() => save()}
+        >
+          Save
+        </Button>
+        <Button size="sm" colorScheme="guru">
+          Publish
+        </Button>
+      </Box>
     </Stack>
   )
 }

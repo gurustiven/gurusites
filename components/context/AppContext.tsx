@@ -38,13 +38,13 @@ export function AppProvider({ children }: Props) {
   const defaultTheme = {
     general: {
       colors: {
-        main: 'black',
-        secondary: 'blue',
-        utilitary: 'red',
+        main: '#000000',
+        secondary: '#444444',
+        utilitary: '#888888',
       },
       fonts: {
-        main: 'Inter',
-        secondary: 'Inter',
+        main: 'inter',
+        secondary: 'poppins',
       },
       container: {
         maxWidth: '1240px',
