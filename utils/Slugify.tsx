@@ -1,4 +1,4 @@
-export const useSlugify = (...args: (string | number)[]): string => {
+export default function Slugify(...args: (string | number)[]): string {
   const value = args.join(' ')
 
   return value

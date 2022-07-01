@@ -14,7 +14,7 @@ export default function ImageUpload({ defaultValue, onChange, style }: any) {
 
   useEffect(() => {
     onChange(imageLink)
-  }, [imageLink])
+  }, [imageLink, onChange])
 
   return (
     <Stack
@@ -31,7 +31,7 @@ export default function ImageUpload({ defaultValue, onChange, style }: any) {
       className={styles.imageUpload}
     >
       {imageLink ? (
-        <img src={imageLink} />
+        <img src={imageLink} alt="image" />
       ) : (
         <>
           <UploadIcon />

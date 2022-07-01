@@ -1,4 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// eslint-disable-next-line
 // @ts-nocheck
 import React, { useCallback, useMemo } from 'react'
 import { Editable, withReact, useSlate, Slate, ReactEditor } from 'slate-react'

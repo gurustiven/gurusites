@@ -1,7 +1,7 @@
 import { Button, HStack, Input, Label, TextArea } from '@guruhotel/aura-ui'
 import { useApp } from 'components/context/AppContext'
 import { useEffect, useState } from 'react'
-import { useSlugify } from 'utils/useSlugify'
+import Slugify from 'utils/Slugify'
 
 export default function LayoutPagesEdit({ data, setOpened, opened }: any) {
   const { theme, setTheme } = useApp()
@@ -28,10 +28,10 @@ export default function LayoutPagesEdit({ data, setOpened, opened }: any) {
   // Get slug from name
   useEffect(() => {
     if (!name) {
-      const slug = useSlugify(editedData?.name)
+      const slug = Slugify(editedData?.name)
       setEditedData({ ...editedData, route: slug })
     }
-  }, [editedData?.name])
+  }, [editedData?.name, name, editedData])
 
   return (
     <>
@@ -56,7 +56,7 @@ export default function LayoutPagesEdit({ data, setOpened, opened }: any) {
         size="sm"
         style={{ margin: '4px 0 8px 0', width: '100%' }}
         onChange={(e: any) =>
-          setEditedData({ ...editedData, route: useSlugify(e.target.value) })
+          setEditedData({ ...editedData, route: Slugify(e.target.value) })
         }
         autoComplete="off"
         disabled={name === 'Home'}
