@@ -43,8 +43,8 @@ export function AppProvider({ children }: Props) {
         utilitary: '#888888',
       },
       fonts: {
-        main: 'inter',
-        secondary: 'poppins',
+        main: 'Inter',
+        secondary: 'Poppins',
       },
       container: {
         maxWidth: '1240px',
